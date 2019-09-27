@@ -253,3 +253,6 @@ TSWLatexianTemp*
 
 # Other
 *tar*
+
+# Jupyter notebook
+.ipynb_checkpoints
