@@ -1,0 +1,344 @@
+\documentclass[a4paper,11pt]{article}
+
+\input{packages.tex}
+\input{tikz.tex}
+\input{thmstyle.tex}
+\input{macros.tex}
+
+% opening
+\title{Notes on tri-symmetric formulas}
+\author{}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+These notes aim at describing some algorithms to search for tri-symmetric
+decompositions of bilinear maps in finite fields. They do not provide a thorough
+presentation of the background nor the interest that such decompositions have.
+In order to have some of these elements, the reader may want to look
+at~\cite{BDEZ12, Covanov18, Covanov19}.
+\end{abstract}
+
+%\tableofcontents
+
+%\clearpage
+
+\section{Introduction}
+\label{intro}
+
+Let $p\in\mathbb{N}$ be a prime number, $n\in\mathbb{N}$ an integer and
+$\mathbb{F}_{p^n}/\mathbb{F}_{p}$ a finite field extension of
+$\mathbb{F}_{p}=\mathbb{Z}/p\mathbb{Z}$. Let $\mathcal{M}$ be the set of
+bilinear \emph{maps} from $\mathbb{F}_{p^n}\times\mathbb{F}_{p^n}$ to
+$\mathbb{F}_{p^n}$ and let $\mathcal F$ the set of bilinear \emph{forms} from $\mathbb{F}_{p^n}\times\mathbb{F}_{p^n}$ to
+$\mathbb{F}_{p}$. Let $\Phi\in\mathcal M$ a bilinear map, our goal is to find an
+equation of the form
+\begin{equation}
+  \Phi(x, y) = \sum_{j=1}^r f_j(x, y)\alpha_j
+  \label{1}
+\end{equation}
+with $f_j\in\mathcal F$ bilinear forms of rank $1$ and $\alpha_j\in\mathbb{F}_{p^n}$ for all $1\leq
+j \leq r$. If the integer $r$ in Equation~\eqref{1} is minimal, then we say that
+$r$ is the \emph{bilinear rank} of $\Phi$. Being a rank $1$ bilinear form is also equivalent to be the product
+of two linear forms, so Equation~\eqref{1} can also be written
+\begin{equation}
+  \Phi(x, y) = \sum_{j=1}^r g_j(x)h_j(y)\alpha_j.
+  \label{2}
+\end{equation}
+
+If $\Phi$ is a symmetric map, we can also try to search for symmetric formulas,
+\ie formulas where the $f_j$ are symmetric, or in other words where $g_j = h_j$
+for all $j$:
+
+\begin{equation}
+  \Phi(x, y) = \sum_{j=1}^r g_j(x)g_j(y)\alpha_j.\footnote{Note that $r$ is not
+    necessarily the same as in Equation~\eqref{1} and~\eqref{2}. It is not known
+  if the minimal $r$ such that this kind of equation holds, that we could maybe
+  call \emph{symmetric rank}, is the same as the bilinear rank.}
+  \label{sym}
+\end{equation}
+
+Furthermore, any linear form $g:\mathbb{F}_{p^n}\to\mathbb{F}_p$ can be written
+$g(x) = \tr(\alpha x)$ with $\alpha\in\mathbb{F}_{p^n}$ a given element
+depending on $g$ and $\tr$ the trace of $\mathbb{F}_{p^n}$ over
+$\mathbb{F}_p$. Thus, we can rewrite Equation~\eqref{sym} as
+\begin{equation}
+  \Phi(x, y) = \sum_{j=1}^r \tr(\beta_j x)\tr(\beta_j y)\alpha_j.
+  \label{symtr}
+\end{equation}
+Finally we may want to add yet another layer of symmetry, we can ask
+$\beta_j=\alpha_j$ for all $j$, and we will call these last decompositions
+\emph{tri-symmetric}:
+\begin{equation}
+  \Phi(x, y) = \sum_{j=1}^r \lambda_j\tr(\alpha_j x)\tr(\alpha_j
+  y)\alpha_j\footnote{Once again, when such a decomposition exists, it is not known if the \emph{tri-symmetric
+  rank} is stricly larger than the other ranks.}
+  \label{trisym}
+\end{equation}
+where $\lambda_j\in\mathbb{F}_p$ for all $1\leq j \leq r$.
+
+\section{From bilinear maps to vector space~\cite[Ch. 1]{Covanov18}}
+
+We keep the same noations as in Section~\ref{intro}. We can choose a basis
+of $\mathbb{F}_{p^n}/\mathbb{F}_p$ and write
+\[
+  \Phi = (\varphi_1, \dots, \varphi_n)
+\]
+with bilinear forms $\varphi_i\in\mathcal F$ for all $1\leq i \leq n$. The set
+$\mathcal F$ of bilinear forms is a $\mathbb{F}_{p}$-vector space of dimension
+$n^2$. We then consider the subspace 
+\[
+  V=\Span(\varphi_1, \dots, \varphi_n)
+\]
+and the sets
+\[
+  \mathcal G = \left\{ g\in\mathcal F\,|\,g\text{ is of rank }1 \right\}
+\]
+and
+\[
+  \mathcal G_{\text{sym}} = \left\{ g\in\mathcal F\,|\,g\text{ is symmetric and of rank }1 \right\}.
+\]
+A strategy to find formulas is to search for elements $g_1, \dots,
+g_r\in\mathcal G$ than span $V$. It is similar to an exhaustive search through
+$\mathcal G$, but Covanov~\cite{Covanov19} developed clever ideas to exploit the
+symmetries of the bilinear map $\Phi$ and substantially reduce the search space.
+Of course, searching for symmetric formulas implies searching in $\mathcal
+G_{\text{sym}}$, which is smaller than $\mathcal G$
+\[
+  \Card \mathcal G_{\text{sym}} = \sqrt{\Card\mathcal G},
+\]
+so searching for symmetric formulas is faster.
+
+\section{The tri-symmetric world}
+
+We cannot apply Covanov's ideas to the tri-symmetric case because the strategy
+used does not take into account the fact that, in the tri-symmetric case, each
+symmetric bilinear form comes wih an element in $\mathbb{F}_{p^n}$ that
+determines its
+contribution to $\Phi=(\varphi_1, \dots, \varphi_n)\in\mathcal B$. 
+
+A first idea to compute a tri-symmetric decomposition of length $r$ is to
+exhaustively search through $r$-uples $(\alpha_1, \dots, \alpha_n)$ and
+$(\lambda_1, \dots, \lambda_r)$ to see if we have
+\[
+  \Phi(x, y) = \sum_{j=1}^r \lambda_j\tr(\alpha_j x)\tr(\alpha_j y)\alpha_j.
+\]
+
+Of course, it has a quite horrific complexity, so we present other solutions.
+Nonetheless, all our solutions have an exponential complexity. 
+It will be convenient to add some more notations.
+Let $\f$ be the application mapping an element in
+$\mathbb{F}_{p^n}$ to its associated bilinear symmetric form:
+\[
+\begin{array}{cccc}
+  \f: & \mathbb{F}_{p^n} & \to & \mathcal F \\
+  & \alpha & \mapsto & (x, y)\mapsto \tr(\alpha x)\tr(\alpha y).
+\end{array}
+\]
+For some choice\footnote{We will see that our algorithms do not depend on this
+choice.} of a basis of $\mathbb{F}_{p^n}$ over $\mathbb{F}_p$, for all
+$1\leq i\leq n$ we let
+\[
+  \E_i=\left\{ \alpha=(a_1, \dots, a_n)\in\mathbb{F}_{p^n}
+  \,|\, \forall k\leq i-1,\,a_k=0\text{ and }a_i=1 \right\}
+\]
+and
+\[
+  \E = \bigcup_{i=1}^n\E_i.
+\]
+Since we are allowed to use scalar coefficients $\lambda_j\in\mathbb{F}_p$ in our decomposition,
+we can search for elements $\alpha_j\in\mathbb{F}_{p^n}$ that are in fact in
+$\E$. The idea is always the same and is rather simple: instead of trying to find a
+\emph{global} solution directly, we try to find \emph{local}\footnote{Nothing to
+do with the local solutions of differential equations.} solutions, \ie coordinates by
+coordinates.
+
+\paragraph{The vector space strategy.}
+In order to search for a length $r$ tri-symmetric decomposition, we
+search for a decomposition of length $s\leq r$\footnote{If $s=r$, it is the same
+as a global exhaustive search.} on each coordinate: we start by exhaustively
+search for up to $s$ elements in $\E_1$ such that
+\[
+  \varphi_1\in\Span(\f(\alpha_1), \dots, \f(\alpha_s)).
+\]
+We then obtain scalars $\lambda_1, \dots, \lambda_s$ such that
+\[
+  \Phi-\sum_{j=1}^s\lambda_j\f(\alpha_j)\alpha_j=(0, \varphi_2', \dots,
+  \varphi_n')
+\]
+and we go on and search for up to $s$ elements in $\E_2$ in order to eliminate
+$\varphi_2'$. Since the elements are
+found in $\E_2$, they have no contribution on the first coordinate. We then
+continue this process with $\varphi_3''$, and so on until we find a
+tri-symmetric decomposition. It is
+possible that there exist tri-symmetric decompositions with $r$ elements that
+are all in $\E_1$, so if our parameter $s$ is strictly less than $r$, we may not
+have all the decompositions. This strategy is described in
+Algorithm~\ref{algo:vect}.
+
+\begin{algorithm}
+  \caption{(Vector space strategy)}\label{algo:vect}
+  \begin{algorithmic}[1]
+    \Require{$\Phi=(\varphi_1, \dots, \varphi_n)\in\mathcal B$ a bilinear map;
+      $r, s\in\mathbb{N}$ two integers with $s\leq r$}
+    \Ensure{A list of tri-symmetric decompositions of $\Phi$ with up to $r$ elements.}
+
+    \Procedure{FindDecomposition}{$\varphi, E, t, R_{\text{glob}},
+    R_{\text{loc}}=\emptyset$}
+    \If{$\varphi\in\Span(R_\text{loc})$}
+    \State $C\gets \left\{ (\lambda_1, \alpha_1), \dots, (\lambda_u, \alpha_u)
+    \right\}$, where $\varphi=\sum_{j=1}^u \lambda_j\f(\alpha_j)$ and
+    $R_\text{loc}=\left\{ \alpha_1, \dots, \alpha_u \right\}$
+    \State $R_\text{glob}\gets R_\text{glob}\bigcup\left\{C\right\}$
+    \ElsIf{$\Card R_\text{loc}<t$}
+    \For{$i=1$ to $\Card E$}
+    \State $E'\gets \left\{ e_{i+1}, \dots, e_v \right\}$\Comment{$E=\left\{ e_1,
+    \dots, e_v\right\}$}
+    \State \Call{FindDecomposition}{$\varphi, E', t, R_\text{glob},
+    R_\text{loc}\cup\left\{ e_i \right\}$}
+    \EndFor
+    \EndIf
+    \EndProcedure
+
+    \Procedure{TriSymmetricSearch}{$\Phi, r, s, S_\text{glob}, j=1,
+    S_\text{loc}=\emptyset$}
+      \If{$\Phi = 0$}
+      \State $S_\text{glob}\gets S_\text{glob}\bigcup \left\{S_\text{loc}\right\}$. 
+      \Else
+        \State $t\gets\min(s, r)$
+        \State $\mathcal R\gets\emptyset$
+        \State \Call{FindDecomposition}{$\varphi_j, \E_j, t,
+        \mathcal R$}\Comment{$\Phi=(\varphi_1, \dots, \varphi_n)$}
+        \ForAll{$S\in\mathcal R$}
+        \State $\Phi'\gets\Phi-\sum_{(\lambda, \alpha)\in
+        S}\lambda\f(\alpha)\alpha$
+        \State \Call{TriSymmetricSearch}{$\Phi', r-\Card S, s, S_\text{glob}, j+1,
+          S_\text{loc}\cup S$}
+        \EndFor
+      \EndIf
+    \EndProcedure
+    \State $\mathcal S\gets\emptyset$
+    \State \Call{TriSymmetricSearch}{$\Phi, r, s, \mathcal S$}
+    \State \Return $\mathcal S$
+  \end{algorithmic}
+\end{algorithm}
+
+\paragraph{The matrix strategy.}
+The idea will still be the same, with a little change in the representation of
+the bilinear forms. Instead of considering the bilinear forms
+$\varphi\in\mathcal F$ as vectors in the $\mathbb{F}_{p}$-vector
+space $\mathcal F$ of dimension $n^2$, we will work with their $n\times n$ matrix
+representation. The main advantage of the matrix representation is that instead
+of searching directly for all the $s$-uple $(\alpha_1, \dots, \alpha_s)$ such
+that
+\[
+  \varphi\in\Span(\f(\alpha_1), \dots, \f(\alpha_s)),
+\]
+we will compute elements $\alpha_1, \dots, \alpha_s$ one by one by looking if
+there exist $\lambda_1\in\mathbb{F}_p$ such that
+\[
+  \rank(\varphi-\lambda_1\f(\alpha_1))<\rank(\varphi),
+\]
+then $\lambda_2$ such that
+\[
+  \rank(\varphi-\lambda_1\f(\alpha_1)-\lambda_2\f(\alpha_2))<\rank(\varphi-\lambda_1\f(\alpha_1)),
+\]
+and so on, eliminating lots of other candidates on the way. This strategy
+is described in Algorithm~\ref{algo:mat}.
+
+\begin{algorithm}
+  \caption{(Matrix strategy)}\label{algo:mat}
+  \begin{algorithmic}[1]
+    \Require{$\Phi=(\varphi_1, \dots, \varphi_n)\in\mathcal B$ a bilinear map;
+      $r, s\in\mathbb{N}$ two integers with $s\leq r$}
+    \Ensure{A list of tri-symmetric decompositions of $\Phi$ with up to $r$ elements.}
+
+    \Procedure{FindDecMat}{$\varphi, E, R_{\text{glob}},
+    R_{\text{loc}}=\emptyset$}
+    \If{$\varphi=0$}\Comment{$\rank(\varphi)=0$}
+    \State $R_\text{glob}\gets R_\text{glob}\bigcup\left\{R_\text{loc}\right\}$
+    \Else
+    \State $\mathcal C\gets\emptyset$
+    \ForAll{$\alpha\in E$}
+    \ForAll{$\lambda\in\mathbb{F}_p$}
+    \If{$\rank(\varphi-\lambda\f(\alpha))<\rank(\varphi)$}
+    \State $\mathcal C\gets\mathcal C\bigcup\left\{ (\lambda, \sigma) \right\}$
+    \State \textbf{break}
+    \EndIf
+    \EndFor
+    \EndFor
+    \For{$i=1$ to $\Card\mathcal C$}\Comment{$\mathcal
+      C=\left\{ (\lambda_1, \alpha_1), \dots, (\lambda_u, \alpha_u) \right\}$}
+      \State $E'\gets\left\{ \alpha_{i+1}, \dots, \alpha_u \right\}$
+    \State \Call{FindDecMat}{$\varphi-\lambda_i\f(\alpha_i), E', R_\text{glob},
+    R_\text{loc}\cup\left\{ (\lambda_i, \alpha_i) \right\}$}
+    \EndFor
+    \EndIf
+    \EndProcedure
+
+    \Procedure{TriSymSearchMat}{$\Phi, r, S_\text{glob}, j=1,
+    S_\text{loc}=\emptyset$}
+      \If{$\Phi = 0$}
+      \State $S_\text{glob}\gets S_\text{glob}\bigcup \left\{S_\text{loc}\right\}$. 
+      \ElsIf{$\rank(\varphi_j)\leq r$}
+        \State $\mathcal R\gets\emptyset$
+        \State \Call{FindDecMat}{$\varphi_j, \E_j, 
+        \mathcal R$}\Comment{$\Phi=(\varphi_1, \dots, \varphi_n)$}
+        \ForAll{$S\in\mathcal R$}
+        \State $\Phi'\gets\Phi-\sum_{(\lambda, \alpha)\in
+        S}\lambda\f(\alpha)\alpha$
+        \State \Call{TriSymSearchMat}{$\Phi', r-\Card S, S_\text{glob}, j+1,
+          S_\text{loc}\cup S$}
+        \EndFor
+      \EndIf
+    \EndProcedure
+    \State $\mathcal S\gets\emptyset$
+    \State \Call{TriSymmetricSearchMat}{$\Phi, r, \mathcal S$}
+    \State \Return $\mathcal S$
+  \end{algorithmic}
+\end{algorithm}
+
+
+\section{Frobenius action}
+
+Let $\sigma$ be the Frobenius automorphism of $\mathbb{F}_{p^n}/\mathbb{F}_p$.
+Assume we have found a tri-symmetric decomposition of the product in
+$\mathbb{F}_{p^n}$ with some elements $\alpha_1, \dots, \alpha_r$, \ie for all
+$x, y\in\mathbb{F}_{p^n}$, we have
+\[
+  xy = \sum_{j=1}^r \tr(\alpha_jx)\tr(\alpha_jy)\alpha_j.
+\]
+Then we have that
+\[
+  \sigma^{-1}(x)\sigma^{-1}(y) = \sum_{j=1}^r
+  \tr(\alpha_j\sigma^{-1}(x))\tr(\alpha_j\sigma^{-1}(y))\alpha_j.
+\]
+Since for all $z\in\mathbb{F}_{p^n}$,
+\[
+  \tr(z) = \tr(\sigma(z)),
+\]
+we also have
+\[
+  \sigma^{-1}(x)\sigma^{-1}(y) = \sum_{j=1}^r
+  \tr(\sigma(\alpha_j)x)\tr(\sigma(\alpha_j)y)\alpha_j.
+\]
+Finally, by applying $\sigma$ on the two sides of the equation, we obtain
+\[
+  xy = \sum_{j=1}^r \tr(\alpha_j^\sigma x)\tr(\alpha_j^\sigma y)\alpha_j^\sigma
+\]
+where $\alpha_j^\sigma \eqdef \sigma(\alpha_j)$. We see that the Frobenius
+automorphism acts on the tri-symmetric decompositions. A first consequence is
+that a single decomposition may give birth to other ones.
+
+An other one is that we would like to be able to ``quotient'' our search by the
+action of the Frobenius. We could do that with an exhaustive search but we
+currently do not have a way to use this in the other algorithms. 
+
+\bibliographystyle{plain}
+\bibliography{erou}
+
+\end{document}
