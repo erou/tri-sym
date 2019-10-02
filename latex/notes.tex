@@ -103,7 +103,7 @@ and
   \mathcal G_{\text{sym}} = \left\{ g\in\mathcal F\,|\,g\text{ is symmetric and of rank }1 \right\}.
 \]
 A strategy to find formulas is to search for elements $g_1, \dots,
-g_r\in\mathcal G$ than span $V$. It is similar to an exhaustive search through
+g_r\in\mathcal G$ that span $V$. It is similar to an exhaustive search through
 $\mathcal G$, but Covanov~\cite{Covanov19} developed clever ideas to exploit the
 symmetries of the bilinear map $\Phi$ and substantially reduce the search space.
 Of course, searching for symmetric formulas implies searching in $\mathcal
@@ -122,7 +122,7 @@ determines its
 contribution to $\Phi=(\varphi_1, \dots, \varphi_n)\in\mathcal B$. 
 
 A first idea to compute a tri-symmetric decomposition of length $r$ is to
-exhaustively search through $r$-uples $(\alpha_1, \dots, \alpha_n)$ and
+exhaustively search through $r$-uples $(\alpha_1, \dots, \alpha_r)$ and
 $(\lambda_1, \dots, \lambda_r)$ to see if we have
 \[
   \Phi(x, y) = \sum_{j=1}^r \lambda_j\tr(\alpha_j x)\tr(\alpha_j y)\alpha_j.
@@ -238,7 +238,7 @@ that
 \[
   \varphi\in\Span(\f(\alpha_1), \dots, \f(\alpha_s)),
 \]
-we will compute elements $\alpha_1, \dots, \alpha_s$ one by one by looking if
+we will compute elements $\alpha_1, \dots, \alpha_s$ one by one by checking if
 there exist $\lambda_1\in\mathbb{F}_p$ such that
 \[
   \rank(\varphi-\lambda_1\f(\alpha_1))<\rank(\varphi),
@@ -254,7 +254,7 @@ is described in Algorithm~\ref{algo:mat}.
   \caption{(Matrix strategy)}\label{algo:mat}
   \begin{algorithmic}[1]
     \Require{$\Phi=(\varphi_1, \dots, \varphi_n)\in\mathcal B$ a bilinear map;
-      $r, s\in\mathbb{N}$ two integers with $s\leq r$}
+      $r\in\mathbb{N}$ an integer}
     \Ensure{A list of tri-symmetric decompositions of $\Phi$ with up to $r$ elements.}
 
     \Procedure{FindDecMat}{$\varphi, E, R_{\text{glob}},
@@ -302,19 +302,177 @@ is described in Algorithm~\ref{algo:mat}.
   \end{algorithmic}
 \end{algorithm}
 
+The main problem of Algorithm~\ref{algo:mat} is that it only finds
+\emph{minimal} solutions, in the sense that if $\varphi_1$ if of rank $r_1$,
+\textsc{FindDecMat}$(\varphi_1, \mathcal E_1, \mathcal R)$ will find only
+solutions composed of $r_1$ elements, not more. The same is also true for
+$\varphi_2', \varphi_3''$, and so on. But there exist tri-symmetric
+decompositions where there is more than $r_1$ elements that are in $\mathcal
+E_1$ (as can be seen in Table~\ref{tab:sets}), so we would like a less naive version of Algorithm~\ref{algo:mat} that
+allows for some margins on each coordinate. We denote this ``margin'' by
+\[
+  \mathfrak M = (m_1, \dots, m_n)\in \mathbb{N}^n
+\]
+and it means that for each step of the algorithm, if $\varphi_j$ is of rank
+$r_j$, we are able to find solutions with up to $r_j + m_j$ elements. The new
+method, namely Algorithm~\ref{algo:margin}, is then a generalization of
+Algorithm~\ref{algo:mat} and Algorithm~\ref{algo:margin} called with $\mathfrak
+M=(0, \dots, 0)$ is exactly Algorithm~\ref{algo:mat}.
+
+\begin{algorithm}
+  \caption{(Matrices with margins)}\label{algo:margin}
+  \begin{algorithmic}[1]
+    \Require{$\Phi=(\varphi_1, \dots, \varphi_n)\in\mathcal B$ a bilinear map;
+      $r\in\mathbb{N}$ an integer, $\mathfrak M$ a margin}
+    \Ensure{A list of tri-symmetric decompositions of $\Phi$ with up to $r$ elements.}
+
+    \Procedure{FindDecMargin}{$\varphi, E, r, m, R_{\text{glob}},
+    R_{\text{loc}}=\emptyset$}
+    \If{$\rank\varphi\leq r$}
+    \If{$\varphi=0$}\Comment{$\rank(\varphi)=0$}
+    \State $R_\text{glob}\gets R_\text{glob}\bigcup\left\{R_\text{loc}\right\}$
+    \ElsIf{$m=0$}\Comment{No margin left!}
+    \State \Call{FindDecMat}{$\varphi, E, R_\text{glob},
+    R_\text{loc}$}\Comment{"naive" strategy: Alg.~\ref{algo:mat}}
+   \Else
+   \For{$i=1$ to $\Card E$}\Comment{$E=\left\{ \alpha_1, \dots, \alpha_u \right\}$}
+   \State $E'\gets\left\{ \alpha_{i+1}, \dots, \alpha_u \right\}$
+    \ForAll{$\lambda\in\mathbb{F}_p$}
+    \State $\varphi'\gets\varphi-\lambda\alpha_i$
+    \State $R_\text{loc}'\gets R_\text{loc}\bigcup\left\{ (\lambda, \alpha_i)
+    \right\}$
+    \If{$\rank(\varphi')<\rank(\varphi)$}
+    \State \Call{FindDecMargin}{$\varphi', E', r-1, m,
+      R_\text{glob}, R_\text{loc}'$}
+    \Else
+    \State \Call{FindDecMargin}{$\varphi', E', r-1, m-1,
+      R_\text{glob}, R_\text{loc}'$}
+    \EndIf
+    \EndFor
+    \EndFor
+    \EndIf
+    \EndIf
+    \EndProcedure
+
+    \Procedure{TriSymSearchMargin}{$\Phi, r, \mathfrak M, S_\text{glob}, j=1,
+    S_\text{loc}=\emptyset$}
+      \If{$\Phi = 0$}
+      \State $S_\text{glob}\gets S_\text{glob}\bigcup \left\{S_\text{loc}\right\}$. 
+      \ElsIf{$\rank(\varphi_j)\leq r$}
+      \State $\mathcal R\gets\emptyset$\Comment{$\mathfrak M = (m_1, \dots, m_n)$}
+        \State \Call{FindDecMargin}{$\varphi_j, \E_j, r, m_j,
+        \mathcal R$}\Comment{$\Phi=(\varphi_1, \dots, \varphi_n)$}
+        \ForAll{$S\in\mathcal R$}
+        \State $\Phi'\gets\Phi-\sum_{(\lambda, \alpha)\in
+        S}\lambda\f(\alpha)\alpha$
+        \State \Call{TriSymSearchMargin}{$\Phi', r\!-\!\Card S, \mathfrak M, S_\text{glob}, j+1,
+          S_\text{loc}\cup S$}
+        \EndFor
+      \EndIf
+    \EndProcedure
+    \State $\mathcal S\gets\emptyset$
+    \State \Call{TriSymSearchMargin}{$\Phi, r, \mathfrak M, \mathcal S$}
+    \State \Return $\mathcal S$
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{ex}
+ Let us see the case of the extension 
+ \[
+   \mathbb{F}_{3^3}\cong \mathbb{F}_{3}[x]/(x^3-x+1)\cong \mathbb{F}_3[z]
+ \]
+ over $\mathbb{F}_3$. There are $4$ tri-symmetric decomposition of length $6$ of
+ the product:
+ \begin{align*}
+   d_1 &=\left\{(1, z^2 + z),
+  (2, z^2 + z + 1),
+  (1, z^2 - z + 1),
+  (1, -z^2 + 1),
+  (2, -z^2 + z + 1),
+  (1, -z^2 -z + 1)\right\}\\
+  d_2 &= \left\{(2, z^2),
+  (2, z^2 + 1),
+  (1, z^2 + z + 1),
+  (2, -z^2 + 1),
+  (1, -z^2 + z),
+  (2, -z^2 - z + 1)\right\}\\
+  d_3 &= \left\{(1, z),
+  (1, z + 1),
+  (2, -z + 1),
+  (2, z^2 + z),
+  (1, -z^2 + 1),
+  (1, -z^2 + z)\right\}\\
+  d_4 &= \left\{ (1, z^2),
+  (1, z^2 + 1),
+  (2, z^2 + z),
+  (2, z^2 - z + 1),
+  (2, -z^2 + z),
+  (1, -z^2 + z + 1).\right\}
+ \end{align*}
+
+How the elements of each decomposition fall into the sets $\mathcal E$ is
+described in Table~\ref{tab:sets}. Table~\ref{tab:algos} describes which
+algorithm finds which decomposition, in this table $\mathcal A(s, r)$ denotes
+Algorithm~\ref{algo:vect} with parameters $s$ and $r$, while $\mathcal B(m_1,
+m_2, m_3)$ denotes Algorithm~\ref{algo:margin} with the margin $\mathcal
+M=(m_1, m_2, m_3)$. Thus $\mathcal B(0,0,0)$ is Algorithm~\ref{algo:mat}. There
+is a checkmark \checkmark when the algorithms succeed in finding the
+decomposition.
+
+ \begin{table}
+   \centering
+\begin{tabular}{|c||ccc|}
+   \hline
+   \diagbox{Decomposition}{Set} & $\mathcal E_1$ & $\mathcal E_2$
+   & $\mathcal E_3$ \\
+   \hline
+   \hline
+   $d_1$ & 5 & 1 & 0 \\
+   $d_2$ & 4 & 1 & 1 \\
+   $d_3$ & 3 & 3 & 0 \\
+   $d_4$ & 3 & 2 & 1 \\
+  \hline 
+ \end{tabular}
+ \caption{The elements of a decomposition and their belonging to a set $\mathcal
+ E$.}
+\label{tab:sets}
+ \end{table}
+
+ \begin{table}
+   \centering
+ \begin{tabular}{|c||cccc|}
+   \hline
+   \diagbox{\small{Decomposition}}{\small{Algorithm}} & $\mathcal A(3, 6)$ & $\mathcal A(6, 6)$
+   & $\mathcal B(0, 0, 0)$ & $\mathcal B(2, 1, 0)$ \\
+   \hline
+   \hline
+   $d_1$ & & \checkmark & & \checkmark \\
+   $d_2$ & & \checkmark & & \checkmark \\
+   $d_3$ & \checkmark & \checkmark & & \checkmark \\
+   $d_4$ & \checkmark & \checkmark & \checkmark & \checkmark \\
+  \hline 
+ \end{tabular}
+
+   \caption{The algorithms and the decompositions they find.}
+   \label{tab:algos}
+ \end{table}
+
+\end{ex}
 
 \section{Frobenius action}
 
 Let $\sigma$ be the Frobenius automorphism of $\mathbb{F}_{p^n}/\mathbb{F}_p$.
 Assume we have found a tri-symmetric decomposition of the product in
-$\mathbb{F}_{p^n}$ with some elements $\alpha_1, \dots, \alpha_r$, \ie for all
+$\mathbb{F}_{p^n}$ with some elements $\alpha_1, \dots, \alpha_r\in
+\mathbb{F}_{p^n}$ and
+$\lambda_1, \dots, \lambda_r\in\mathbb{F}_p$, \ie for all
 $x, y\in\mathbb{F}_{p^n}$, we have
 \[
-  xy = \sum_{j=1}^r \tr(\alpha_jx)\tr(\alpha_jy)\alpha_j.
+  xy = \sum_{j=1}^r \lambda_j \tr(\alpha_jx)\tr(\alpha_jy)\alpha_j.
 \]
 Then we have that
 \[
-  \sigma^{-1}(x)\sigma^{-1}(y) = \sum_{j=1}^r
+  \sigma^{-1}(x)\sigma^{-1}(y) = \sum_{j=1}^r \lambda_j
   \tr(\alpha_j\sigma^{-1}(x))\tr(\alpha_j\sigma^{-1}(y))\alpha_j.
 \]
 Since for all $z\in\mathbb{F}_{p^n}$,
@@ -323,12 +481,12 @@ Since for all $z\in\mathbb{F}_{p^n}$,
 \]
 we also have
 \[
-  \sigma^{-1}(x)\sigma^{-1}(y) = \sum_{j=1}^r
+  \sigma^{-1}(x)\sigma^{-1}(y) = \sum_{j=1}^r \lambda_j
   \tr(\sigma(\alpha_j)x)\tr(\sigma(\alpha_j)y)\alpha_j.
 \]
 Finally, by applying $\sigma$ on the two sides of the equation, we obtain
 \[
-  xy = \sum_{j=1}^r \tr(\alpha_j^\sigma x)\tr(\alpha_j^\sigma y)\alpha_j^\sigma
+  xy = \sum_{j=1}^r \lambda_j \tr(\alpha_j^\sigma x)\tr(\alpha_j^\sigma y)\alpha_j^\sigma
 \]
 where $\alpha_j^\sigma \eqdef \sigma(\alpha_j)$. We see that the Frobenius
 automorphism acts on the tri-symmetric decompositions. A first consequence is
