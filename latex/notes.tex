@@ -496,6 +496,90 @@ An other one is that we would like to be able to ``quotient'' our search by the
 action of the Frobenius. We could do that with an exhaustive search but we
 currently do not have a way to use this in the other algorithms. 
 
+
+\section{Quadratic extensions}
+
+Let $q=p^l$ denote a prime power, with $p\neq2$. In this section we investigate
+the case of the quadratic extension 
+\[
+  \mathbb{F}_{q^2}/\mathbb{F}_q.
+\]
+It is always possible to find an element $\zeta\in\mathbb{F}_q$ such that 
+\[
+  \mathbb{F}_{q^2}\cong \mathbb{F}_{q}[x]/(x^2-\zeta)=\mathbb{F}_q(\alpha)
+\]
+where $\alpha=\bar x$ is the canonical generator of $\mathbb{F}_{q^2}$. With
+this representation of $\mathbb{F}_{q^2}$, we have that
+\[
+  \tr(x_0 + x_1\alpha) = 2x_0,
+\]
+where $\tr$ is the trace of $\mathbb{F}_{q^2}$ over $\mathbb{F}_q$.
+We represent
+bilinear forms on $\mathbb{F}_{q^2}\times \mathbb{F}_{q^2}$ as $2\times2$
+matrices, so that the product
+\[
+  ab = (a_0+a_1\alpha)(b_0+b_1\alpha)=a_0b_0+\zeta a_1b_1
+  +(a_0b_1+a_1b_0)\alpha
+\]
+can be writen as
+\[
+  ab = 
+  \begin{bmatrix}
+    1 & 0 \\
+    0 & \zeta
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    0 & 1 \\
+    1 & 0
+  \end{bmatrix}\alpha.
+\]
+With these notations, the bilinear map 
+\[
+  (a, b)\mapsto \tr((x_0+x_1\alpha)a)\tr((x_0+x_1\alpha)b)
+\]
+is given by the matrix 
+\[
+  f(x_0+x_1\alpha)=
+  \left(S 
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix}\right)
+  \left(S 
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix}\right)^\intercal
+\]
+where
+\[
+  S =
+  \begin{bmatrix}
+    \tr(\alpha^{i+j})
+  \end{bmatrix}_{0\leq i, j\leq 1}
+  =
+  \begin{bmatrix}
+   2 & 0 \\
+   0 & 2\zeta
+  \end{bmatrix}.
+\]
+In other words we have
+\[
+  f(x_0+x_1\alpha) = 
+  4\begin{bmatrix}
+   x_0^2 & \zeta x_0x_1 \\
+   \zeta x_0 x_1 & \zeta^2 x_1^2
+  \end{bmatrix}.
+\]
+And we can finally check that
+\[
+  ab = (1-\zeta^{-1})4^{-1}f(1)\cdot1 +
+  (8\zeta)^{-1}f(1+\alpha)\cdot(1+\alpha)+(8\zeta)^{-1}f(1-\alpha)(1-\alpha)
+\]
+so that the trisymmetric bilinear complexity for
+$\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$.
+
 \bibliographystyle{plain}
 \bibliography{erou}
 

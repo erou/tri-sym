@@ -256,3 +256,6 @@ TSWLatexianTemp*
 
 # Jupyter notebook
 .ipynb_checkpoints
+
+# TODO personal file
+TODO.md
