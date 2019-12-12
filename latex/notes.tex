@@ -580,6 +580,143 @@ And we can finally check that
 so that the trisymmetric bilinear complexity for
 $\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$.
 
+\section{Other algebras of small degree}
+
+Until now, we have studied $\mathbb{F}_q$ algebras that were of a special kind
+because they were field extensions, and thus they were not only algebras but
+also fields. More generally, we can study other $\mathbb{F}_q$-algebra $\A$ such
+that 
+\[
+  \A \cong \A^\times,
+\]
+where $\A^\times$ is the dual of $\A$, and for which we know how to realize the
+isomorphism. For the case
+\[
+  \A = \mathbb{F}_{q^n},
+\]
+the isomorphism is realized by the trace map.
+
+An other interesting case is the algebra of truncated polynomials, \ie the algebra
+\[
+  \A = \mathbb{F}_{q}[x]/(x^n) = \mathbb{F}_{q}[\alpha],
+\]
+where $\alpha=\bar x$ is the canonical generator.
+In this context, an element $\bfa\in\A$ can be written as
+\[
+  \bfa = \sum_{j=0}^{n-1}a_j \alpha^j
+\]
+and a map realizing the isomorphism $\A\cong\A^\times$ is given by
+\[
+  \R(\bfa)=\R\left(\sum_{j=0}^{n-1}a_j \alpha^j\right) = a_{n-1}.
+\]
+
+\paragraph{Algebras of degree $2$.} Let $q=p^l$ denote a prime power, with
+$p\neq 2$, we first investigate the algebra
+\[
+  \A = \mathbb{F}_q[x]/(x^2) =\mathbb{F}_q[\alpha]
+\]
+where $\alpha=\bar x$ is the canonical generator of $\A$ and $\alpha^2=0$.
+With this representation of $\A$, we have that
+\[
+  \R(x_0 + x_1\alpha) = x_1,
+\]
+where $\R$ is the map defined earlier.
+We represent
+bilinear forms on $\A\times\A$ as $2\times2$
+matrices, so that the product
+\[
+  \bfa\bfb = (a_0+a_1\alpha)(b_0+b_1\alpha)=a_0b_0+(a_0b_1+a_1b_0)\alpha
+\]
+can be writen as
+\[
+  \bfa\bfb = 
+  \begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    0 & 1 \\
+    1 & 0
+  \end{bmatrix}\alpha.
+\]
+With these notations, the bilinear map 
+\[
+  (\bfa, \bfb)\mapsto \R((x_0+x_1\alpha)\bfa)\R((x_0+x_1\alpha)\bfb)
+\]
+is given by the matrix 
+\[
+  f(x_0+x_1\alpha)=
+  \left(S 
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix}\right)
+  \left(S 
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix}\right)^\intercal
+\]
+where
+\[
+  S =
+  \begin{bmatrix}
+    \R(\alpha^{i+j})
+  \end{bmatrix}_{0\leq i, j\leq 1}
+  =
+  \begin{bmatrix}
+   0 & 1 \\
+   1 & 0
+  \end{bmatrix}.
+\]
+In other words we have
+\[
+  f(x_0+x_1\alpha) = 
+  \begin{bmatrix}
+   x_1^2 & x_0x_1 \\
+   x_0 x_1 & x_0^2
+  \end{bmatrix}.
+\]
+And we can finally check that
+\[
+  \bfa\bfb = -f(1)\cdot1 +
+  2^{-1}f(1+\alpha)\cdot(1+\alpha)+2^{-1}f(1-\alpha)\cdot(1-\alpha)
+\]
+so that the trisymmetric bilinear complexity for
+$\A=\mathbb{F}_q[x]/(x^2)$ is $3$.
+
+\paragraph{Algebras of degree $3$ and $4$.} Let $q=p^l$ denote a prime power,
+with $p\notin\left\{ 2, 3 \right\}$. Here again, $\R$ and $f$ denote the maps defined
+earlier (they are not the same in degree $3$ and degree $4$).
+
+For $\bfa, \bfb\in\A=\mathbb{F}_{q}[x]/(x^3)$, we have
+\begin{equation*}
+  \begin{split}
+  \bfa\bfb =&
+  -f(1-\alpha-\alpha^2)\cdot(1-\alpha-\alpha^2)+3^{-1}f(\alpha+2\alpha^2)\cdot(\alpha+2\alpha^2)\\
+  &+2^{-1}f(1-\alpha-2\alpha^2)\cdot(1-\alpha-2\alpha^2) -
+  3^{-1}f(\alpha-\alpha^2)\cdot(\alpha-\alpha^2)\\
+  &+2^{-1}f(1-\alpha)\cdot(1-\alpha).
+  \end{split}
+\end{equation*}
+Thus the trisymmetric bilinear complexity for $\A=\mathbb{F}_q[x]/(x^3)$ is $5$.
+
+For $\bfa, \bfb\in\A=\mathbb{F}_{q}[x]/(x^4)$, we have
+\begin{equation*}
+  \begin{split}
+    \bfa\bfb =&\phantom{+}2^{-1}f(1-\alpha^2+\alpha^3)\cdot(1-\alpha^2+\alpha^3)-f(1-\alpha^2)\cdot(1-\alpha^2)\\
+  &+12^{-1}f(\alpha+2\alpha^2+2\alpha^3)\cdot(\alpha+2\alpha^2+2\alpha^3)\\
+  &-12^{-1}f(\alpha-2\alpha^2+2\alpha^3)\cdot(\alpha-2\alpha^2+2\alpha^3)\\
+  &-6^{-1}f(\alpha+\alpha^2-\alpha^3)\cdot(\alpha+\alpha^2-\alpha^3)\\
+  &+6^{-1}f(\alpha-\alpha^2-\alpha^3)\cdot(\alpha-\alpha^2-\alpha^3)\\
+  &+2^{-1}f(1-\alpha^2-\alpha^3)\cdot(1-\alpha^2-\alpha^3).
+  \end{split}
+\end{equation*}
+Thus the trisymmetric bilinear complexity for $\A=\mathbb{F}_q[x]/(x^4)$ is $7$.
+
+
+
 \bibliographystyle{plain}
 \bibliography{erou}
 
