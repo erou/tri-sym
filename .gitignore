@@ -259,3 +259,5 @@ TSWLatexianTemp*
 
 # TODO personal file
 TODO.md
+
+*.djvu
