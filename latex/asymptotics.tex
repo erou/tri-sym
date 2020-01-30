@@ -128,9 +128,13 @@ $t_3$.
   $3$-symmetric decomposition of $t_3$.
 \end{rem}
 \paragraph{Notations.} We let $\tri{q}{k}$ be the tri-symmetric
-bilinear complexity of $\mathbb{F}_{q^{k}}/\mathbb{F}_{q}$, \ie the length $n$
+bilinear complexity of $\mathbb{F}_{q^{k}}/\mathbb{F}_{q}$, \ie the minimal length $n$
 of a tri-symmetric decomposition of the product in the extension
-$\mathbb{F}_{q^k}/\mathbb{F}_q$.
+$\mathbb{F}_{q^k}/\mathbb{F}_q$. We let
+$\sym{q}{k}$ be the minimal length $n$ of a $m$-symmetric decomposition of 
+\[
+  m_3:\mathbb{F}_{q^{k}}\times\mathbb{F}_{q^k}\times\mathbb{F}_{q^k}\to\mathbb{F}_{q^k}.
+\].
 
 \section{Evaluation-interpolation method}
 \label{sec:eval}
@@ -376,12 +380,12 @@ hold is that
 \[
   \frac{n}{3} > \deg D > k + 2g - 2.
 \]
-If $\frac{n}{3}>k + 2g -1$, there exists an integer $d\in\mathbb{N}$ with
+If $\frac{n}{3}>k + 2g -1$, there exists an integer $\delta\in\mathbb{N}$ with
 \[
-  \frac{n}{3} > d > k +2g -2,
+  \frac{n}{3} > \delta > k +2g -2,
 \]
-\eg $d=k+2g-1$, therefore we can assume without loss of generality that there
-exists a divisor $D$ of degree $d$ which support does not include $Q, P_1,
+\eg $\delta=k+2g-1$, therefore we can assume without loss of generality that there
+exists a divisor $D$ of degree $\delta$ which support does not include $Q, P_1,
 \dots, P_n$, thanks to the strong approximation theorem.
 
 The remaining part is to prove that we can find suitable function fields for
@@ -403,7 +407,8 @@ with
 \[
   N_i = \Card\left\{ P\in\mathbb{P}_{F_i}\,|\,\deg P = 1 \right\}
 \]
-the number of places of degree $1$ of $F_i$. For each $k$, let $g_{i(k)}$ be the
+the number of places of degree $1$ of $F_i$. We also assume that the sequence
+$(g_i)_i$ is increasing. For each $k$, let $g_{i(k)}$ be the
 smallest genus $g_i$ such that
 \[
   N_{i} > 3k + 6g_{i}.
@@ -450,8 +455,8 @@ Inequation~\eqref{eqn:degreek} is true as soon as $k$ is large enough. Let
 $k_0(q)$ be a constant such that~\eqref{eqn:degreek} is true for $k\geq k_0(q)$.
 If $q\geq 64$ is a square and $k\geq k_0(q)$, we now know that we can find a
 function field $\mathbb{F}_{i(k)}$ in which Proposition~\ref{prop:method}
-applies, so that we can find a tri-symmetric decomposition of
-$\mathbb{F}_{q^k}/\mathbb{F}_q$ of length $n$, with
+applies, so that we can find a $3$-symmetric decomposition of $m_3$ of length
+$n$, and therefore a tri-symmetric decomposition $\mathbb{F}_{q^k}/\mathbb{F}_q$ of length $n$, with
 \begin{equation*}
   \begin{split}
     n&\leq N_{i(k)}\\
@@ -460,27 +465,31 @@ $\mathbb{F}_{q^k}/\mathbb{F}_q$ of length $n$, with
     &= O(k).
   \end{split}
 \end{equation*}
-We have therefore proven that the tri-symmetric bilinear complexity of
+We have thus proven that the tri-symmetric bilinear complexity of
 $\mathbb{F}_{q^k}/F_{q}$ is \emph{linear} in $k$ for $q\geq64$ a square.
 
 Let $q\geq3$ be a prime power, there exists an integer $d\in\mathbb{N}$ such that
 \[
   q' = q^d \geq 64
 \]
-is a square. Let $s=\tri{q}{d}$ be the tri-symmetric bilinear complexity of
-$\mathbb{F}_{q'}/\mathbb{F}_{q}$. We know that there exists some constant
+is a square. Let $\sym{q}{k}$ be the minimal length of a $3$-symmetric
+decomposition of 
+\[
+  m_3:\mathbb{F}_{q^{k}}\times\mathbb{F}_{q^k}\times\mathbb{F}_{q^k}\to\mathbb{F}_{q^k}.
+\]
+We know that there exists some constant
 $N$ such that
 \[
-  \tri{q'}{k}\leq Nk
+  \sym{q'}{k}\leq Nk
 \]
 for $k$ large enough, and since we know that
 
 \[
-  \tri{q}{kd}\leq\tri{q'}{k}\tri{q}{d},
+  \sym{q}{kd}\leq\sym{q'}{k}\sym{q}{d},
 \]
 it follows that
 \[
-  \tri{q}{kd} \leq (sN)k.
+  \sym{q}{kd} \leq (sN)k.
 \]
 \begin{center}
   \begin{tikzpicture}
@@ -503,11 +512,11 @@ Since
 we also have
 \begin{equation*}
   \begin{split}
-    \tri{q}{k}&\leq\tri{q}{kd}\\
+    \sym{q}{k}&\leq\sym{q}{kd}\\
     &\leq (sN)k.
   \end{split}
 \end{equation*}
-It thus proves that the tri-symmetric bilinear complexity of
+Because $\tri{q}{k}\leq\sym{q}{k}$, it thus proves that the tri-symmetric bilinear complexity of
 $\mathbb{F}_{q^k}/\mathbb{F}_q$ is linear in $k$, for any $q\geq3$.
 
 \bibliographystyle{plain}
