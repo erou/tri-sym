@@ -1,0 +1,96 @@
+\documentclass[a4paper,11pt]{article}
+
+\input{packages.tex}
+\input{tikz.tex}
+\input{thmstyle.tex}
+\input{macros.tex}
+
+% opening
+\title{Tri-symmetric decompositions of bilinear maps over finite fields}
+\author{}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  To be written.
+\end{abstract}
+
+%\tableofcontents
+
+%\clearpage
+
+\section{Introduction}
+\label{sec:intro}
+
+\paragraph{Bilinear complexity.} Let $k=\mathbb{F}_{q}$ be a finite field with
+$q$ elements and $\A$
+an algebra over $k$. Given an algorithm dealing with elements in $\A$, one is
+usually interested in the (asymptotic) cost of the algorithm. In order to
+understand this cost, one studies the \emph{complexity} of the algorithm, \ie
+the number of operations needed by the algorithm. We can for example count the number
+of bit operations or the algebraic operations $(+, \times, \cdot)$ in the algebra
+$\A$ or in the field $k$. The latter is called the \emph{algebraic complexity}
+and in this model we suppose that all algebraic operations have the same cost.
+Nevertheless, multiplications in an algebra $\A$ are arguably more expensive than
+additions or scalar multiplications. In the context of the computation of
+bilinear maps, extensive work has been done to reduce the number of
+multiplications involved. Notable examples are Karatsuba's
+algorithm~\cite{Karatsuba63} and
+Strassen's algorithm~\cite{Strassen69}. Karatsuba's algorithm is
+based on the fact that the bilinear map associated to the product of two
+polynomials of degree $1$
+\[
+  A = a_1 X + a_0\text{ and }B = b_1 X + b_0
+\]
+can be computed with three products $a_0b_0, (a_0+a_1)(b_0+b_1), a_1b_1$ instead
+of the four classic ones $a_0b_0, a_0b_1, a_1b_0, a_1b_1$. Strassen's algorithm
+exploits a similar idea in the case of $2\times2$ matrices: only $7$ products
+are used instead of $8$ in order to compute a matrix product. Both these
+algorithms have very practical consequences. The \emph{bilinear complexity}
+$\mu(\A/k)$ of the algebra $\A$ represents the minimum number of two-variable
+multiplications in $k$ needed to compute a product in $\A$, assuming that other
+operations such as addition or multiplication by a constant have no cost. The
+bilinear complexity is defined as the minimal number $n$ such that there exist
+linear forms $(\varphi_i)_{1\leq i \leq n}$, $(\psi_i)_{1\leq i \leq n}$ in
+$\A^\vee$, where $\A^\vee$ is the dual of $\A$, and
+elements $(\alpha_i)_{1\leq i \leq n}$ in $\A$ such that
+\[
+  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\varphi_i(x)\psi_i(y)\alpha_i.
+\]
+Equivalently, it can be defined as the rank of the tensor in
+\[
+  \A^\vee \times \A^\vee\times \A
+\]
+corresponding to the multiplication map in $\A$. Let $k^{2\times2}$ be the space
+of $2\times2$ matrices over $k$. We know thanks to Strassen's algorithm that 
+\[
+  \mu(k^{2\times 2}/k) \leq 7.
+\]
+In fact, this is optimal, so we have exactly $\mu(k^{2\times2}/k)=7$. In
+general, it seems to be hard to find the bilinear complexity of a given algebra,
+for example the bilinear complexity of $k^{3\times3}$ is not known.
+In the litterature, work has been done both to algorithmically find the bilinear complexity of
+small algebras~\cite{BDEZ12, Covanov18} and to understand how the bilinear
+complexity asymptotically grows~\cite{CC88, BCPRRR}. In this article, we
+investigate both questions, in the case of an other type of decomposition that
+is called \emph{tri-symmetric}. We define symmetric and tri-symmetric
+decomposition in Section~\ref{sec:symtrisym}. In Section~\ref{sec:algos} we
+describe algorithms to compute tri-symmetric decompositions. Finally, in
+Section~\ref{sec:asymptotic}, we prove that the tri-symmetric bilinear
+complexity of an extension of a finite field is linear in the degree of the
+extension.
+
+\section{Symmetric and tri-symmetric decompositions}
+\label{sec:symtrisym}
+
+\section{Finding tri-symmetric decompositions}
+\label{sec:algos}
+
+\section{Asymptotic lengths}
+\label{sec:asymptotic}
+
+\end{document}
