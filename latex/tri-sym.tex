@@ -75,17 +75,68 @@ general, it seems to be hard to find the bilinear complexity of a given algebra,
 for example the bilinear complexity of $k^{3\times3}$ is not known.
 In the litterature, work has been done both to algorithmically find the bilinear complexity of
 small algebras~\cite{BDEZ12, Covanov18} and to understand how the bilinear
-complexity asymptotically grows~\cite{CC88, BCPRRR}. In this article, we
+complexity asymptotically grows~\cite{CC88, BCPRRR}. Chudnovsky and Chudnosky
+proved in 1988 that the bilinear complexity of an extension field
+$\mathbb{F}_{q^n}/\mathbb{F}_{q}$ was linear in the the degree $n$ of the
+extension, using an evaluation-interpolation method on curves. In this article, we
 investigate both questions, in the case of an other type of decomposition that
 is called \emph{tri-symmetric}. We define symmetric and tri-symmetric
 decomposition in Section~\ref{sec:symtrisym}. In Section~\ref{sec:algos} we
 describe algorithms to compute tri-symmetric decompositions. Finally, in
 Section~\ref{sec:asymptotic}, we prove that the tri-symmetric bilinear
-complexity of an extension of a finite field is linear in the degree of the
+complexity of an extension of a finite field is again linear in the degree of the
 extension.
 
 \section{Symmetric and tri-symmetric decompositions}
 \label{sec:symtrisym}
+
+When the algebra $\A$ is commutative, \ie the product is symmetric, it is
+natural to search for \emph{symmetric decompositions}, \ie formulas of the form
+\begin{equation}
+  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\varphi_i(x)\varphi_i(y)\alpha_i,
+  \label{eq:sym}
+\end{equation}
+where for all $1\leq i\leq n$, $\varphi_i\in\A^\vee$ and $\alpha_i\in\A$. On an
+algorithmic point of view, it is also simpler to find symmetric decompositions,
+because the search space is smaller. The minimal $n$ such that we have an
+equation of type~\eqref{eq:sym} is called the \emph{symmetric bilinear
+complexity} and we write $\mu_{\text{sym}}(\A/k)$. If $\A$ is commutative, then
+we always have $\mu_{\text{sym}}(\A/k)<\infty$, and it is clear that 
+\[
+  \mu(\A/k)\leq\mu_{\text{sym}}(\A/k),
+\]
+but we do not know an example where the two quantities are different.
+It was also shown\footnote{Where?} that the
+asymptotic \emph{symmetric} bilinear complexity of a finite extension of a
+finite field is linear in the degree of the extension.
+
+In the case $\A=\mathbb{F}_{q^n}$ of a finite field extension, every linear form
+$\varphi\in\A^\vee$ can be written as $x\mapsto\tr(x\alpha)$, where
+$\alpha\in\A$ and $\tr$ is the trace of the extension
+$\mathbb{F}_{q^n}/\mathbb{F}_q$. Letting $\ps{x}{\alpha}=\tr(x\alpha)$, we can
+rewrite~\eqref{eq:sym} as
+\begin{equation}
+  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\ps{x}{\beta_i}\ps{y}{\beta_i}\alpha_i,
+  \label{eq:sym-tr}
+\end{equation}
+with $\alpha_i, \beta_i\in\A$ for all $1\leq i\leq n$. An other question,
+already invastigated in~\cite{SL81}, is then
+whether we can find decompositions with even more symmetries. We say that we
+have a \emph{tri-symmetric} decomposition if there exist elements $(\alpha_i)_{1\leq i
+\leq n}$ in $\A$ and scalars $(\lambda_i)_{1\leq i \leq n}$ in $k$ such that
+\begin{equation}
+  \forall x, y\in\A,\,xy =
+  \sum_{i=1}^{n}\lambda_i\ps{x}{\alpha_i}\ps{y}{\alpha_i}\alpha_i.
+  \label{eq:tri-sym}
+\end{equation}
+Such a decomposition always exist if $q\neq2$. As before, the minimal $n$
+in~\eqref{eq:tri-sym} is called the \emph{tri-symmetric bilinear complexity} and
+is noted $\mu_{\text{tri}}(\A/k)$. Once again, it is clear that
+\[
+  \mu(\A/k) \leq \mu_{\text{sym}}(\A/k)\leq\mu_{\text{tri}}(\A/k),
+\]
+but, for $q\neq2$, we do not know any example where these quantities are
+different.
 
 \section{Finding tri-symmetric decompositions}
 \label{sec:algos}
