@@ -6,7 +6,7 @@
 \input{macros.tex}
 
 % opening
-\title{Tri-symmetric decompositions of bilinear maps over finite fields}
+\title{Tri-symmetric decompositions in finite fields}
 \author{}
 
 
@@ -57,9 +57,10 @@ bilinear complexity is defined as the minimal number $n$ such that there exist
 linear forms $(\varphi_i)_{1\leq i \leq n}$, $(\psi_i)_{1\leq i \leq n}$ in
 $\A^\vee$, where $\A^\vee$ is the dual of $\A$, and
 elements $(a_i)_{1\leq i \leq n}$ in $\A$ such that
-\[
+\begin{equation}
   \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\varphi_i(x)\psi_i(y)a_i.
-\]
+  \label{eq:no-sym}
+\end{equation}
 Equivalently, it can be defined as the rank of the tensor in
 \[
   \A^\vee \times \A^\vee\times \A
@@ -73,7 +74,7 @@ In fact, this is optimal, so we have exactly $\mu(\K^{2\times2}/\K)=7$. In
 general, it seems to be hard to find the bilinear complexity of a given algebra,
 for example the bilinear complexity of $\K^{3\times3}$ is not known.
 In the litterature, work has been done both to algorithmically find the bilinear complexity of
-small algebras~\cite{BDEZ12, Covanov18} and to understand how the bilinear
+small algebras~\cite{BDEZ12, Covanov19} and to understand how the bilinear
 complexity asymptotically grows~\cite{CC88, BCPRRR19}. Chudnovsky and Chudnosky
 proved in 1988 that the bilinear complexity of an extension field
 $\mathbb{F}_{q^k}/\mathbb{F}_{q}$ was linear in the the degree $k$ of the
@@ -140,6 +141,42 @@ different.
 
 \section{Finding tri-symmetric decompositions}
 \label{sec:algos}
+Barbulescu \emph{et al.}~\cite{BDEZ12} and later Covanov~\cite{Covanov19} found
+clever ways of exhaustively search for equations of type~\eqref{eq:no-sym}
+and~\eqref{eq:sym}. Their method eliminates redundancy in the search but highly
+relies on the fact that the vectors $a_i\in\mathbb{F}_{q^k}$ can be chosen independently of
+the linear forms $\varphi_i$ and $\psi_i$, which is no longer
+the case when searching for tri-symmetric decompositions. For this reason, we
+use another method that is once again a variant of an exhaustive search. Recall
+that we are looking for a tri-symmetric decomposition:
+\[
+  \forall x, y\in\mathbb{F}_{q^k},\,xy =
+  \sum_{i=1}^{n}\lambda_i\ps{x}{a_i}\ps{y}{a_i}a_i,
+\]
+with $a_i\in\mathbb{F}_{q^k}$ and $\lambda_i\in\mathbb{F}_q$ for all $1\leq i
+\leq n$. Because we are allowed to use scalars $\lambda_i\in\mathbb{F}_q$, we
+can limit our search to ``normalized'' elements in $\mathbb{F}_{q^k}$. For some
+choice of a basis of $\mathbb{F}_{q^k}/\mathbb{F}_q$ and for all
+$1\leq i\leq k$, we let
+\[
+  \E_i=\left\{ x=(x_1, \dots, x_k)\in\mathbb{F}_{p^k}
+  \,|\, \forall j\leq i-1,\,x_j=0\text{ and }x_i=1 \right\}
+\]
+and
+\[
+  \E = \bigcup_{i=1}^k\E_i.
+\]
+We search for elements $a_i$ in $\E$ instead of $\mathbb{F}_{q^k}$. We further
+use the vector space structure of $\mathbb{F}_{q^k}$ by searching for solutions
+coordinate by coordinate. % Can we really say that?
+Let 
+\[
+  xy = (\pi_1(x, y), \dots, \pi_k(x, y)),
+\]
+where, for all $1\leq i\leq k$, $\pi_i$ is the bilinear form corresponding to
+the $i$-th coordinate of the product in $\mathbb{F}_{p^k}$.
+% les pi sont des matrices
+% explication du coordonnée par coordonnée
 
 \section{Asymptotic lengths}
 \label{sec:asymptotic}
