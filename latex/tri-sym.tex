@@ -209,7 +209,23 @@ the end, we obtain $n$ elements $a_1, \dots, a_n\in \E$ and $\lambda_1, \dots,
 \]
 Now, there is left to see how we compute the elements $a_1, \dots,
 a_{n_1}\in\E_1$ and $\lambda_1, \dots, \lambda_{n_1}\in\mathbb{F}_q$ in order to
-obtain~\eqref{eq:pi1}. Let $r_1$ be the rank of $\pi_1$.
+obtain~\eqref{eq:pi1}. Let $r_1$ be the rank of $\pi_1$. We know that the number
+$n_1$ of elements in $\E_1$ such that we have~\eqref{eq:pi1} is at least $r_1$,
+but there also exist some tri-symmetric decompositions where we need more than $r_1$
+elements. To find these elements, we search through elements $a_1\in\E_1$ such that
+there exists $\lambda_1\in\mathbb{F}_q$ with
+\[
+  \rank(\pi_1-\lambda_1\f(a_1))<\rank(\pi_1),
+\]
+then, for each such $a_1\in\E_1$, we search through elements $a_2\in\E_1$ such that there exists $\lambda_2$
+with
+\[
+  \rank(\pi_1-\lambda_1\f(a_1)-\lambda_2\f(a_2))<\rank(\pi_1-\lambda_1\f(a_1)),
+\]
+and so on, eliminating a lot of unsuitable elements along the way. This method
+allows us to find decompositions of $\pi_1$ into a sum of exactly $r_1$ bilinear forms of
+rank $1$. In order to find decompositions containing $r_1+m_1$ bilinear forms, we
+repeat the same process, except that we allow the rank not to decrease $m_1$ times.
 
 \section{Asymptotic lengths}
 \label{sec:asymptotic}
