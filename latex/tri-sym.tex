@@ -147,10 +147,11 @@ and~\eqref{eq:sym}. Their method eliminates redundancy in the search but highly
 relies on the fact that the vectors $a_i\in\mathbb{F}_{q^k}$ can be chosen independently of
 the linear forms $\varphi_i$ and $\psi_i$, which is no longer
 the case when searching for tri-symmetric decompositions. For this reason, we
-use another method that is once again a variant of an exhaustive search. Recall
+use another method that is once again a variant of an exhaustive search. Let
+$\Phi$ be the product in $\mathbb{F}_{q^k}$. Recall
 that we are looking for a tri-symmetric decomposition:
 \[
-  \forall x, y\in\mathbb{F}_{q^k},\,xy =
+  \forall x, y\in\mathbb{F}_{q^k},\,\Phi(x, y) = xy =
   \sum_{i=1}^{n}\lambda_i\ps{x}{a_i}\ps{y}{a_i}a_i,
 \]
 with $a_i\in\mathbb{F}_{q^k}$ and $\lambda_i\in\mathbb{F}_q$ for all $1\leq i
@@ -168,15 +169,47 @@ and
 \]
 We search for elements $a_i$ in $\E$ instead of $\mathbb{F}_{q^k}$. We further
 use the vector space structure of $\mathbb{F}_{q^k}$ by searching for solutions
-coordinate by coordinate. % Can we really say that?
+on each coordinate.
 Let 
 \[
   xy = (\pi_1(x, y), \dots, \pi_k(x, y)),
 \]
 where, for all $1\leq i\leq k$, $\pi_i$ is the bilinear form corresponding to
-the $i$-th coordinate of the product in $\mathbb{F}_{p^k}$.
-% les pi sont des matrices
-% explication du coordonnée par coordonnée
+the $i$-th coordinate of the product in $\mathbb{F}_{p^k}$. In other words, 
+\[
+  \Phi = (\pi_1, \dots, \pi_k).
+\]
+We identify the
+bilinear forms to $k\times k$ matrices and therefore we use the same notation for both the
+bilinear forms and their matrix representations. Let $\f$ be the application mapping an element in
+$\mathbb{F}_{q^k}$ to its associated bilinear symmetric form:
+\[
+\begin{array}{cccc}
+  \f: & \mathbb{F}_{q^k} & \to & (\mathbb{F}_q)^{k\times k} \\
+  & a & \mapsto & (x, y)\mapsto \ps{x}{a}\ps{y}{a}.
+\end{array}
+\]
+The idea is to search for elements $a_1, \dots, a_{n_1}$ in $\E_1$ and
+$\lambda_1, \dots, \lambda_{n_1}$ in $\mathbb{F}_q$ such that 
+\begin{equation}
+  \pi_1 = \sum_{j=1}^{n_1}\lambda_j\f(a_j),
+  \label{eq:pi1}
+\end{equation}
+we then have
+\[
+  \Phi-\sum_{j=1}^{n_1}\lambda_j\f(a_j)a_j = (0, \pi_2', \dots, \pi_k'), 
+\]
+where for $2\leq i \leq k$, $\pi_i'$ is some other bilinear form.
+We then continue the operation with $\pi_2'$ and elements $a_{n_1+1}, \dots,
+a_{n_2}$ in $\E_2$, then with $\pi_3''$ and elements in $\E_3$, and so on. In
+the end, we obtain $n$ elements $a_1, \dots, a_n\in \E$ and $\lambda_1, \dots,
+\lambda_n\in\mathbb{F}_q$ such that
+\[
+  \Phi = \sum_{j=1}^{n}\lambda_j\f(a_j)a_j.
+\]
+Now, there is left to see how we compute the elements $a_1, \dots,
+a_{n_1}\in\E_1$ and $\lambda_1, \dots, \lambda_{n_1}\in\mathbb{F}_q$ in order to
+obtain~\eqref{eq:pi1}. Let $r_1$ be the rank of $\pi_1$.
 
 \section{Asymptotic lengths}
 \label{sec:asymptotic}
