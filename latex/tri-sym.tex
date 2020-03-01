@@ -6,7 +6,7 @@
 \input{macros.tex}
 
 % opening
-\title{Tri-symmetric decompositions in finite fields}
+\title{Trisymmetric multiplication formulae in finite fields}
 \author{}
 
 
@@ -25,7 +25,8 @@
 \section{Introduction}
 \label{sec:intro}
 
-\paragraph{Bilinear complexity.} Given an algorithm that computes a polynomial map over a field $\K$
+%\paragraph{Bilinear complexity.}
+Given an algorithm that computes a polynomial map over a field $\K$
 (or a family of such polynomial maps, with entries of length going to infinity),
 one is
 usually interested in the (asymptotic) cost of the algorithm. In order to
@@ -50,8 +51,8 @@ exploits a similar idea in the case of $2\times2$ matrices: only $7$ products
 are used instead of $8$ in order to compute a matrix product. Both these
 algorithms have very practical consequences. The \emph{bilinear complexity}
 $\mu(\Phi/\K)$ of a bilinear map $\Phi$ over $\K$ represents the minimum number of two-variable
-multiplications in a formula that computes $\Phi$, assuming that other
-operations such as addition or multiplication by a constant have no cost.
+multiplications in a formula that computes $\Phi$, discarding the cost of other
+operations such as addition or multiplication by a constant.
 %The bilinear complexity is defined as the minimal number $n$ such that there exist
 %linear forms $(\varphi_i)_{1\leq i \leq n}$, $(\psi_i)_{1\leq i \leq n}$ in
 %$\A^\vee$, where $\A^\vee$ is the dual of $\A$, and
@@ -86,28 +87,72 @@ extension, using an evaluation-interpolation method on curves.
 As the main contribution of this article, we
 investigate both questions for \emph{trisymmetric} bilinear complexity.
 
-When a bilinear map admits certain invariance properties, it can be interesting to find formulae for it that exhibit these same invariances.
+When a bilinear map admits certain invariance properties, it can be interesting,
+both for theoretical and for practical reasons,
+to find formulae for it that exhibit these same invariances.
 For symmetric bilinear maps, and in particular for commutative algebras, this leads to the notion of symmetric bilinear complexity.
 A further refinement, the trisymmetric bilinear complexity of $\mathbb{F}_{q^k}$ over $\mathbb{F}_{q}$, was first introduced in \cite{SL84}, and rediscovered independently in \cite[App.~A]{Randriam15}.
 
-In Section~\ref{sec:symtrisym} we recall the definition of symmetric and trisymmetric formulae, as well as some generalizations. In Section~\ref{sec:algos} we
-describe algorithms to compute trisymmetric formulae. Finally, in
-Section~\ref{sec:asymptotic}, we prove that the trisymmetric bilinear
-complexity of an extension of a finite field is again linear in the degree of the
-extension.
+In Section~\ref{sec:symtrisym} we recall the definition of symmetric and trisymmetric formulae, and discuss further generalizations. In Section~\ref{sec:algos} we
+describe algorithms to compute trisymmetric decompositions in small dimension.
+Finally, in
+Section~\ref{sec:asymptotic}, we prove (among other generalizations) that for all $q>2$, the trisymmetric bilinear
+complexity of an extension of $\mathbb{F}_q$ is again linear in the degree.
+All these results solve a certain number of open problems 5.2 from \cite{BCPRRR19}.
 
-\section{Symmetric and tri-symmetric decompositions}
+\section{Symmetric and trisymmetric decompositions}
 \label{sec:symtrisym}
 
-When the algebra $\A$ is commutative, \ie the product is symmetric, it is
-natural to search for \emph{symmetric decompositions}, \ie formulas of the form
-\begin{equation}
-  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\varphi_i(x)\varphi_i(y)a_i,
-  \label{eq:sym}
-\end{equation}
-where for all $1\leq i\leq n$, $\varphi_i\in\A^\vee$ and $a_i\in\A$. On an
-algorithmic point of view, it is also simpler to find symmetric decompositions,
-because the search space is smaller. The minimal $n$ such that we have an
+Although we are mainly interested in bilinear multiplication formulae,
+the notions we will consider naturally involve higher multilinear maps.
+
+Let $\Phi:V_1\times\cdots\times V_t\to W$
+be a $t$-multilinear map between finite dimensional vector spaces over $\K$.
+A \emph{multilinear algorithm}, or \emph{multilinear decomposition}, or \emph{multilinear formula} of length $n$ for $\Phi$ is a collection linear
+forms $(\phi_i^{(j)})_{\substack{1\leq i \leq n\\1\leq j\leq t}}$,
+where $\phi_i^{(j)}$ is in $V_j^\vee$, the dual vector space of $V_j$,
+and elements $(w_i)_{1\leq i \leq n}$ in $W$, 
+such that for all $v_1,\dots,v_t$ we have
+\[
+  \Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\varphi_i^{(1)}(v_1)\cdots\varphi_i^{(t)}(v_t)w_i.
+\]
+The \emph{multilinear complexity} $\mu(\Phi/\K)$ is then defined as the smallest
+length $n$ of such a decomposition.
+Equivalently, it is the rank of the tensor in
+$V_1^\vee \otimes\dots\otimes V_t^\vee\otimes W$
+corresponding to $\Phi$.
+
+When $V_1=\cdots=V_t=V$ and $\Phi$ is a \emph{symmetric} multilinear map, it is
+natural to search for \emph{symmetric multilinear decompositions}, \ie formulae of the form
+\begin{equation*}
+  \Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\varphi_i(v_1)\cdots\varphi_i(v_t)w_i
+%  \label{eq:sym}
+\end{equation*}
+with $\varphi_i^{(1)}=\dots=\varphi_i^{(t)}=\varphi_i\in V^\vee$ for all $i$.
+It is more space-efficient, since symmetric formulae admit a shorter description.
+On an algorithmic point of view, it should also be simpler to find symmetric formulae,
+because the search space is smaller. 
+We define $\mu^{\text{sym}}(\Phi/\K)$,
+the \emph{symmetric multilinear complexity} of $\Phi$,
+as the minimal length $n$ of such a symmetric decomposition, if it exists
+(otherwise we set $\mu^{\text{sym}}(\Phi/\K)=\infty$).
+
+When $t=2$, symmetric bilinear maps always admit a symmetric decomposition.
+However, when $t\geq3$ and $\K=\mathbb{F}_q$ is a finite field, this can fail.
+
+Now suppose furthermore that $V=W$, and that this space is equipped with a
+non-degenerate symmetric bilinear form, written as a scalar product
+\[
+\begin{array}{ccc}
+V\times V &\to&\K\\
+(v,w)&\mapsto&\ps{v}{w}.
+\end{array}
+\]
+This allows to identify $V$ and $V^\vee$, \ie any linear form $\phi\in V^\vee$
+is of the form $\phi(x)=\ps{a}{x}$ for a uniquely determined $a\in V$.
+
+
+The minimal length $n$ such that we have an
 equation of type~\eqref{eq:sym} is called the \emph{symmetric bilinear
 complexity} and we write $\mu_{\text{sym}}(\A/\K)$. If $\A$ is commutative, then
 we always have $\mu_{\text{sym}}(\A/\K)<\infty$, and it is clear that 
