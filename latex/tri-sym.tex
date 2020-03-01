@@ -25,19 +25,18 @@
 \section{Introduction}
 \label{sec:intro}
 
-\paragraph{Bilinear complexity.} Let $\K=\mathbb{F}_{q}$ be a finite field with
-$q$ elements and $\A$
-an algebra over $\K$. Given an algorithm dealing with elements in $\A$, one is
+\paragraph{Bilinear complexity.} Given an algorithm that computes a polynomial map over a field $\K$
+(or a family of such polynomial maps, with entries of length going to infinity),
+one is
 usually interested in the (asymptotic) cost of the algorithm. In order to
 understand this cost, one studies the \emph{complexity} of the algorithm, \ie
 the number of operations needed by the algorithm. We can for example count the number
-of bit operations or the algebraic operations $(+, \times, \cdot)$ in the algebra
-$\A$ or in the field $\K$. The latter is called the \emph{algebraic complexity}
-and in this model we suppose that all algebraic operations have the same cost.
-Nevertheless, multiplications in an algebra $\A$ are arguably more expensive than
-additions or scalar multiplications. In the context of the computation of
+of bit operations, or the number of algebraic operations $(+, \times)$ in $\K$. The latter is called the \emph{algebraic complexity}
+and in this model it is supposed that all algebraic operations have the same cost.
+Nevertheless, multiplication of two variable quantities in $\K$ is arguably more expensive than
+addition, or than multiplication of a variable by a fixed constant. In the context of the computation of
 bilinear maps, extensive work has been done to reduce the number of
-multiplications involved. Notable examples are Karatsuba's
+two-variable multiplications involved. Notable examples are Karatsuba's
 algorithm~\cite{Karatsuba63} and
 Strassen's algorithm~\cite{Strassen69}. Karatsuba's algorithm is
 based on the fact that the bilinear map associated to the product of two
@@ -50,22 +49,27 @@ of the four classic ones $a_0b_0, a_0b_1, a_1b_0, a_1b_1$. Strassen's algorithm
 exploits a similar idea in the case of $2\times2$ matrices: only $7$ products
 are used instead of $8$ in order to compute a matrix product. Both these
 algorithms have very practical consequences. The \emph{bilinear complexity}
-$\mu(\A/\K)$ of the algebra $\A$ represents the minimum number of two-variable
-multiplications in $\K$ needed to compute a product in $\A$, assuming that other
-operations such as addition or multiplication by a constant have no cost. The
-bilinear complexity is defined as the minimal number $n$ such that there exist
-linear forms $(\varphi_i)_{1\leq i \leq n}$, $(\psi_i)_{1\leq i \leq n}$ in
-$\A^\vee$, where $\A^\vee$ is the dual of $\A$, and
-elements $(a_i)_{1\leq i \leq n}$ in $\A$ such that
-\begin{equation}
-  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\varphi_i(x)\psi_i(y)a_i.
-  \label{eq:no-sym}
-\end{equation}
-Equivalently, it can be defined as the rank of the tensor in
-\[
-  \A^\vee \times \A^\vee\times \A
-\]
-corresponding to the multiplication map in $\A$. Let $\K^{2\times2}$ be the space
+$\mu(\Phi/\K)$ of a bilinear map $\Phi$ over $\K$ represents the minimum number of two-variable
+multiplications in a formula that computes $\Phi$, assuming that other
+operations such as addition or multiplication by a constant have no cost.
+%The bilinear complexity is defined as the minimal number $n$ such that there exist
+%linear forms $(\varphi_i)_{1\leq i \leq n}$, $(\psi_i)_{1\leq i \leq n}$ in
+%$\A^\vee$, where $\A^\vee$ is the dual of $\A$, and
+%elements $(a_i)_{1\leq i \leq n}$ in $\A$ such that
+%\begin{equation}
+%  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\varphi_i(x)\psi_i(y)a_i.
+%  \label{eq:no-sym}
+%\end{equation}
+%Equivalently, it can be defined as the rank of the tensor in
+%\[
+%  \A^\vee \otimes \A^\vee\otimes \A
+%\]
+%corresponding to the multiplication map in $\A$.
+In particular when $\A$ is a finite dimensional algebra over $\K$,
+we define the bilinear complexity of $\A$ as $\mu(\A/\K)=\mu(m_{\A}/\K)$
+where $m_{\A}:\A\times\A\to\A$ is the multiplication map in $\A$. 
+
+Let $\K^{2\times2}$ be the algebra
 of $2\times2$ matrices over $\K$. We know thanks to Strassen's algorithm that 
 \[
   \mu(\K^{2\times 2}/\K) \leq 7.
@@ -78,12 +82,17 @@ small algebras~\cite{BDEZ12, Covanov19} and to understand how the bilinear
 complexity asymptotically grows~\cite{CC88, BCPRRR19}. Chudnovsky and Chudnovsky
 proved in 1988 that the bilinear complexity of an extension field
 $\mathbb{F}_{q^k}/\mathbb{F}_{q}$ is linear in the degree $k$ of the
-extension, using an evaluation-interpolation method on curves. In this article, we
-investigate both questions, in the case of an other type of decomposition that
-is called \emph{tri-symmetric}. We define symmetric and tri-symmetric
-decomposition in Section~\ref{sec:symtrisym}. In Section~\ref{sec:algos} we
-describe algorithms to compute tri-symmetric decompositions. Finally, in
-Section~\ref{sec:asymptotic}, we prove that the tri-symmetric bilinear
+extension, using an evaluation-interpolation method on curves.
+As the main contribution of this article, we
+investigate both questions for \emph{trisymmetric} bilinear complexity.
+
+When a bilinear map admits certain invariance properties, it can be interesting to find formulae for it that exhibit these same invariances.
+For symmetric bilinear maps, and in particular for commutative algebras, this leads to the notion of symmetric bilinear complexity.
+A further refinement, the trisymmetric bilinear complexity of $\mathbb{F}_{q^k}$ over $\mathbb{F}_{q}$, was first introduced in \cite{SL84}, and rediscovered independently in \cite[App.~A]{Randriam15}.
+
+In Section~\ref{sec:symtrisym} we recall the definition of symmetric and trisymmetric formulae, as well as some generalizations. In Section~\ref{sec:algos} we
+describe algorithms to compute trisymmetric formulae. Finally, in
+Section~\ref{sec:asymptotic}, we prove that the trisymmetric bilinear
 complexity of an extension of a finite field is again linear in the degree of the
 extension.
 
