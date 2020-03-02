@@ -219,49 +219,49 @@ and such that $\ps{v^\sigma}{w^\sigma}=\ps{v}{w}$ for all $v,w$ in $V$.
 
 
 
-For instance, if $\A$ is a commutative algebra equipped with a scalar product,
-a trisymmetric 
+%For instance, if $\A$ is a commutative algebra equipped with a scalar product,
+%a trisymmetric 
 
-The minimal length $n$ such that we have an
-equation of type~\eqref{eq:sym} is called the \emph{symmetric bilinear
-complexity} and we write $\mu_{\text{sym}}(\A/\K)$. If $\A$ is commutative, then
-we always have $\mu_{\text{sym}}(\A/\K)<\infty$, and it is clear that 
-\[
-  \mu(\A/\K)\leq\mu_{\text{sym}}(\A/\K),
-\]
-but we do not know an example where the two quantities are different.
-It was also shown\footnote{Where?} that the
-asymptotic \emph{symmetric} bilinear complexity of a finite extension of a
-finite field is linear in the degree of the extension.
+%The minimal length $n$ such that we have an
+%equation of type~\eqref{eq:sym} is called the \emph{symmetric bilinear
+%complexity} and we write $\mu_{\text{sym}}(\A/\K)$. If $\A$ is commutative, then
+%we always have $\mu_{\text{sym}}(\A/\K)<\infty$, and it is clear that 
+%\[
+%  \mu(\A/\K)\leq\mu_{\text{sym}}(\A/\K),
+%\]
+%but we do not know an example where the two quantities are different.
+%It was also shown\footnote{Where?} that the
+%asymptotic \emph{symmetric} bilinear complexity of a finite extension of a
+%finite field is linear in the degree of the extension.
 
-In the case $\A=\mathbb{F}_{q^k}$ of a finite field extension, every linear form
-$\varphi\in\A^\vee$ can be written as $x\mapsto\tr(x a)$, where
-$a\in\A$ and $\tr$ is the trace of the extension
-$\mathbb{F}_{q^k}/\mathbb{F}_q$. Letting $\ps{x}{a}=\tr(xa)$, we can
-rewrite~\eqref{eq:sym} as
-\begin{equation}
-  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\ps{x}{b_i}\ps{y}{b_i}a_i,
-  \label{eq:sym-tr}
-\end{equation}
-with $a_i, b_i\in\A$ for all $1\leq i\leq n$. An other question,
-already invastigated in~\cite{SL84}, is then
-whether we can find decompositions with even more symmetries. We say that we
-have a \emph{trisymmetric} decomposition if there exist elements $(a_i)_{1\leq i
-\leq n}$ in $\A$ and scalars $(\lambda_i)_{1\leq i \leq n}$ in $\K$ such that
-\begin{equation}
-  \forall x, y\in\A,\,xy =
-  \sum_{i=1}^{n}\lambda_i\ps{x}{a_i}\ps{y}{a_i}a_i.
-  \label{eq:tri-sym}
-\end{equation}
+%In the case $\A=\mathbb{F}_{q^k}$ of a finite field extension, every linear form
+%$\varphi\in\A^\vee$ can be written as $x\mapsto\tr(x a)$, where
+%$a\in\A$ and $\tr$ is the trace of the extension
+%$\mathbb{F}_{q^k}/\mathbb{F}_q$. Letting $\ps{x}{a}=\tr(xa)$, we can
+%rewrite~\eqref{eq:sym} as
+%\begin{equation}
+%  \forall x, y\in\A,\,xy = \sum_{i=1}^{n}\ps{x}{b_i}\ps{y}{b_i}a_i,
+%  \label{eq:sym-tr}
+%\end{equation}
+%with $a_i, b_i\in\A$ for all $1\leq i\leq n$. An other question,
+%already invastigated in~\cite{SL84}, is then
+%whether we can find decompositions with even more symmetries. We say that we
+%have a \emph{trisymmetric} decomposition if there exist elements $(a_i)_{1\leq i
+%\leq n}$ in $\A$ and scalars $(\lambda_i)_{1\leq i \leq n}$ in $\K$ such that
+%\begin{equation}
+%  \forall x, y\in\A,\,xy =
+%  \sum_{i=1}^{n}\lambda_i\ps{x}{a_i}\ps{y}{a_i}a_i.
+%  \label{eq:tri-sym}
+%\end{equation}
 % Should we prove that? Should we just cite Hugues' paper?
-Such a decomposition always exist if $q\neq2$. As before, the minimal $n$
-in~\eqref{eq:tri-sym} is called the \emph{trisymmetric bilinear complexity} and
-is noted $\mu_{\text{tri}}(\A/\K)$. Once again, it is clear that
-\[
-  \mu(\A/\K) \leq \mu_{\text{sym}}(\A/\K)\leq\mu_{\text{tri}}(\A/\K),
-\]
-but, for $q\neq2$, we do not know any example where these quantities are
-different.
+%Such a decomposition always exist if $q\neq2$. As before, the minimal $n$
+%in~\eqref{eq:tri-sym} is called the \emph{trisymmetric bilinear complexity} and
+%is noted $\mu_{\text{tri}}(\A/\K)$. Once again, it is clear that
+%\[
+%  \mu(\A/\K) \leq \mu_{\text{sym}}(\A/\K)\leq\mu_{\text{tri}}(\A/\K),
+%\]
+%but, for $q\neq2$, we do not know any example where these quantities are
+%different.
 
 \section{Finding trisymmetric decompositions}
 \label{sec:algos}
