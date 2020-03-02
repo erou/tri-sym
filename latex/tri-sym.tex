@@ -126,7 +126,7 @@ When $V_1=\cdots=V_t=V$ and $\Phi$ is a \emph{symmetric} multilinear map, it is
 natural to search for \emph{symmetric multilinear decompositions}, \ie formulae of the form
 \begin{equation*}
   \Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\varphi_i(v_1)\cdots\varphi_i(v_t)w_i
-%  \label{eq:sym}
+  \label{eq:sym}
 \end{equation*}
 with $\varphi_i^{(1)}=\dots=\varphi_i^{(t)}=\varphi_i\in V^\vee$ for all $i$.
 It is more space-efficient, since symmetric formulae admit a shorter description.
@@ -289,14 +289,16 @@ formulas for $k\leq 6$.
 
 As mentionned in Section~\ref{sec:symtrisym}, we were not able to find an
 extension where the bilinear complexity and the trisymmetric bilinear
-complexity are different. Moreover, in the case $q\neq2, k=2$, we can prove that we have
+complexity are different. Moreover, in the case $q=p^l$ with $p\neq2$ and $k=2$,
+we can prove that we have
 \[
   \mu_q(2) = \tri{q}{2} = 3.
 \]
 In fact, we know~\cite[Theorem 2.2]{BCPRRR19} that $\mu_q(k)\geq2k-1$ with
 equality if and only if $k\leq \frac{q}{2}+1$. In order to prove that
-$\tri{q}{2}$, we find a trisymmetric formula of length $3$ that is true for all
-$q\neq3$. In order to obtain such a formula, it is useful to change our point of
+$\tri{q}{2} = 3$, we find an \emph{universal} trisymmetric formula of length
+$3$, \ie a formula that is true for all
+$q=p^l$, such that $p\neq2$. In order to obtain such a formula, it is useful to change our point of
 view of the problem. Assume we want to compute a trisymmetric decomposition of
 the product $\Phi$ in $\mathbb{F}_{q^k}/\mathbb{F}_q$. After the choice of a basis of
 $\mathbb{F}_{q^k}$ and a basis of the space $\B$ of the bilinear forms on
@@ -336,15 +338,108 @@ $\mathbb{F}_{q^2}$, we have
   xy = (x_0+x_1\alpha)(y_0+y_1\alpha)=x_0y_0+\zeta x_1y_1
   +(x_0y_1+x_1y_0)\alpha.
 \]
-We can then construct the matrix $B$ and $A$, and solve $AX=B$ over
-$\mathbb{Q}(\zeta)$, where $\zeta$ is viewed as an indeterminate.
-We can finally check that
+This formula is the same for all $q=p^l$ with $p\neq2$, because we can represent
+$\mathbb{F}_{q^2}$ in the same way for all these choices of $q$. As a consequence, we can lift the matrix $B$ coming from
+the multiplication formula, that has coefficients in $\mathbb{F}_{q}$, to a
+matrix with coefficients in $\mathbb{Q}(\zeta)$, where $\zeta$ is an
+indeterminate. The important point is that, for all finite fields, we can lift
+$B$ to the same matrix with coefficients in $\mathbb{Q}(\zeta)$, that we still
+denote as $B$ for simplicity. The same argument is true for the matrix $A$, because the map
+$\f$ (and therefore $\bff$) has the same expression in all these finite fields.
+Indeed, one can check that the map $\f$ is given by
+\[
+  \f(x_0+x_1\alpha)=
+  \left(S 
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix}\right)
+  \left(S 
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix}\right)^\intercal
+\]
+where
+\[
+  S =
+  \begin{bmatrix}
+    \ps{\alpha^i}{\alpha^j}
+  \end{bmatrix}_{0\leq i, j\leq 1}
+  =
+  \begin{bmatrix}
+    \tr(\alpha^{i+j})
+  \end{bmatrix}_{0\leq i, j\leq 1}
+  =
+  \begin{bmatrix}
+   2 & 0 \\
+   0 & 2\zeta
+  \end{bmatrix}.
+\]
+For all $q=p^l$, $p\neq 2$, we then have
+\[
+  \f(x_0+x_1\alpha) =
+  4\begin{bmatrix}
+   x_0^2 & \zeta x_0x_1 \\
+   \zeta x_0 x_1 & \zeta^2 x_1^2
+  \end{bmatrix}.
+\]
+We can then solve $AX=B$ over
+$\mathbb{Q}(\zeta)$ and finally check that
 \[
   B = (1-\zeta^{-1})4^{-1}\bff(1) +
   (8\zeta)^{-1}\bff(1+\alpha)+(8\zeta)^{-1}\bff(1-\alpha),
 \]
-so that the trisymmetric bilinear complexity for
-$\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$.
+so that the trisymmetric bilinear complexity of
+$\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$. Using the same strategy, we can also
+find universal formulae for an other type of algebra $\A =
+\mathbb{F}_{q}[T]/(T^k)$, namely the truncated polynomials. In that context, we
+are able to find formulae for $2\leq k \leq 4$.
+\paragraph{Truncated polynomials of degree $2$.} Let $q=p^l$, with $p\neq2$. Let
+\[
+  \A = \mathbb{F}_{q}[T]/(T^2) = \mathbb{F}_q[\alpha],
+\]
+with $\alpha=\bar T$. If $x =
+x_0 + x_1\alpha$ and $y = y_0 + y_1\alpha$ are two elements of
+$\A$, we have
+\[
+  xy = (x_0+x_1\alpha)(y_0+y_1\alpha)=x_0y_0+
+  (x_0y_1+x_1y_0)\alpha.
+\]
+We can again construct the matrix $B$ and $A$, and solve $AX=B$, this time
+simply over
+$\mathbb{Q}$. We obtain
+\[
+  B = -\bff(1) + 2^{-1}\bff(1+\alpha)+2^{-1}\bff(1-\alpha)
+\]
+so that the trisymmetric bilinear complexity of
+$\A=\mathbb{F}_q[T]/(T^2)$ is $3$.
+\paragraph{Truncated polynomials of degree $3$ and $4$.} Let $q=p^l$, with
+$p\notin\left\{ 2, 3 \right\}$. We use the same notations as before. For
+$\A=\mathbb{F}_{q}[T]/(T^3)$, we obtain
+\[
+  B =
+  -\bff(1-\alpha-\alpha^2)+3^{-1}\bff(\alpha+2\alpha^2)
+  +2^{-1}\bff(1-\alpha-2\alpha^2) -
+  3^{-1}\bff(\alpha-\alpha^2)
+  +2^{-1}\bff(1-\alpha).
+\]
+Therefore the trisymmetric bilinear complexity of
+$\A=\mathbb{F}_q[T]/(T^3)$ is $5$.
+
+Finally, for $\A=\mathbb{F}_{q}[T]/(T^4)$, we obtain
+\begin{equation*}
+  \begin{split}
+    B =&\phantom{-}2^{-1}\bff(1-\alpha^2+\alpha^3)-\bff(1-\alpha^2)
+  +12^{-1}\bff(\alpha+2\alpha^2+2\alpha^3)
+  -12^{-1}\bff(\alpha-2\alpha^2+2\alpha^3)\\
+  &-6^{-1}\bff(\alpha+\alpha^2-\alpha^3)
+  +6^{-1}\bff(\alpha-\alpha^2-\alpha^3)
+  +2^{-1}\bff(1-\alpha^2-\alpha^3)\cdot(1-\alpha^2-\alpha^3).
+  \end{split}
+\end{equation*}
+The trisymmetric bilinear complexity of $\A=\mathbb{F}_q[T]/(T^4)$ is then $7$.
+
 
 \section{Asymptotic lengths}
 \label{sec:asymptotic}
