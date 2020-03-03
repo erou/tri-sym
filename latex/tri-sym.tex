@@ -50,7 +50,7 @@ of the four classic ones $a_0b_0, a_0b_1, a_1b_0, a_1b_1$. Strassen's algorithm
 exploits a similar idea in the case of $2\times2$ matrices: only $7$ products
 are used instead of $8$ in order to compute a matrix product. Both these
 algorithms have very practical consequences. The \emph{bilinear complexity}
-$\mu(\Phi/\K)$ of a bilinear map $\Phi$ over $\K$ represents the minimum number of two-variable
+$\mu(\Phi)$ of a bilinear map $\Phi$ over $\K$ represents the minimum number of two-variable
 multiplications in a formula that computes $\Phi$, discarding the cost of other
 operations such as addition or multiplication by a constant.
 %The bilinear complexity is defined as the minimal number $n$ such that there exist
@@ -67,8 +67,9 @@ operations such as addition or multiplication by a constant.
 %\]
 %corresponding to the multiplication map in $\A$.
 In particular when $\A$ is a finite dimensional algebra over $\K$,
-we define the bilinear complexity of $\A$ as $\mu(\A/\K)=\mu(m_{\A}/\K)$
-where $m_{\A}:\A\times\A\to\A$ is the multiplication map in $\A$. 
+we define the bilinear complexity of $\A$ as $\mu(\A/\K)=\mu(m_{\A})$
+where $m_{\A}:\A\times\A\to\A$ is the multiplication map in $\A$ seen
+as a $\K$-bilinear map. 
 
 Let $\K^{2\times2}$ be the algebra
 of $2\times2$ matrices over $\K$. We know thanks to Strassen's algorithm that 
@@ -100,12 +101,13 @@ Section~\ref{sec:asymptotic}, we prove (among other generalizations) that for al
 complexity of an extension of $\mathbb{F}_q$ is again linear in the degree.
 All these results solve a certain number of open problems 5.2 from \cite{BCPRRR19}.
 
-\section{Symmetric and trisymmetric decompositions}
+\section{Symmetries and multiplication formulae}
 \label{sec:symtrisym}
 
 Although we are mainly interested in bilinear multiplication formulae,
 the notions we will consider naturally involve higher multilinear maps.
 
+\paragraph{Multilinear complexity.}
 Let $\Phi:V_1\times\cdots\times V_s\to W$
 be a $s$-multilinear map between finite dimensional vector spaces over $\K$.
 A \emph{multilinear algorithm}, or \emph{multilinear decomposition}, or \emph{multilinear formula} of length $n$ for $\Phi$ is a collection linear
@@ -116,12 +118,13 @@ such that for all $v_1,\dots,v_s$ we have
 \[
   \Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\varphi_i^{(1)}(v_1)\cdots\varphi_i^{(s)}(v_s)w_i.
 \]
-The \emph{multilinear complexity} $\mu(\Phi/\K)$ is then defined as the smallest
+The \emph{multilinear complexity} $\mu(\Phi)$ is then defined as the smallest
 length $n$ of such a decomposition.
 Equivalently, it is the rank of the tensor in
 $V_1^\vee \otimes\dots\otimes V_s^\vee\otimes W$
 corresponding to $\Phi$.
 
+\paragraph{Symmetric multilinear complexity.}
 When $V_1=\cdots=V_s=V$ and $\Phi$ is a \emph{symmetric} multilinear map, it is
 natural to search for \emph{symmetric multilinear decompositions}, \ie formulae of the form
 \begin{equation*}
@@ -132,10 +135,10 @@ with $\varphi_i^{(1)}=\dots=\varphi_i^{(s)}=\varphi_i\in V^\vee$ for all $i$.
 It is more space-efficient, since symmetric formulae admit a shorter description.
 On an algorithmic point of view, it should also be simpler to find symmetric formulae,
 because the search space is smaller. 
-We define $\mu^{\text{sym}}(\Phi/\K)$,
+We define $\mu^{\text{sym}}(\Phi)$,
 the \emph{symmetric multilinear complexity} of $\Phi$,
 as the minimal length $n$ of such a symmetric decomposition, if it exists
-(otherwise we set $\mu^{\text{sym}}(\Phi/\K)=\infty$).
+(otherwise we set $\mu^{\text{sym}}(\Phi)=\infty$).
 
 In the case $s=2$, a symmetric bilinear map always admits a symmetric decomposition.
 However, when $s\geq3$ and $\K=\mathbb{F}_q$ is a finite field, this can fail.
@@ -158,6 +161,7 @@ Then $\Phi$ admits a symmetric decomposition if and only if $\Phi$ is \emph{Frob
 (Observe that this criterion involves the \emph{cardinality} of the field, not its characteristic.)
 \end{thm}
 
+\paragraph{Trisymmetric and hypersymmetric complexity.}
 Now suppose furthermore that $V=W$, and that this space is equipped with a
 non-degenerate symmetric bilinear form, written as a scalar product
 \[
@@ -181,10 +185,10 @@ elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}
 \[
 \Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}a_i.
 \]
-The hypersymmetric complexity $\mu^{\text{hyp}}(\Phi/\K)$ is then the minimal length $n$ of such a hypersymmetric decomposition, if it exists.
+The hypersymmetric complexity $\mu^{\text{hyp}}(\Phi)$ is then the minimal length $n$ of such a hypersymmetric decomposition, if it exists.
 
 When $s=2$, we will say \emph{trisymmetric} for hypersymmetric,
-and write $\mu^{\text{tri}}(\Phi/\K)$ for $\mu^{\text{hyp}}(\Phi/\K)$.
+and write $\mu^{\text{tri}}(\Phi)$ for $\mu^{\text{hyp}}(\Phi)$.
 \end{defi}
 As a further motivation, observe that to any $s$-multilinear map $\Phi:V^s\to V$
 one can associate a $(s+1)$-multilinear \emph{form} $\widetilde{\Phi}:V^{s+1}\to \K$, defined by
@@ -204,18 +208,48 @@ if and only if they define a symmetric formula for the $(s+1)$-multilinear form 
 \]
 
 In particular, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{criterion}),
-and
+and we have
 \[
-\mu^{\text{hyp}}(\Phi/\K)=\mu^{\text{sym}}\left(\widetilde{\Phi}/\K\right).
+\mu^{\text{hyp}}(\Phi)=\mu^{\text{sym}}\left(\widetilde{\Phi}\right).
 \]
 \end{lm}
 \begin{proof}
 In one direction, take scalar product with $v_{s+1}$. In the other, use the fact that the scalar product is non-degenerate.
 \end{proof}
 
-Last, another type of invariance one might consider is Galois invariance.
-Let $\sigma:v\mapsto v^\sigma$ be a $\K$-linear automorphism of $V$,
-and such that $\ps{v^\sigma}{w^\sigma}=\ps{v}{w}$ for all $v,w$ in $V$.
+\paragraph{Galois invariance.}
+Last we consider another type of symmetry.
+Let $\sigma:v\mapsto v^\sigma$ be a $\K$-linear automorphism of $V$
+that respects the scalar product: $\ps{v^\sigma}{w^\sigma}=\ps{v}{w}$ for all $v,w$ in $V$.
+\begin{lm}
+Let $\Phi:V^s\to V$ be a symmetric $s$-multilinear map that is compatible with $\sigma$, \ie
+\[
+\Phi(v_1^\sigma,\dots,v_s^\sigma)=\Phi(v_1,\dots,v_s)^\sigma
+\]
+for all $v_1,\dots,v_s$ in $V$,
+and let $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ in $V$ define a symmetric formula for $\Phi$,
+\[
+\Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}b_i.
+\]
+Then $(a_i^\sigma)_{1\leq i\leq n}$ and $(b_i^\sigma)_{1\leq i\leq n}$ also define a symmetric formula for $\Phi$,
+\[
+\Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\ps{a_i^\sigma}{v_1}\cdots\ps{a_i^\sigma}{v_s}b_i^\sigma.
+\]
+\end{lm}
+\begin{proof}
+Write $\Phi(v_1,\dots,v_s)=\Phi(v_1^{\sigma^{-1}},\dots,v_s^{\sigma^{-1}})^\sigma$ and apply the formula.
+\end{proof}
+We then say that the symmetric formula given by $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ is $\sigma$-invariant if it is the same as the formula given by $(a_i^\sigma)_{1\leq i\leq n}$ and $(b_i^\sigma)_{1\leq i\leq n}$,
+\ie if there is a permutation $\pi$ of $\{1,\dots,n\}$ such that $(a_i^\sigma,b_i^\sigma)=(a_{\pi(i)},b_{\pi(i)})$ for all $i$. This applies also to hypersymmetric formulae, setting $b_i=\lambda_i a_i$.
+
+If $G$ is a group of $\K$-linear automorphisms of $V$
+that respect the scalar product, and if $\Phi:V^s\to V$ is a symmetric $s$-multilinear map that is compatible with all elements in $G$,
+we then define $\mu^{\text{sym},G}(\Phi)$ (resp. $\mu^{\text{hyp},G}(\Phi)$),
+the \emph{$G$-invariant} symmetric (resp. hypersymmetric) multilinear complexity of $\Phi$,
+as the minimal length $n$ of a symmetric (resp. hypersymmetric) multilinear formula for $\Phi$ that is $G$-invariant, \ie $\sigma$-invariant for all $\sigma$ in $G$. 
+
+
+\paragraph{Multiplication and trace maps in algebras}
 
 
 
