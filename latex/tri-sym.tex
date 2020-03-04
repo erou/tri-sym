@@ -135,10 +135,10 @@ with $\varphi_i^{(1)}=\dots=\varphi_i^{(s)}=\varphi_i\in V^\vee$ for all $i$.
 It is more space-efficient, since symmetric formulae admit a shorter description.
 On an algorithmic point of view, it should also be simpler to find symmetric formulae,
 because the search space is smaller. 
-We define $\mu^{\text{sym}}(\Phi)$,
+We define $\musym(\Phi)$,
 the \emph{symmetric multilinear complexity} of $\Phi$,
 as the minimal length $n$ of such a symmetric decomposition, if it exists
-(otherwise we set $\mu^{\text{sym}}(\Phi)=\infty$).
+(otherwise we set $\musym(\Phi)=\infty$).
 
 In the case $s=2$, a symmetric bilinear map always admits a symmetric decomposition.
 However, when $s\geq3$ and $\K=\mathbb{F}_q$ is a finite field, this can fail.
@@ -148,9 +148,9 @@ a necessary condition is that $\Phi$ should satisfy $\Phi(x,x,y)=\Phi(x,y,y)$
 for all entries $x,y$.
 These results were then combined and generalized into the following necessary and sufficient criterion:
 \begin{thm}[{\cite[Thm.~A.7]{Randriam15}}]\label{criterion}
-Let $\Phi:V^s\to W$ be a symmetric $s$-multilinear map between finite dimensional vector spaces over $\mathbb{F}_q$.
+Let $\Phi:V^s\to W$ be a $s$-multilinear map between finite dimensional vector spaces over $\mathbb{F}_q$.
 Then $\Phi$ admits a symmetric decomposition if and only if $\Phi$ is \emph{Frobenius-symmetric},
-\ie if and only if one of the following two conditions holds:
+\ie if and only if it is symmetric and one of the following two conditions holds:
 \begin{itemize}
 \item $s\leq q$
 \item $s\geq q+1$ and for all $u,v,z_1,\dots,z_{s-q-1}$ in $V$,
@@ -158,8 +158,8 @@ Then $\Phi$ admits a symmetric decomposition if and only if $\Phi$ is \emph{Frob
 \Phi(\underset{\textrm{$q$ times}}{\underbrace{u,\dots,u}},v,z_1,\dots,z_{s-q-1})=\Phi(u,\underset{\textrm{$q$ times}}{\underbrace{v,\dots,v}},z_1,\dots,z_{s-q-1}).
 \]
 \end{itemize}
-(Observe that this criterion involves the \emph{cardinality} of the field, not its characteristic.)
 \end{thm}
+Observe that this criterion involves the \emph{cardinality} of the field, not its characteristic.
 
 \paragraph{Trisymmetric and hypersymmetric complexity.}
 Now suppose furthermore that $V=W$, and that this space is equipped with a
@@ -185,10 +185,10 @@ elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}
 \[
 \Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}a_i.
 \]
-The hypersymmetric complexity $\mu^{\text{hyp}}(\Phi)$ is then the minimal length $n$ of such a hypersymmetric decomposition, if it exists.
+The hypersymmetric complexity $\muhyp(\Phi)$ is then the minimal length $n$ of such a hypersymmetric decomposition, if it exists.
 
 When $s=2$, we will say \emph{trisymmetric} for hypersymmetric,
-and write $\mu^{\text{tri}}(\Phi)$ for $\mu^{\text{hyp}}(\Phi)$.
+and write $\mutri(\Phi)$ for $\muhyp(\Phi)$.
 \end{defi}
 As a further motivation, observe that to any $s$-multilinear map $\Phi:V^s\to V$
 one can associate a $(s+1)$-multilinear \emph{form} $\widetilde{\Phi}:V^{s+1}\to \K$, defined by
@@ -197,6 +197,7 @@ one can associate a $(s+1)$-multilinear \emph{form} $\widetilde{\Phi}:V^{s+1}\to
 \]
 We then say that $\Phi$ is hypersymmetric (as a $s$-multilinear map)
 if $\widetilde{\Phi}$ is symmetric (as a $(s+1)$-multilinear form).
+It is easily seen that $\Phi$ hypersymmetric is a necessary condition for it to admit a hypersymmetric decomposition, and more precisely:
 \begin{lm}
 Elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}$ in $\K$ define a hypersymmetric formula for the $s$-multilinear map $\Phi$,
 \[
@@ -210,7 +211,7 @@ if and only if they define a symmetric formula for the $(s+1)$-multilinear form 
 In particular, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{criterion}),
 and we have
 \[
-\mu^{\text{hyp}}(\Phi)=\mu^{\text{sym}}\left(\widetilde{\Phi}\right).
+\muhyp(\Phi)=\musym\left(\widetilde{\Phi}\right).
 \]
 \end{lm}
 \begin{proof}
@@ -244,13 +245,43 @@ We then say that the symmetric formula given by $(a_i)_{1\leq i\leq n}$ and $(b_
 
 If $G$ is a group of $\K$-linear automorphisms of $V$
 that respect the scalar product, and if $\Phi:V^s\to V$ is a symmetric $s$-multilinear map that is compatible with all elements in $G$,
-we then define $\mu^{\text{sym},G}(\Phi)$ (resp. $\mu^{\text{hyp},G}(\Phi)$),
+we then define $\musymG(\Phi)$ (resp. $\muhypG(\Phi)$),
 the \emph{$G$-invariant} symmetric (resp. hypersymmetric) multilinear complexity of $\Phi$,
 as the minimal length $n$ of a symmetric (resp. hypersymmetric) multilinear formula for $\Phi$ that is $G$-invariant, \ie $\sigma$-invariant for all $\sigma$ in $G$. 
 
 
-\paragraph{Multiplication and trace maps in algebras}
+\paragraph{Trace-like maps in algebras}
 
+Let $\A$ be a finite dimensional commutative algebra over $\K$.
+We say a linear form $\tau:\A\to\K$ is trace-like if the symmetric bilinear form $\A\times\A\to\K$, $(x,y)\mapsto\tau(xy)$ is non-degenerate.
+If so, we set $\ps{x}{y}=\tau(xy)$, which defines a scalar product on $\A$.
+In this work we will take $\K=\mathbb{F}_q$, and either:
+\begin{itemize}
+\item $\A=\mathbb{F}_{q^k}$ a finite field extension, and $\tau=\tr_{\mathbb{F}_{q^k}/\mathbb{F}_q}$ the usual trace map; indeed it is well known that the trace bilinear form $\ps{x}{y}=\tr_{\mathbb{F}_{q^k}/\mathbb{F}_q}(xy)$ is non-degenerate
+\item $\A=\mathbb{F}_q[T]/(T^k)$ an algebra of truncated polynomials,
+and $\tau$ defined by $\tau(x)=x_{k-1}$ for $x=x_0+x_1T+\dots+x_{k-1}T^{k-1}$ in $\A$;
+indeed, observe that for $x=x_0+x_1T+\dots+x_{k-1}T^{k-1}$, $y=y_0+y_1T+\dots+y_{k-1}T^{k-1}$,
+we then have $\ps{x}{y}=\tau(xy)=x_0y_{k-1}+x_1y_{k-2}+\dots+x_{k-1}y_0$, which is non-degenerate.
+\end{itemize}
+Let $m_{\A}:\A\times\A\to\A$ be the multiplication map, $m_{\A}(x,y)=xy$.
+It is easily seen that $m_{\A}$ is trisymmetric.
+Indeed $\widetilde{m}_{\A}$ is the trilinear form $x,y,z\mapsto \tau(xyz)$,
+which is symmetric.
+A symmetric bilinear multiplication formula for $\A$ is thus the data
+of $(a_i^\sigma)_{1\leq i\leq n},(b_i^\sigma)_{1\leq i\leq n}$ in $\A$ such that
+\begin{equation}
+\forall x, y\in\A,\,xy = \sum_{i=1}^{n}\ps{a_i}{x}\ps{a_i}{y}b_i,
+\label{eq:sym-tr}
+\end{equation}
+and a trisymmetric formula is the data of $(a_i^\sigma)_{1\leq i\leq n}$ in $\A$
+and $(\lambda_i^\sigma)_{1\leq i\leq n}$ in $\mathbb{F}_q$ such that
+\begin{equation}
+\forall x, y\in\A,\,xy = \sum_{i=1}^{n}\lambda_i\ps{a_i}{x}\ps{a_i}{y}a_i.
+\label{eq:tri-sym}
+\end{equation}
+We will write $\mu_q(k)$ (resp. $\hat\mu_q(k)$) for the bilinear complexity of multiplication in $\mathbb{F}_{q^k}$ (resp. in $\mathbb{F}_q[T]/(T^k)$) over $\mathbb{F}_q$,
+and we will write likewise $\musym_q(k)$, $\hmusym_q(k)$, $\mutri_q(k)$, $\hmutri_q(k)$, $\musymG_q(k)$, $\hmusymG_q(k)$, $\mutriG_q(k)$, $\hmutriG_q(k)$, etc.
+for the similar quantities with the corresponding symmetry conditions.
 
 
 %For instance, if $\A$ is a commutative algebra equipped with a scalar product,
