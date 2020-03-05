@@ -97,11 +97,11 @@ A further refinement, the trisymmetric bilinear complexity of $\mathbb{F}_{q^k}$
 In Section~\ref{sec:symtrisym} we recall the definition of symmetric and trisymmetric formulae, and discuss further generalizations. In Section~\ref{sec:algos} we
 describe algorithms to compute trisymmetric decompositions in small dimension.
 Finally, in
-Section~\ref{sec:asymptotic}, we prove (among other generalizations) that for all $q>2$, the trisymmetric bilinear
+Section~\ref{sec:asymptotic}, we prove (among other generalizations) that for all $q\geq2$, the trisymmetric bilinear
 complexity of an extension of $\mathbb{F}_q$ is again linear in the degree.
 All these results solve a certain number of open problems 5.2 from \cite{BCPRRR19}.
 
-\section{Symmetries and multiplication formulae}
+\section{Multiplication formulae with symmetries}
 \label{sec:symtrisym}
 
 Although we are mainly interested in bilinear multiplication formulae,
@@ -208,11 +208,13 @@ if and only if they define a symmetric formula for the $(s+1)$-multilinear form 
 \widetilde{\Phi}(v_1,\dots,v_s,v_{s+1})=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}\ps{a_i}{v_{s+1}}.
 \]
 
-In particular, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{criterion}),
+Thus, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{criterion}),
 and we have
 \[
 \muhyp(\Phi)=\musym\left(\widetilde{\Phi}\right).
 \]
+
+In particular, if $q\geq s+1$, then any hypersymmetric $s$-multilinear map over $\mathbb{F}_q$ admits a hypersymmetric formula.
 \end{lm}
 \begin{proof}
 In one direction, take scalar product with $v_{s+1}$. In the other, use the fact that the scalar product is non-degenerate.
@@ -223,6 +225,7 @@ Last we consider another type of symmetry.
 Let $\sigma:v\mapsto v^\sigma$ be a $\K$-linear automorphism of $V$
 that respects the scalar product: $\ps{v^\sigma}{w^\sigma}=\ps{v}{w}$ for all $v,w$ in $V$.
 \begin{lm}
+\label{hypersym=sym}
 Let $\Phi:V^s\to V$ be a symmetric $s$-multilinear map that is compatible with $\sigma$, \ie
 \[
 \Phi(v_1^\sigma,\dots,v_s^\sigma)=\Phi(v_1,\dots,v_s)^\sigma
@@ -250,7 +253,7 @@ the \emph{$G$-invariant} symmetric (resp. hypersymmetric) multilinear complexity
 as the minimal length $n$ of a symmetric (resp. hypersymmetric) multilinear formula for $\Phi$ that is $G$-invariant, \ie $\sigma$-invariant for all $\sigma$ in $G$. 
 
 
-\paragraph{Trace-like maps in algebras}
+\paragraph{Known results for multiplication in algebras}
 
 Let $\A$ be a finite dimensional commutative algebra over $\K$.
 We say a linear form $\tau:\A\to\K$ is trace-like if the symmetric bilinear form $\A\times\A\to\K$, $(x,y)\mapsto\tau(xy)$ is non-degenerate.
@@ -263,25 +266,38 @@ and $\tau$ defined by $\tau(x)=x_{k-1}$ for $x=x_0+x_1T+\dots+x_{k-1}T^{k-1}$ in
 indeed, observe that for $x=x_0+x_1T+\dots+x_{k-1}T^{k-1}$, $y=y_0+y_1T+\dots+y_{k-1}T^{k-1}$,
 we then have $\ps{x}{y}=\tau(xy)=x_0y_{k-1}+x_1y_{k-2}+\dots+x_{k-1}y_0$, which is non-degenerate.
 \end{itemize}
-Let $m_{\A}:\A\times\A\to\A$ be the multiplication map, $m_{\A}(x,y)=xy$.
-It is easily seen that $m_{\A}$ is trisymmetric.
-Indeed $\widetilde{m}_{\A}$ is the trilinear form $x,y,z\mapsto \tau(xyz)$,
+Let $\Phi:\A\times\A\to\A$ be the multiplication map, $\Phi(x,y)=xy$.
+It is easily seen that $\Phi$ is trisymmetric.
+Indeed $\widetilde{\Phi}$ is the trilinear form $x,y,z\mapsto \tau(xyz)$,
 which is symmetric.
 A symmetric bilinear multiplication formula for $\A$ is thus the data
-of $(a_i^\sigma)_{1\leq i\leq n},(b_i^\sigma)_{1\leq i\leq n}$ in $\A$ such that
+of $(a_i)_{1\leq i\leq n}$ in $\A$ and $(\varphi_i)_{1\leq i\leq n}$ in $\A^\vee$ such that
 \begin{equation}
-\forall x, y\in\A,\,xy = \sum_{i=1}^{n}\ps{a_i}{x}\ps{a_i}{y}b_i,
+\forall x, y\in\A,\;xy = \sum_{i=1}^{n}\varphi_i(x)\varphi_i(y)a_i,
 \label{eq:sym-tr}
 \end{equation}
-and a trisymmetric formula is the data of $(a_i^\sigma)_{1\leq i\leq n}$ in $\A$
-and $(\lambda_i^\sigma)_{1\leq i\leq n}$ in $\mathbb{F}_q$ such that
+and a trisymmetric formula is the data of $(a_i)_{1\leq i\leq n}$ in $\A$
+and $(\lambda_i)_{1\leq i\leq n}$ in $\mathbb{F}_q$ such that
 \begin{equation}
-\forall x, y\in\A,\,xy = \sum_{i=1}^{n}\lambda_i\ps{a_i}{x}\ps{a_i}{y}a_i.
+\forall x, y\in\A,\;xy = \sum_{i=1}^{n}\lambda_i\ps{a_i}{x}\ps{a_i}{y}a_i.
 \label{eq:tri-sym}
 \end{equation}
 We will write $\mu_q(k)$ (resp. $\hat\mu_q(k)$) for the bilinear complexity of multiplication in $\mathbb{F}_{q^k}$ (resp. in $\mathbb{F}_q[T]/(T^k)$) over $\mathbb{F}_q$,
 and we will write likewise $\musym_q(k)$, $\hmusym_q(k)$, $\mutri_q(k)$, $\hmutri_q(k)$, $\musymG_q(k)$, $\hmusymG_q(k)$, $\mutriG_q(k)$, $\hmutriG_q(k)$, etc.
 for the similar quantities with the corresponding symmetry conditions.
+
+For $q\geq3$ we have $\mutri_q(k)<\infty$ and $\hmutri_q(k)<\infty$ for all $k$,
+while for $q=2$ we have $\mutri_2(1)=\hmutri_2(1)=1$ and $\mutri_2(2)=3$,
+but $\mutri_2(k)=\infty$ for $k\geq3$ and $\hmutri_2(k)=\infty$ for $k\geq2$.
+This follows essentially from Theorem~\ref{criterion} and Lemma~\ref{hypersym=sym} (see also \cite[Prop.~A.14]{Randriam15}).
+
+Obviously we have $\mu_q(k)\leq\musym_q(k)\leq\mutri_q(k)$ and $\hat\mu_q(k)\leq\hmusym_q(k)\leq\hmutri_q(k)$ for all $q$ and $k$.
+But when all these quantities are finite, e.g. when $q\geq3$, no example of strict inequality is known.
+
+In the other direction, when $q\geq4$ is not divisible by $3$, \cite[Thm.~2]{SL84} gives $\mutri_q(k)\leq 4\musym_q(k)$ and $\hmutri_q(k)\leq 4\hmusym_q(k)$.
+This allows to translate the many known upper bounds on symmetric complexity \cite{BCPRRR19}
+into upper bounds on trisymmetric complexity.
+However the resulting upper bounds do not seem to be tight, so it would be desirable to have better estimates, and especially upper bounds that work also for $q$ divisible by $3$.
 
 
 %For instance, if $\A$ is a commutative algebra equipped with a scalar product,
