@@ -209,7 +209,7 @@ if and only if they define a symmetric formula for the $(t+1)$-multilinear form 
 \widetilde{\Phi}(v_1,\dots,v_s,v_{t+1})=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_t}\ps{a_i}{v_{t+1}}.
 \]
 
-Thus, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{criterion}),
+Thus, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{th:criterion}),
 and we have
 \[
 \muhyp(\Phi)=\musym\left(\widetilde{\Phi}\right).
@@ -641,7 +641,8 @@ In particular for $t=2$ we have
 When working in $\mathbb{F}_q[T]/(T^k)$ over $\mathbb{F}_q$,
 we will write likewise $\hmusym_q(k,m_t)$, $\hmuhyp_q(k,m_t)$, etc.
 
-
+Our aim is, for fixed $q$ and $t$ with $q\geq t+1$, to show that $\muhyp_q(k,m_t)$ and $\hmuhyp_q(k,m_t)$ grow linearly with $k\to\infty$.
+Thanks to Lemma~\ref{lm:hyp<sym+1}, it suffices to show, for fixed $q$ and $t$ with $q\geq t$, that
 
 %Let
 %$\tri{q}{k}=\mu_{\text{tri}}(\mathbb{F}_{q^k}/\mathbb{F}_q)$ the trisymmetric
@@ -708,18 +709,16 @@ we will write likewise $\hmusym_q(k,m_t)$, $\hmuhyp_q(k,m_t)$, etc.
 %  obtaining the desired result.
 %\end{rem}
 
-\subsection{Evaluation-interpolation method}
-\label{sec:eval}
-
-Albeit not optimal, our strategy will be to find a $3$-symmetric decomposition of
-$m_3$ by an evaluation-interpolation method. We use the function field
-terminology and notations
+\paragraph{Evaluation-interpolation method.}
+%Albeit not optimal, our strategy will be to find a $3$-symmetric decomposition of
+%$m_3$ by an evaluation-interpolation method.
+We use the function field terminology and notations
 presented in~\cite{Stichtenoth09}. Let $F/\mathbb{F}_q$ be an algebraic
 function field of one variable over $\mathbb{F}_{q}$ and let $\mathbb{P}_F$ be the
 set of places of $F$. Let $\D_F$ the set of
 divisors on $F$, and if $D\in\D_F$ is a divisor on
-$F$, we denote by $L(D)$ its Riemann-Roch space. The following proposition
-highlights the method.
+$F$, we denote by $L(D)$ its Riemann-Roch space.
+%The following proposition highlights the method.
 
 \begin{prop}
   \label{prop:method}
@@ -727,7 +726,7 @@ highlights the method.
   \dots, P_n\in\mathbb{P}_F$ places of $F$ of degree $1$, and a divisor
   $D\in\D_F$ of $F$ such that the places $Q$ and $P_1, \dots, P_n$ are not in
   the support of $D$ and such the following conditions hold.
-  \begin{enumerate}
+  \begin{enumerate}[(i)]
     \item \label{cond:1} The evaluation map
       \[
         \begin{array}{cccc}
@@ -739,28 +738,21 @@ is \emph{surjective}.
     \item \label{cond:2} The evaluation map
       \[
         \begin{array}{cccc}
-        \ev_{\Pcal, 3D}: & L(3D) & \to & (\mathbb{F}_{q})^n\\
+        \ev_{\Pcal, tD}: & L(tD) & \to & (\mathbb{F}_{q})^n\\
   & h & \mapsto & (h(P_1), \dots, h(P_n))
 \end{array}
 \]
 is \emph{injective}.
   \end{enumerate}
-  Then we can compute a $3$-symmetric decomposition of $m_3$ of length $n$.
+  Then ${m_t}^{\mathbb{F}_{q^k}/\mathbb{F}_q}$ admits a symmetric formula of length $n$, \ie we have $\musym_q(k,m_t)\leq n$.
 \end{prop}
 \begin{proof}
-  Since the map $\ev_{Q, D}$ is surjective, it admits a right inverse $s$, \ie a
-  map
-  \[
-        \begin{array}{cccc}
-          s: & \mathbb{F}_{q^k} & \to & L(D)
-\end{array}
-  \]
+  Since the map $\ev_{Q, D}$ is surjective, it admits a right inverse, \ie a linear
+  map $s: \mathbb{F}_{q^k} \to L(D)$
   such that
-  \[
-    \ev_{Q, D}\circ s = \Id_{\mathbb{F}_{q^k}},
-  \]
-  where $\Id_{\mathbb{F}_{q^k}}$ is the identity map on $\mathbb{F}_{q^k}$, and
-  for all $x\in\mathbb{F}_{q^k}$, we denote $s(x)\in L(D)$ by $f_x$. We
+  $\ev_{Q, D}\circ s = \Id_{\mathbb{F}_{q^k}}$.
+For all $x\in\mathbb{F}_{q^k}$, we denote $s(x)\in L(D)$ by $f_x$,
+so the map $x\mapsto f_x$ is linear, and $f_x(Q)=x$. We
   also let
   \[
         \begin{array}{cccc}
@@ -768,7 +760,7 @@ is \emph{injective}.
           & x & \mapsto & (f_x(P_1), \dots, f_x(P_n))
 \end{array}
   \]
-  be the map $a = \ev_{\Pcal, D}\circ s$. The situation is sumed up in the
+  be the composite map $a = \ev_{\Pcal, D}\circ s$. The situation is sumed up in the
   following drawing.
    \begin{center}
   \begin{tikzpicture}
@@ -787,42 +779,26 @@ is \emph{injective}.
   \end{center}
   For all $1\leq i\leq n$, the map
   $x\mapsto f_x(P_i)$ is a linear form, so there exists an element
-  $a_i\in\mathbb{F}_{q^k}$ such that
+  $a_i\in\mathbb{F}_{q^k}$ such that $f_x(P_i) = \ps{a_i}{x}$,
+and thus
   \[
-    \forall x\in\mathbb{F}_{q^k},\, f_x(P_i) = \ps{a_i}{x},
+    \forall x\in\mathbb{F}_{q^k},\; a(x) = (\ps{a_1}{x}, \dots, \ps{a_n}{x}).
   \]
-  thus
+  Let $x,\dots,x_t\in\mathbb{F}_{q^k}$, and
   \[
-    \forall x\in\mathbb{F}_{q^k},\, a(x) = (\ps{a_1}{x}, \dots, \ps{a_n}{x}).
+    p = a(x_1)*\dots*a(x_t)\in(\mathbb{F}_{q})^n
   \]
-  Let $x, y, z\in\mathbb{F}_{q^k}$, and
-  \[
-    p = a(x)*a(y)*a(z)\in(\mathbb{F}_{q})^n
-  \]
-  be the coordinate-wise product of the elements $a(x)$, $a(y)$, and $a(z)$. In
+  be the coordinatewise product of the elements $a(x_1)$, ..., $a(x_t)$. In
   other words,
   \[
-    p = (f_xf_yf_z(P_1), \dots, f_xf_yf_z(P_n)).
+    p = ((\prod_{j=1}^tf_{x_j})(P_1), \dots, (\prod_{j=1}^tf_{x_j})(P_n)).
   \]
-  Similarly, since the map $\ev_{\Pcal, 3D}$ is injective, it admits a left inverse $r$, \ie a
-  map
-  \[
-        \begin{array}{cccc}
-          r: & (\mathbb{F}_{q})^n & \to & L(D)
-\end{array}
-  \]
-  such that
-  \[
-    r\circ\ev_{\Pcal, 3D} = \Id_{L(D)},
-  \]
-  where $\Id_{L(D)}$ is the identity map on $L(D)$. We
-  also let
-  \[
-        \begin{array}{cccc}
-          d: & (\mathbb{F}_{q})^n & \to & \mathbb{F}_{q^k} \\
-\end{array}
-  \]
-  be the map $d = \ev_{Q, 3D}\circ r$.   The situation is sumed up in the
+
+  Similarly, since the map $\ev_{\Pcal, tD}$ is injective, it admits a left inverse, \ie a linear
+  map $r: (\mathbb{F}_{q})^n \to L(tD)$
+  such that $r\circ\ev_{\Pcal, tD} = \Id_{L(tD)}$.
+We also let $b: (\mathbb{F}_{q})^n \to \mathbb{F}_{q^k}$
+  be the composite map $b = \ev_{Q, tD}\circ r$.   The situation is sumed up in the
   following drawing.
   \begin{center}
   \begin{tikzpicture}
@@ -836,128 +812,89 @@ is \emph{injective}.
     \node (s) at (3.6, 1.5) {$r$};
     \node (evQ) at (1.2, .4) {$\ev_{Q, 3D}$};
     \draw[->] (Fqn) to[out=60,in=0](2, 2.5) to[out=180, in=120] (Fqk);
-    \node (d) at (2, 2.7) {$d$};
+    \node (d) at (2, 2.7) {$b$};
   \end{tikzpicture}
 \end{center}
-The map $r$ is linear, so $d$ is also linear, by
-  composition of two linear maps. Thus we have $n$ elements $d_1, \dots, d_n$ of
-  $\mathbb{F}_{q^k}$ such that, for all $(x_1, \dots, x_n)\in\Img(\ev_{\Pcal,
-  3D})$,
+The map $b$ is linear, so there are $b_1, \dots, b_n$ in
+  $\mathbb{F}_{q^k}$ such that, for all $y=(y_1, \dots, y_n)\in(\mathbb{F}_{q})^n$,
   \[
-    d(x_1, \dots, x_n) = \sum_{i=1}^n x_i d_i.
+    b(y) = \sum_{i=1}^n y_i b_i.
   \]
 Now
 \[
-  h = r(p)\in L(3D)
+  h = r(p)\in L(tD)
 \]
-is an element of $L(3D)$ such that
+is an element of $L(tD)$ such that
 \[
-  \forall 1\leq i\leq n,\,\ev_{\Pcal, 3D}(h) = f_xf_yf_z(P_i),
+  \forall 1\leq i\leq n,\,h(P_i) = (\prod_{j=1}^tf_{x_j})(P_i),
 \]
-but this is also the case for the function $f_xf_yf_z\in L(3D)$. Since the map
-$\ev_{\Pcal, 3D}$ is injective, we have
+Since the map $\ev_{\Pcal, tD}$ is injective, this forces
 \[
-  h = f_xf_yf_z.
+  h = \prod_{j=1}^tf_{x_j}.
 \]
 Then, we have
 \begin{equation*}
-  \begin{split}
-  d(p) &= \ev_{Q, 3D}(r(p))\\
-  &= \ev_{Q, 3D}(h)\\
-  &= h(Q)\\
-  &= f_x(Q)f_y(Q)f_z(Q)\\
-  &= s(x)(Q)s(y)(Q)s(z)(Q)\\
-  &= \ev_{Q, D}\circ s(x)\ev_{Q, D}\circ s(y)\ev_{Q, D}\circ s(z)\\
-  &= xyz.
-  \end{split}
+b(p) = \ev_{Q, tD}(r(p))
+  = \ev_{Q, tD}(h)
+  = h(Q)
+  = \prod_{j=1}^t f_{x_j}(Q)
+  = \prod_{j=1}^t x_j.
 \end{equation*}
 But we also have
 \begin{equation*}
-  \begin{split}
-    p &= a(x)*a(y)*a(z)\\
-    &= (\ps{a_1}{x}\ps{a_1}{y}\ps{a_1}{z}, \dots,
-    \ps{a_n}{x}\ps{a_n}{y}\ps{a_n}{z}),
-  \end{split}
-\end{equation*}
+    p = a(x_1)*\cdots*a(x_t)
+    = (\prod_{j=1}^t\ps{a_1}{x_j}, \dots, \prod_{j=1}^t\ps{a_n}{x_j}),
+ \end{equation*}
 so
 \[
-  d(p) = \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i
+  b(p) = \sum_{i=1}^n(\prod_{j=1}^t\ps{a_i}{x_j})b_i
 \]
-and finally we have a $3$-symmetric decomposition of $m_3$:
+and finally we get a symmetric formula for $m_t$:
 \[
-  xyz = \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
+  \prod_{j=1}^t x_j = \sum_{i=1}^n(\prod_{j=1}^t\ps{a_i}{x_j})b_i.
 \]
 \end{proof}
-Now that we know the method to find $3$-symmetric decompositions of $m_3$, and thus
-trisymmetric decompositions of $m_2$, the question is, given $q$ and $k$, to
-find an algebraic function field $F/\mathbb{F}_{q}$ satisfying
-Proposition~\ref{prop:method}. If $F/\mathbb{F}_q$ is a function field of genus
-$g$ and $G\in\D_F$ a divisor of $F$, Riemann's theorem states that
+
+\begin{prop}
+\label{prop:numerical}
+Let $F/\mathbb{F}_{q}$ be an algebraic function field of genus $g$.
+Assume that $F$ admits a place $Q$ of degree $k$, and at least
 \[
-  \dim L(G) \geq \deg G + 1 - g,
+  n > (k+2g-1)t
 \]
-with equality if $\deg G > 2g - 2$. Assume that there exist $Q\in\mathbb{P}_F$ a
-place of $F$ of degree $k$, $P_1, \dots, P_n$ places of degree $1$ and
-$D\in\D_F$ a divisor which support does not include $Q, P_1, \dots, P_n$. Since
-\[
-  \Ker(\ev_{\Pcal, 3D}:L(3D)\to(\mathbb{F}_{q})^n) = L(3D-P_1-\dots-P_n),
-\]
-the injectivity in Condition~\eqref{cond:2} is equivalent to
-\[
-  L(3D-P_1-\dots-P_n)=\left\{ 0 \right\}.
-\]
-This is the case if
-\[
-\deg(3D-P_1-\dots-P_n)<0,
-\]
-which is the case if
-\[
-  n > 3\deg D.
-\]
-Similarly, we have
+places $P_1,\dots,P_n$ of degree $1$.
+Then there is a divisor $D$ such that Proposition~\ref{prop:method} applies, so
+\[ \musym_q(k,m_t)\leq n. \]
+\end{prop}
+\begin{proof}
+Set $d=k+2g-1$.
+By a result of Schmidt \cite[Cor.~5.1.11]{Stichtenoth09}, we know that $F$ admits divisors of any degree,
+so in particular it admits a divisor $D$ of degree $d$. Moreover, by the strong approximation theorem \cite[Thm.~1.6.5]{Stichtenoth09}
+we can assume that $D$ is disjoint from $Q,P_1,\dots,P_n$.
+
+Now recall the equality case \cite[Thm.~1.5.17]{Stichtenoth09} in the Riemann-Roch theorem: any divisor $G$ with $\deg(G)\geq 2g-1$ satisfies $\ell(G)=\deg(G)+1-g$.
+It applies to $D$ and to $D-Q$ and gives $\ell(D)=k+g$ and $\ell(D-Q)=g$. 
+Then we have
 \[
   \Ker(\ev_{Q, D}:L(D)\to\mathbb{F}_{q^k}) = L(D-Q),
 \]
-and the rank-nullity theorem states that
+so by the rank-nullity theorem,
 \[
-  \dim L(D) = \dim\Ker(\ev_{Q, D})+\dim\Img(\ev_{Q, D}),
+  \dim\Img(\ev_{Q, D}) = \ell(D) - \ell(D-Q)=k,
 \]
-so the surjectivity in Condition~\eqref{cond:1} is equivalent to
-\[
-  \dim L(D-Q) = \dim L(D) - k.
+and the surjectivity condition~\ref{cond:1} in Proposition~\ref{prop:method} is satisfied.
+
+Likewise we have $\deg(tD-P_1-\dots-P_n)=td-n<0$, so
+ \[
+  \Ker(\ev_{\Pcal, tD}:L(tD)\to(\mathbb{F}_{q})^n) = L(tD-P_1-\dots-P_n)=0,
 \]
-A sufficient condition for the last equation to hold is that
-\[
-  \deg D > k+ 2g - 2,
-\]
-because
-\begin{equation*}
-  \begin{split}
-  \deg(D-Q) &= \deg D - \deg Q\\
-  &= \deg D - k\\
-  &> 2g - 2
-  \end{split}
-\end{equation*}
-and so
-\begin{equation*}
-  \begin{split}
-    \dim L(D-Q) &= \deg(D-Q)+1-g\\
-    &=\deg D+1-g-k\\
-    &=\dim L(D)-k.
-  \end{split}
-\end{equation*}
-Thus, a sufficient condition for Conditions~\eqref{cond:1} and~\eqref{cond:2} to
-hold is that
-\[
-  \frac{n}{3} > \deg D > k + 2g - 2.
-\]
-If $\frac{n}{3}>k + 2g -1$, there exists an integer $\delta\in\mathbb{N}$ with
-\[
-  \frac{n}{3} > \delta > k +2g -2,
-\]
-\eg $\delta=k+2g-1$, therefore we can assume without loss of generality that there
-exists a divisor $D$ of degree $\delta$ which support does not include $Q, P_1,
-\dots, P_n$, thanks to the strong approximation theorem.
+and the injectivity condition~\ref{cond:2} in Proposition~\ref{prop:method} is satisfied.
+\end{proof}
+
+\paragraph{Choice of the curves for $q$ a large enough square.}
+
+Let us assume $q$ is a square, $q\geq(2t+2)^2$.
+
 
 The remaining part is to prove that we can find suitable function fields for
 each $q$ fixed and $k\to\infty$. It means that we look for a function field
