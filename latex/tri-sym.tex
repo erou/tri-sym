@@ -108,30 +108,30 @@ Although we are mainly interested in bilinear multiplication formulae,
 the notions we will consider naturally involve higher multilinear maps.
 
 \paragraph{Multilinear complexity.}
-Let $\Phi:V_1\times\cdots\times V_s\to W$
-be a $s$-multilinear map between finite dimensional vector spaces over $\K$.
+Let $\Phi:V_1\times\cdots\times V_t\to W$
+be a $t$-multilinear map between finite dimensional vector spaces over $\K$.
 A \emph{multilinear algorithm}, or \emph{multilinear decomposition}, or \emph{multilinear formula} of length $n$ for $\Phi$ is a collection linear
-forms $(\phi_i^{(j)})_{\substack{1\leq i \leq n\\1\leq j\leq s}}$,
+forms $(\phi_i^{(j)})_{\substack{1\leq i \leq n\\1\leq j\leq t}}$,
 where $\phi_i^{(j)}$ is in $V_j^\vee$, the dual vector space of $V_j$,
 and elements $(w_i)_{1\leq i \leq n}$ in $W$, 
-such that for all $v_1,\dots,v_s$ we have
+such that for all $v_1,\dots,v_t$ we have
 \[
-  \Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\varphi_i^{(1)}(v_1)\cdots\varphi_i^{(s)}(v_s)w_i.
+  \Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\varphi_i^{(1)}(v_1)\cdots\varphi_i^{(t)}(v_t)w_i.
 \]
 The \emph{multilinear complexity} $\mu(\Phi)$ is then defined as the smallest
 length $n$ of such a decomposition.
 Equivalently, it is the rank of the tensor in
-$V_1^\vee \otimes\dots\otimes V_s^\vee\otimes W$
+$V_1^\vee \otimes\dots\otimes V_t^\vee\otimes W$
 corresponding to $\Phi$.
 
 \paragraph{Symmetric multilinear complexity.}
-When $V_1=\cdots=V_s=V$ and $\Phi$ is a \emph{symmetric} multilinear map, it is
+When $V_1=\cdots=V_t=V$ and $\Phi$ is a \emph{symmetric} multilinear map, it is
 natural to search for \emph{symmetric multilinear decompositions}, \ie formulae of the form
 \begin{equation*}
-  \Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\varphi_i(v_1)\cdots\varphi_i(v_s)w_i
+  \Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\varphi_i(v_1)\cdots\varphi_i(v_t)w_i
 %  \label{eq:sym}
 \end{equation*}
-with $\varphi_i^{(1)}=\dots=\varphi_i^{(s)}=\varphi_i\in V^\vee$ for all $i$.
+with $\varphi_i^{(1)}=\dots=\varphi_i^{(t)}=\varphi_i\in V^\vee$ for all $i$.
 It is more space-efficient, since symmetric formulae admit a shorter description.
 On an algorithmic point of view, it should also be simpler to find symmetric formulae,
 because the search space is smaller. 
@@ -140,22 +140,22 @@ the \emph{symmetric multilinear complexity} of $\Phi$,
 as the minimal length $n$ of such a symmetric decomposition, if it exists
 (otherwise we set $\musym(\Phi)=\infty$).
 
-In the case $s=2$, a symmetric bilinear map always admits a symmetric decomposition.
-However, when $s\geq3$ and $\K=\mathbb{F}_q$ is a finite field, this can fail.
-When $s=3$ and $q>2$, it is shown in \cite[Lemma~7]{SL84} that a symmetric trilinear map $\Phi$ over $\mathbb{F}_q$ always admits a symmetric algorithm,
-while in the remaining case $s=3$ and $q=2$, as observed by Cascudo,
+In the case $t=2$, a symmetric bilinear map always admits a symmetric decomposition.
+However, when $t\geq3$ and $\K=\mathbb{F}_q$ is a finite field, this can fail.
+When $t=3$ and $q>2$, it is shown in \cite[Lemma~7]{SL84} that a symmetric trilinear map $\Phi$ over $\mathbb{F}_q$ always admits a symmetric algorithm,
+while in the remaining case $t=3$ and $q=2$, as observed by Cascudo,
 a necessary condition is that $\Phi$ should satisfy $\Phi(x,x,y)=\Phi(x,y,y)$
 for all entries $x,y$.
 These results were then combined and generalized into the following necessary and sufficient criterion:
-\begin{thm}[{\cite[Thm.~A.7]{Randriam15}}]\label{criterion}
-Let $\Phi:V^s\to W$ be a $s$-multilinear map between finite dimensional vector spaces over $\mathbb{F}_q$.
+\begin{thm}[{\cite[Thm.~A.7]{Randriam15}}]\label{th:criterion}
+Let $\Phi:V^t\to W$ be a $t$-multilinear map between finite dimensional vector spaces over $\mathbb{F}_q$.
 Then $\Phi$ admits a symmetric decomposition if and only if $\Phi$ is \emph{Frobenius-symmetric},
 \ie if and only if it is symmetric and one of the following two conditions holds:
 \begin{itemize}
-\item $s\leq q$
-\item $s\geq q+1$ and for all $u,v,z_1,\dots,z_{s-q-1}$ in $V$,
+\item $t\leq q$
+\item $t\geq q+1$ and for all $u,v,z_1,\dots,z_{t-q-1}$ in $V$,
 \[
-\Phi(\underset{\textrm{$q$ times}}{\underbrace{u,\dots,u}},v,z_1,\dots,z_{s-q-1})=\Phi(u,\underset{\textrm{$q$ times}}{\underbrace{v,\dots,v}},z_1,\dots,z_{s-q-1}).
+\Phi(\underset{\textrm{$q$ times}}{\underbrace{u,\dots,u}},v,z_1,\dots,z_{t-q-1})=\Phi(u,\underset{\textrm{$q$ times}}{\underbrace{v,\dots,v}},z_1,\dots,z_{t-q-1}).
 \]
 \end{itemize}
 \end{thm}
@@ -172,52 +172,53 @@ V\times V &\to&\K\\
 \]
 This allows to identify $V$ and $V^\vee$, \ie any linear form $\phi\in V^\vee$
 is of the form $\phi(x)=\ps{a}{x}$ for a uniquely determined $a\in V$.
-As a consequence, a symmetric decomposition for $\Phi:V^s\to V$ can also be described
+As a consequence, a symmetric decomposition for $\Phi:V^t\to V$ can also be described
 as the data of elements $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ in $V$
-such that for all $v_1,\dots,v_s$ in $V$,
-we have $\Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}b_i$.
+such that for all $v_1,\dots,v_t$ in $V$,
+we have $\Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\ps{a_i}{v_1}\cdots\ps{a_i}{v_t}b_i$.
 In order to have an even more compact description, one could ask for $b_i$ to be proportional to $a_i$, leading to the following:
 \begin{defi}
 Let $V$ be a finite dimensional $\K$-vector space equipped with a scalar product,
-and $\Phi:V^s\to V$ a symmetric $s$-multilinear map.
+and $\Phi:V^t\to V$ a symmetric $t$-multilinear map.
 Then a \emph{hypersymmetric} formula for $\Phi$ is the data of
-elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}$ in $\K$ such that, for all $v_1,\dots,v_s\in V$,
+elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}$ in $\K$ such that, for all $v_1,\dots,v_t\in V$,
 \[
-\Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}a_i.
+\Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_t}a_i.
 \]
 The hypersymmetric complexity $\muhyp(\Phi)$ is then the minimal length $n$ of such a hypersymmetric decomposition, if it exists.
 
-When $s=2$, we will say \emph{trisymmetric} for hypersymmetric,
+When $t=2$, we will say \emph{trisymmetric} for hypersymmetric,
 and write $\mutri(\Phi)$ for $\muhyp(\Phi)$.
 \end{defi}
-As a further motivation, observe that to any $s$-multilinear map $\Phi:V^s\to V$
-one can associate a $(s+1)$-multilinear \emph{form} $\widetilde{\Phi}:V^{s+1}\to \K$, defined by
+As a further motivation, observe that to any $t$-multilinear map $\Phi:V^t\to V$
+one can associate a $(t+1)$-multilinear \emph{form} $\widetilde{\Phi}:V^{t+1}\to \K$, defined by
 \[
-\widetilde{\Phi}(v_1,\dots,v_s,v_{s+1})=\ps{\Phi(v_1,\dots,v_s)}{v_{s+1}}.
+\widetilde{\Phi}(v_1,\dots,v_t,v_{t+1})=\ps{\Phi(v_1,\dots,v_t)}{v_{t+1}}.
 \]
-We then say that $\Phi$ is hypersymmetric (as a $s$-multilinear map)
-if $\widetilde{\Phi}$ is symmetric (as a $(s+1)$-multilinear form).
+We then say that $\Phi$ is hypersymmetric (as a $t$-multilinear map)
+if $\widetilde{\Phi}$ is symmetric (as a $(t+1)$-multilinear form).
 It is easily seen that $\Phi$ hypersymmetric is a necessary condition for it to admit a hypersymmetric decomposition, and more precisely:
 \begin{lm}
-Elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}$ in $\K$ define a hypersymmetric formula for the $s$-multilinear map $\Phi$,
+\label{lm:hyp=symtilde}
+Elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}$ in $\K$ define a hypersymmetric formula for the $t$-multilinear map $\Phi$,
 \[
-\Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}a_i,
+\Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_t}a_i,
 \]
-if and only if they define a symmetric formula for the $(s+1)$-multilinear form $\widetilde{\Phi}$,
+if and only if they define a symmetric formula for the $(t+1)$-multilinear form $\widetilde{\Phi}$,
 \[
-\widetilde{\Phi}(v_1,\dots,v_s,v_{s+1})=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}\ps{a_i}{v_{s+1}}.
+\widetilde{\Phi}(v_1,\dots,v_s,v_{t+1})=\sum_{i=1}^{n}\lambda_i\ps{a_i}{v_1}\cdots\ps{a_i}{v_t}\ps{a_i}{v_{t+1}}.
 \]
 
-Thus, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{criterion}),
+Thus, $\Phi$ admits a hypersymmetric formula if and only if $\widetilde{\Phi}$ is Frobenius-symmetric (in the sense of Theorem~\ref{th:criterion}),
 and we have
 \[
 \muhyp(\Phi)=\musym\left(\widetilde{\Phi}\right).
 \]
 
-In particular, if $q\geq s+1$, then any hypersymmetric $s$-multilinear map over $\mathbb{F}_q$ admits a hypersymmetric formula.
+In particular, if $q\geq t+1$, then any hypersymmetric $t$-multilinear map over $\mathbb{F}_q$ admits a hypersymmetric formula.
 \end{lm}
 \begin{proof}
-In one direction, take scalar product with $v_{s+1}$. In the other, use the fact that the scalar product is non-degenerate.
+In one direction, take scalar product with $v_{t+1}$. In the other, use the fact that the scalar product is non-degenerate.
 \end{proof}
 
 \paragraph{Galois invariance.}
@@ -225,29 +226,29 @@ Last we consider another type of symmetry.
 Let $\sigma:v\mapsto v^\sigma$ be a $\K$-linear automorphism of $V$
 that respects the scalar product: $\ps{v^\sigma}{w^\sigma}=\ps{v}{w}$ for all $v,w$ in $V$.
 \begin{lm}
-\label{hypersym=sym}
-Let $\Phi:V^s\to V$ be a symmetric $s$-multilinear map that is compatible with $\sigma$, \ie
+\label{lm:symGalois}
+Let $\Phi:V^t\to V$ be a symmetric $t$-multilinear map that is compatible with $\sigma$, \ie
 \[
-\Phi(v_1^\sigma,\dots,v_s^\sigma)=\Phi(v_1,\dots,v_s)^\sigma
+\Phi(v_1^\sigma,\dots,v_t^\sigma)=\Phi(v_1,\dots,v_t)^\sigma
 \]
-for all $v_1,\dots,v_s$ in $V$,
+for all $v_1,\dots,v_t$ in $V$,
 and let $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ in $V$ define a symmetric formula for $\Phi$,
 \[
-\Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\ps{a_i}{v_1}\cdots\ps{a_i}{v_s}b_i.
+\Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\ps{a_i}{v_1}\cdots\ps{a_i}{v_t}b_i.
 \]
 Then $(a_i^\sigma)_{1\leq i\leq n}$ and $(b_i^\sigma)_{1\leq i\leq n}$ also define a symmetric formula for $\Phi$,
 \[
-\Phi(v_1,\dots,v_s)=\sum_{i=1}^{n}\ps{a_i^\sigma}{v_1}\cdots\ps{a_i^\sigma}{v_s}b_i^\sigma.
+\Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\ps{a_i^\sigma}{v_1}\cdots\ps{a_i^\sigma}{v_t}b_i^\sigma.
 \]
 \end{lm}
 \begin{proof}
-Write $\Phi(v_1,\dots,v_s)=\Phi(v_1^{\sigma^{-1}},\dots,v_s^{\sigma^{-1}})^\sigma$ and apply the formula.
+Write $\Phi(v_1,\dots,v_t)=\Phi(v_1^{\sigma^{-1}},\dots,v_t^{\sigma^{-1}})^\sigma$ and apply the formula.
 \end{proof}
 We then say that the symmetric formula given by $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ is $\sigma$-invariant if it is the same as the formula given by $(a_i^\sigma)_{1\leq i\leq n}$ and $(b_i^\sigma)_{1\leq i\leq n}$,
 \ie if there is a permutation $\pi$ of $\{1,\dots,n\}$ such that $(a_i^\sigma,b_i^\sigma)=(a_{\pi(i)},b_{\pi(i)})$ for all $i$. This applies also to hypersymmetric formulae, setting $b_i=\lambda_i a_i$.
 
 If $G$ is a group of $\K$-linear automorphisms of $V$
-that respect the scalar product, and if $\Phi:V^s\to V$ is a symmetric $s$-multilinear map that is compatible with all elements in $G$,
+that respect the scalar product, and if $\Phi:V^t\to V$ is a symmetric $t$-multilinear map that is compatible with all elements in $G$,
 we then define $\musymG(\Phi)$ (resp. $\muhypG(\Phi)$),
 the \emph{$G$-invariant} symmetric (resp. hypersymmetric) multilinear complexity of $\Phi$,
 as the minimal length $n$ of a symmetric (resp. hypersymmetric) multilinear formula for $\Phi$ that is $G$-invariant, \ie $\sigma$-invariant for all $\sigma$ in $G$. 
@@ -289,7 +290,7 @@ for the similar quantities with the corresponding symmetry conditions.
 For $q\geq3$ we have $\mutri_q(k)<\infty$ and $\hmutri_q(k)<\infty$ for all $k$,
 while for $q=2$ we have $\mutri_2(1)=\hmutri_2(1)=1$ and $\mutri_2(2)=3$,
 but $\mutri_2(k)=\infty$ for $k\geq3$ and $\hmutri_2(k)=\infty$ for $k\geq2$.
-This follows essentially from Theorem~\ref{criterion} and Lemma~\ref{hypersym=sym} (see also \cite[Prop.~A.14]{Randriam15}).
+This follows essentially from Theorem~\ref{th:criterion} and Lemma~\ref{lm:hyp=symtilde} (see also \cite[Prop.~A.14]{Randriam15}).
 
 Obviously we have $\mu_q(k)\leq\musym_q(k)\leq\mutri_q(k)$ and $\hat\mu_q(k)\leq\hmusym_q(k)\leq\hmutri_q(k)$ for all $q$ and $k$.
 But when all these quantities are finite, e.g. when $q\geq3$, no example of strict inequality is known.
@@ -596,83 +597,128 @@ The trisymmetric bilinear complexity of $\A=\mathbb{F}_q[T]/(T^4)$ is then $7$.
 
 \section{Asymptotic lengths}
 \label{sec:asymptotic}
-In this section, we work with $\A=\mathbb{F}_{q^k}$. Let
-$\tri{q}{k}=\mu_{\text{tri}}(\mathbb{F}_{q^k}/\mathbb{F}_q)$ the trisymmetric
-bilinear complexity of the extension $\mathbb{F}_{q^k}$. We prove that
-$\tri{q}{k}$ is asymptotically linear in $k$. For any elements $x, y, z\in\mathbb{F}_{q^k}$, let
+In this section, we work with $\A=\mathbb{F}_{q^k}$ or $\mathbb{F}_q[T]/(T^k)$, seen as an algebra over $\K=\mathbb{F}_q$, and equipped with the trace-like linear form $\tau$ introduced at the end of Section~\ref{sec:symtrisym}.
+Our aim is to show that the trisymmetric bilinear complexities $\mutri_q(k)$ and $\hmutri_q(k)$ grow linearly as $k\to\infty$.
+Our proof will involve higher multilinear maps, and in turn, give results for them as well.
+
+For any $t$ we define the $t$-multilinear multiplication map in $\A$ over $\K$
 \[
-m_3(x, y, z) = xyz
+\begin{array}{cccc}
+m_t:&\A^t&\to&\A\\
+&(a_1,\dots,a_t)&\mapsto&a_1\cdots a_t
+\end{array}
 \]
-and
+and the $t$-multilinear trace form
 \[
-t_3(x, y, z) = \tr(xyz).
+\begin{array}{cccc}
+\tau_t=\tau\circ m_t:&\A^t&\to&\A\\
+&(a_1,\dots,a_t)&\mapsto&\tau(a_1\cdots a_t).
+\end{array}
 \]
-The maps $m_3$ and $t_3$ are $3$-linear and we say that we have a $3$-symmetric
-decomposition of $m_3$ if there exist $(a_i)_{1\leq i\leq n}$ and $(d_i)_{1\leq i\leq
-n}$ in $\mathbb{F}_{q^k}$ with
-\begin{equation}
-    \forall x, y, z\in\mathbb{F}_{q^k},\,m_3(x, y, z) =
-    \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
-  \label{eq:3-sym}
-\end{equation}
-We have a similar definition for $t_3$. In fact, having a trisymmetric
-decomposition of the product in $\mathbb{F}_{q^k}$ is equivalent to having a
-$3$-symmetric decomposition of the $3$-linear form $t_3$, as stated in Lemma~\ref{lm:m2t3}.
+If needed, we will write ${m_t}^{\A/\K}$ or ${\tau_t}^{\A/\K}$ to keep $\A$ and $\K$ explicit. 
+
+The (symmetric) multilinear complexity of $m_t$ has been considered in \cite{Bshouty13} in relation with the theory of testers.
+
 \begin{lm}
-  \label{lm:m2t3}
-  Let $n\in\mathbb{N}$ be a natural integer and for $1\leq i \leq n$, let
-  $a_i\in\mathbb{F}_{q^k}$ and $\lambda_i\in\mathbb{F}_q$, then
-  \[
-    \forall x, y\in\mathbb{F}_{q^k},\, xy =
-    \sum_{i=1}^n\lambda_i\ps{a_i}{x}\ps{a_i}{y}a_i
-  \]
-  if and only if
-  \[
-    \forall x, y, z\in\mathbb{F}_{q^k},\,\tr(xyz) =
-    \sum_{i=1}^n\lambda_i\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}
-  \]
+\label{lm:hyp<sym+1}
+The map $m_t$ is hypersymmetric, and we have
+\[
+\muhyp(m_t)=\musym(\tau_{t+1})\leq\musym(m_{t+1}).
+\] 
 \end{lm}
 \begin{proof}
-  In one direction, multiply by $z$ and take the trace. In the other, it follows
-  from the fact that the trace is non degenerate.
+Indeed we have $\widetilde{m}_t=\tau_{t+1}$, and the equality on the left is a special case of Lemma~\ref{lm:hyp=symtilde}.
+For the inequality on the right, take a symmetric formula for $m_{t+1}$ and apply $\tau$.
 \end{proof}
-The next lemma gives us a way of obtaining a $3$-symmetric decomposition of
-$t_3$.
-\begin{lm}
-  Given a $3$-symmetric decomposition of $m_3$, one can deduce a $3$-symmetric
-  decomposition of $t_3$.
-\end{lm}
-\begin{proof}
-  Assume that there exist $n$ elements $a_i\in\mathbb{F}_{q^k}$ and $n$ elements
-  $d_i\in\mathbb{F}_{q^k}$ with
-  \[
-    \forall x, y, z\in\mathbb{F}_{q^k},\,xyz =
-    \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
-  \]
-  Then taking the trace, we obtain
-  \[
-    \tr(xyz) = \sum_{i=1}^n\tr(d_i)\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z},
-  \]
-  that is exactly a $3$-symmetric decomposition of the $3$-linear form $t_3$.
-\end{proof}
-\begin{rem}
-  This is probably not the optimal way of obtaining a
-  $3$-symmetric decomposition of $t_3$, but this strategy is sufficient for
-  obtaining the desired result.
-\end{rem}
 
-\subsection{Evaluation-interpolation method}
-\label{sec:eval}
+When studying the variation with the degree of the extension field $\mathbb{F}_{q^k}$ over $\mathbb{F}_q$,
+we will write $\musym_q(k,m_t)$ for $\musym\left({m_t}^{\mathbb{F}_{q^k}/\mathbb{F}_q}\right)$,
+and we will also use the similar notations $\muhyp_q(k,m_t)$, $\musym_q(k,\tau_t)$, etc.
+In particular for $t=2$ we have
+\[
+\mutri_q(k)=\mutri_q(k,m_2)=\musym_q(k,\tau_3).
+\]
+When working in $\mathbb{F}_q[T]/(T^k)$ over $\mathbb{F}_q$,
+we will write likewise $\hmusym_q(k,m_t)$, $\hmuhyp_q(k,m_t)$, etc.
 
-Albeit not optimal, our strategy will be to find a $3$-symmetric decomposition of
-$m_3$ by an evaluation-interpolation method. We use the function field
-terminology and notations
+Our aim is, for fixed $q$ and $t$ with $q\geq t+1$, to show that $\muhyp_q(k,m_t)$ and $\hmuhyp_q(k,m_t)$ grow linearly with $k\to\infty$.
+Thanks to Lemma~\ref{lm:hyp<sym+1}, it suffices to show, for fixed $q$ and $t$ with $q\geq t$, that
+
+%Let
+%$\tri{q}{k}=\mu_{\text{tri}}(\mathbb{F}_{q^k}/\mathbb{F}_q)$ the trisymmetric
+%bilinear complexity of the extension $\mathbb{F}_{q^k}$. We prove that
+%$\tri{q}{k}$ is asymptotically linear in $k$. For any elements $x, y, z\in\mathbb{F}_{q^k}$, let
+%\[
+%m_3(x, y, z) = xyz
+%\]
+%and
+%\[
+%t_3(x, y, z) = \tr(xyz).
+%\]
+%The maps $m_3$ and $t_3$ are $3$-linear and we say that we have a $3$-symmetric
+%decomposition of $m_3$ if there exist $(a_i)_{1\leq i\leq n}$ and $(d_i)_{1\leq i\leq
+%n}$ in $\mathbb{F}_{q^k}$ with
+%\begin{equation}
+%    \forall x, y, z\in\mathbb{F}_{q^k},\,m_3(x, y, z) =
+%    \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
+%  \label{eq:3-sym}
+%\end{equation}
+%We have a similar definition for $t_3$. In fact, having a trisymmetric
+%decomposition of the product in $\mathbb{F}_{q^k}$ is equivalent to having a
+%$3$-symmetric decomposition of the $3$-linear form $t_3$, as stated in Lemma~\ref{lm:m2t3}.
+%\begin{lm}
+%  \label{lm:m2t3}
+%  Let $n\in\mathbb{N}$ be a natural integer and for $1\leq i \leq n$, let
+%  $a_i\in\mathbb{F}_{q^k}$ and $\lambda_i\in\mathbb{F}_q$, then
+%  \[
+%    \forall x, y\in\mathbb{F}_{q^k},\, xy =
+%    \sum_{i=1}^n\lambda_i\ps{a_i}{x}\ps{a_i}{y}a_i
+%  \]
+%  if and only if
+%  \[
+%    \forall x, y, z\in\mathbb{F}_{q^k},\,\tr(xyz) =
+%    \sum_{i=1}^n\lambda_i\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}
+%  \]
+%\end{lm}
+%\begin{proof}
+%  In one direction, multiply by $z$ and take the trace. In the other, it follows
+%  from the fact that the trace is non degenerate.
+%\end{proof}
+%The next lemma gives us a way of obtaining a $3$-symmetric decomposition of
+%$t_3$.
+%\begin{lm}
+%  Given a $3$-symmetric decomposition of $m_3$, one can deduce a $3$-symmetric
+%  decomposition of $t_3$.
+%\end{lm}
+%\begin{proof}
+%  Assume that there exist $n$ elements $a_i\in\mathbb{F}_{q^k}$ and $n$ elements
+%  $d_i\in\mathbb{F}_{q^k}$ with
+%  \[
+%    \forall x, y, z\in\mathbb{F}_{q^k},\,xyz =
+%    \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
+%  \]
+%  Then taking the trace, we obtain
+%  \[
+%    \tr(xyz) = \sum_{i=1}^n\tr(d_i)\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z},
+%  \]
+%  that is exactly a $3$-symmetric decomposition of the $3$-linear form $t_3$.
+%\end{proof}
+%\begin{rem}
+%  This is probably not the optimal way of obtaining a
+%  $3$-symmetric decomposition of $t_3$, but this strategy is sufficient for
+%  obtaining the desired result.
+%\end{rem}
+
+\paragraph{Evaluation-interpolation method.}
+%Albeit not optimal, our strategy will be to find a $3$-symmetric decomposition of
+%$m_3$ by an evaluation-interpolation method.
+We use the function field terminology and notations
 presented in~\cite{Stichtenoth09}. Let $F/\mathbb{F}_q$ be an algebraic
 function field of one variable over $\mathbb{F}_{q}$ and let $\mathbb{P}_F$ be the
 set of places of $F$. Let $\D_F$ the set of
 divisors on $F$, and if $D\in\D_F$ is a divisor on
-$F$, we denote by $L(D)$ its Riemann-Roch space. The following proposition
-highlights the method.
+$F$, we denote by $L(D)$ its Riemann-Roch space.
+%The following proposition highlights the method.
 
 \begin{prop}
   \label{prop:method}
@@ -680,7 +726,7 @@ highlights the method.
   \dots, P_n\in\mathbb{P}_F$ places of $F$ of degree $1$, and a divisor
   $D\in\D_F$ of $F$ such that the places $Q$ and $P_1, \dots, P_n$ are not in
   the support of $D$ and such the following conditions hold.
-  \begin{enumerate}
+  \begin{enumerate}[(i)]
     \item \label{cond:1} The evaluation map
       \[
         \begin{array}{cccc}
@@ -692,28 +738,21 @@ is \emph{surjective}.
     \item \label{cond:2} The evaluation map
       \[
         \begin{array}{cccc}
-        \ev_{\Pcal, 3D}: & L(3D) & \to & (\mathbb{F}_{q})^n\\
+        \ev_{\Pcal, tD}: & L(tD) & \to & (\mathbb{F}_{q})^n\\
   & h & \mapsto & (h(P_1), \dots, h(P_n))
 \end{array}
 \]
 is \emph{injective}.
   \end{enumerate}
-  Then we can compute a $3$-symmetric decomposition of $m_3$ of length $n$.
+  Then ${m_t}^{\mathbb{F}_{q^k}/\mathbb{F}_q}$ admits a symmetric formula of length $n$, \ie we have $\musym_q(k,m_t)\leq n$.
 \end{prop}
 \begin{proof}
-  Since the map $\ev_{Q, D}$ is surjective, it admits a right inverse $s$, \ie a
-  map
-  \[
-        \begin{array}{cccc}
-          s: & \mathbb{F}_{q^k} & \to & L(D)
-\end{array}
-  \]
+  Since the map $\ev_{Q, D}$ is surjective, it admits a right inverse, \ie a linear
+  map $s: \mathbb{F}_{q^k} \to L(D)$
   such that
-  \[
-    \ev_{Q, D}\circ s = \Id_{\mathbb{F}_{q^k}},
-  \]
-  where $\Id_{\mathbb{F}_{q^k}}$ is the identity map on $\mathbb{F}_{q^k}$, and
-  for all $x\in\mathbb{F}_{q^k}$, we denote $s(x)\in L(D)$ by $f_x$. We
+  $\ev_{Q, D}\circ s = \Id_{\mathbb{F}_{q^k}}$.
+For all $x\in\mathbb{F}_{q^k}$, we denote $s(x)\in L(D)$ by $f_x$,
+so the map $x\mapsto f_x$ is linear, and $f_x(Q)=x$. We
   also let
   \[
         \begin{array}{cccc}
@@ -721,7 +760,7 @@ is \emph{injective}.
           & x & \mapsto & (f_x(P_1), \dots, f_x(P_n))
 \end{array}
   \]
-  be the map $a = \ev_{\Pcal, D}\circ s$. The situation is sumed up in the
+  be the composite map $a = \ev_{\Pcal, D}\circ s$. The situation is sumed up in the
   following drawing.
    \begin{center}
   \begin{tikzpicture}
@@ -740,42 +779,26 @@ is \emph{injective}.
   \end{center}
   For all $1\leq i\leq n$, the map
   $x\mapsto f_x(P_i)$ is a linear form, so there exists an element
-  $a_i\in\mathbb{F}_{q^k}$ such that
+  $a_i\in\mathbb{F}_{q^k}$ such that $f_x(P_i) = \ps{a_i}{x}$,
+and thus
   \[
-    \forall x\in\mathbb{F}_{q^k},\, f_x(P_i) = \ps{a_i}{x},
+    \forall x\in\mathbb{F}_{q^k},\; a(x) = (\ps{a_1}{x}, \dots, \ps{a_n}{x}).
   \]
-  thus
+  Let $x,\dots,x_t\in\mathbb{F}_{q^k}$, and
   \[
-    \forall x\in\mathbb{F}_{q^k},\, a(x) = (\ps{a_1}{x}, \dots, \ps{a_n}{x}).
+    p = a(x_1)*\dots*a(x_t)\in(\mathbb{F}_{q})^n
   \]
-  Let $x, y, z\in\mathbb{F}_{q^k}$, and
-  \[
-    p = a(x)*a(y)*a(z)\in(\mathbb{F}_{q})^n
-  \]
-  be the coordinate-wise product of the elements $a(x)$, $a(y)$, and $a(z)$. In
+  be the coordinatewise product of the elements $a(x_1)$, ..., $a(x_t)$. In
   other words,
   \[
-    p = (f_xf_yf_z(P_1), \dots, f_xf_yf_z(P_n)).
+    p = ((\prod_{j=1}^tf_{x_j})(P_1), \dots, (\prod_{j=1}^tf_{x_j})(P_n)).
   \]
-  Similarly, since the map $\ev_{\Pcal, 3D}$ is injective, it admits a left inverse $r$, \ie a
-  map
-  \[
-        \begin{array}{cccc}
-          r: & (\mathbb{F}_{q})^n & \to & L(D)
-\end{array}
-  \]
-  such that
-  \[
-    r\circ\ev_{\Pcal, 3D} = \Id_{L(D)},
-  \]
-  where $\Id_{L(D)}$ is the identity map on $L(D)$. We
-  also let
-  \[
-        \begin{array}{cccc}
-          d: & (\mathbb{F}_{q})^n & \to & \mathbb{F}_{q^k} \\
-\end{array}
-  \]
-  be the map $d = \ev_{Q, 3D}\circ r$.   The situation is sumed up in the
+
+  Similarly, since the map $\ev_{\Pcal, tD}$ is injective, it admits a left inverse, \ie a linear
+  map $r: (\mathbb{F}_{q})^n \to L(tD)$
+  such that $r\circ\ev_{\Pcal, tD} = \Id_{L(tD)}$.
+We also let $b: (\mathbb{F}_{q})^n \to \mathbb{F}_{q^k}$
+  be the composite map $b = \ev_{Q, tD}\circ r$.   The situation is sumed up in the
   following drawing.
   \begin{center}
   \begin{tikzpicture}
@@ -789,128 +812,89 @@ is \emph{injective}.
     \node (s) at (3.6, 1.5) {$r$};
     \node (evQ) at (1.2, .4) {$\ev_{Q, 3D}$};
     \draw[->] (Fqn) to[out=60,in=0](2, 2.5) to[out=180, in=120] (Fqk);
-    \node (d) at (2, 2.7) {$d$};
+    \node (d) at (2, 2.7) {$b$};
   \end{tikzpicture}
 \end{center}
-The map $r$ is linear, so $d$ is also linear, by
-  composition of two linear maps. Thus we have $n$ elements $d_1, \dots, d_n$ of
-  $\mathbb{F}_{q^k}$ such that, for all $(x_1, \dots, x_n)\in\Img(\ev_{\Pcal,
-  3D})$,
+The map $b$ is linear, so there are $b_1, \dots, b_n$ in
+  $\mathbb{F}_{q^k}$ such that, for all $y=(y_1, \dots, y_n)\in(\mathbb{F}_{q})^n$,
   \[
-    d(x_1, \dots, x_n) = \sum_{i=1}^n x_i d_i.
+    b(y) = \sum_{i=1}^n y_i b_i.
   \]
 Now
 \[
-  h = r(p)\in L(3D)
+  h = r(p)\in L(tD)
 \]
-is an element of $L(3D)$ such that
+is an element of $L(tD)$ such that
 \[
-  \forall 1\leq i\leq n,\,\ev_{\Pcal, 3D}(h) = f_xf_yf_z(P_i),
+  \forall 1\leq i\leq n,\,h(P_i) = (\prod_{j=1}^tf_{x_j})(P_i),
 \]
-but this is also the case for the function $f_xf_yf_z\in L(3D)$. Since the map
-$\ev_{\Pcal, 3D}$ is injective, we have
+Since the map $\ev_{\Pcal, tD}$ is injective, this forces
 \[
-  h = f_xf_yf_z.
+  h = \prod_{j=1}^tf_{x_j}.
 \]
 Then, we have
 \begin{equation*}
-  \begin{split}
-  d(p) &= \ev_{Q, 3D}(r(p))\\
-  &= \ev_{Q, 3D}(h)\\
-  &= h(Q)\\
-  &= f_x(Q)f_y(Q)f_z(Q)\\
-  &= s(x)(Q)s(y)(Q)s(z)(Q)\\
-  &= \ev_{Q, D}\circ s(x)\ev_{Q, D}\circ s(y)\ev_{Q, D}\circ s(z)\\
-  &= xyz.
-  \end{split}
+b(p) = \ev_{Q, tD}(r(p))
+  = \ev_{Q, tD}(h)
+  = h(Q)
+  = \prod_{j=1}^t f_{x_j}(Q)
+  = \prod_{j=1}^t x_j.
 \end{equation*}
 But we also have
 \begin{equation*}
-  \begin{split}
-    p &= a(x)*a(y)*a(z)\\
-    &= (\ps{a_1}{x}\ps{a_1}{y}\ps{a_1}{z}, \dots,
-    \ps{a_n}{x}\ps{a_n}{y}\ps{a_n}{z}),
-  \end{split}
-\end{equation*}
+    p = a(x_1)*\cdots*a(x_t)
+    = (\prod_{j=1}^t\ps{a_1}{x_j}, \dots, \prod_{j=1}^t\ps{a_n}{x_j}),
+ \end{equation*}
 so
 \[
-  d(p) = \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i
+  b(p) = \sum_{i=1}^n(\prod_{j=1}^t\ps{a_i}{x_j})b_i
 \]
-and finally we have a $3$-symmetric decomposition of $m_3$:
+and finally we get a symmetric formula for $m_t$:
 \[
-  xyz = \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
+  \prod_{j=1}^t x_j = \sum_{i=1}^n(\prod_{j=1}^t\ps{a_i}{x_j})b_i.
 \]
 \end{proof}
-Now that we know the method to find $3$-symmetric decompositions of $m_3$, and thus
-trisymmetric decompositions of $m_2$, the question is, given $q$ and $k$, to
-find an algebraic function field $F/\mathbb{F}_{q}$ satisfying
-Proposition~\ref{prop:method}. If $F/\mathbb{F}_q$ is a function field of genus
-$g$ and $G\in\D_F$ a divisor of $F$, Riemann's theorem states that
+
+\begin{prop}
+\label{prop:numerical}
+Let $F/\mathbb{F}_{q}$ be an algebraic function field of genus $g$.
+Assume that $F$ admits a place $Q$ of degree $k$, and at least
 \[
-  \dim L(G) \geq \deg G + 1 - g,
+  n > (k+2g-1)t
 \]
-with equality if $\deg G > 2g - 2$. Assume that there exist $Q\in\mathbb{P}_F$ a
-place of $F$ of degree $k$, $P_1, \dots, P_n$ places of degree $1$ and
-$D\in\D_F$ a divisor which support does not include $Q, P_1, \dots, P_n$. Since
-\[
-  \Ker(\ev_{\Pcal, 3D}:L(3D)\to(\mathbb{F}_{q})^n) = L(3D-P_1-\dots-P_n),
-\]
-the injectivity in Condition~\eqref{cond:2} is equivalent to
-\[
-  L(3D-P_1-\dots-P_n)=\left\{ 0 \right\}.
-\]
-This is the case if
-\[
-\deg(3D-P_1-\dots-P_n)<0,
-\]
-which is the case if
-\[
-  n > 3\deg D.
-\]
-Similarly, we have
+places $P_1,\dots,P_n$ of degree $1$.
+Then there is a divisor $D$ such that Proposition~\ref{prop:method} applies, so
+\[ \musym_q(k,m_t)\leq n. \]
+\end{prop}
+\begin{proof}
+Set $d=k+2g-1$.
+By a result of Schmidt \cite[Cor.~5.1.11]{Stichtenoth09}, we know that $F$ admits divisors of any degree,
+so in particular it admits a divisor $D$ of degree $d$. Moreover, by the strong approximation theorem \cite[Thm.~1.6.5]{Stichtenoth09}
+we can assume that $D$ is disjoint from $Q,P_1,\dots,P_n$.
+
+Now recall the equality case \cite[Thm.~1.5.17]{Stichtenoth09} in the Riemann-Roch theorem: any divisor $G$ with $\deg(G)\geq 2g-1$ satisfies $\ell(G)=\deg(G)+1-g$.
+It applies to $D$ and to $D-Q$ and gives $\ell(D)=k+g$ and $\ell(D-Q)=g$. 
+Then we have
 \[
   \Ker(\ev_{Q, D}:L(D)\to\mathbb{F}_{q^k}) = L(D-Q),
 \]
-and the rank-nullity theorem states that
+so by the rank-nullity theorem,
 \[
-  \dim L(D) = \dim\Ker(\ev_{Q, D})+\dim\Img(\ev_{Q, D}),
+  \dim\Img(\ev_{Q, D}) = \ell(D) - \ell(D-Q)=k,
 \]
-so the surjectivity in Condition~\eqref{cond:1} is equivalent to
-\[
-  \dim L(D-Q) = \dim L(D) - k.
+and the surjectivity condition~\ref{cond:1} in Proposition~\ref{prop:method} is satisfied.
+
+Likewise we have $\deg(tD-P_1-\dots-P_n)=td-n<0$, so
+ \[
+  \Ker(\ev_{\Pcal, tD}:L(tD)\to(\mathbb{F}_{q})^n) = L(tD-P_1-\dots-P_n)=0,
 \]
-A sufficient condition for the last equation to hold is that
-\[
-  \deg D > k+ 2g - 2,
-\]
-because
-\begin{equation*}
-  \begin{split}
-  \deg(D-Q) &= \deg D - \deg Q\\
-  &= \deg D - k\\
-  &> 2g - 2
-  \end{split}
-\end{equation*}
-and so
-\begin{equation*}
-  \begin{split}
-    \dim L(D-Q) &= \deg(D-Q)+1-g\\
-    &=\deg D+1-g-k\\
-    &=\dim L(D)-k.
-  \end{split}
-\end{equation*}
-Thus, a sufficient condition for Conditions~\eqref{cond:1} and~\eqref{cond:2} to
-hold is that
-\[
-  \frac{n}{3} > \deg D > k + 2g - 2.
-\]
-If $\frac{n}{3}>k + 2g -1$, there exists an integer $\delta\in\mathbb{N}$ with
-\[
-  \frac{n}{3} > \delta > k +2g -2,
-\]
-\eg $\delta=k+2g-1$, therefore we can assume without loss of generality that there
-exists a divisor $D$ of degree $\delta$ which support does not include $Q, P_1,
-\dots, P_n$, thanks to the strong approximation theorem.
+and the injectivity condition~\ref{cond:2} in Proposition~\ref{prop:method} is satisfied.
+\end{proof}
+
+\paragraph{Choice of the curves for $q$ a large enough square.}
+
+Let us assume $q$ is a square, $q\geq(2t+2)^2$.
+
 
 The remaining part is to prove that we can find suitable function fields for
 each $q$ fixed and $k\to\infty$. It means that we look for a function field
