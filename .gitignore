@@ -258,6 +258,7 @@ TSWLatexianTemp*
 .ipynb_checkpoints
 
 # TODO personal file
+todo.md
 TODO.md
 
 *.djvu

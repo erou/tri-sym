@@ -347,36 +347,37 @@ However the resulting upper bounds do not seem to be tight, so it would be desir
 
 \section{Finding trisymmetric decompositions}
 \label{sec:algos}
+\paragraph{Algorithmic search.}
 Barbulescu \emph{et al.}~\cite{BDEZ12} and later Covanov~\cite{Covanov19} found
 clever ways of exhaustively search for formulae for (symmetric) bilinear maps.
 Their method eliminates redundancy in the search but highly
-relies on the fact that the vectors $a_i\in\mathbb{F}_{q^k}$ in 
-the symmetric formulae
+relies on the fact that the vectors $a_i\in\A$ in 
+the symmetric formulae~\eqref{eq:sym-tr} 
 can be chosen independently of
-the linear forms $\varphi_i$, which is no longer
+the linear forms $\varphi_i\in\A^\vee$, which is no longer
 the case when searching for trisymmetric decompositions. For this reason, we
 use another method that is once again a variant of an exhaustive search. Let
-$\Phi$ be the product in $\mathbb{F}_{q^k}$. Recall
+$\Phi$ be the two-variable product in $\A$. Recall
 that we are looking for a trisymmetric decomposition:
 \[
-  \forall x, y\in\mathbb{F}_{q^k},\,\Phi(x, y) = xy =
+  \forall x, y\in\A,\,\Phi(x, y) = xy =
   \sum_{i=1}^{n}\lambda_i\ps{x}{a_i}\ps{y}{a_i}a_i,
 \]
-with $a_i\in\mathbb{F}_{q^k}$ and $\lambda_i\in\mathbb{F}_q$ for all $1\leq i
-\leq n$. Because we are allowed to use scalars $\lambda_i\in\mathbb{F}_q$, we
-can limit our search to ``normalized'' elements in $\mathbb{F}_{q^k}$. For some
-choice of a basis of $\mathbb{F}_{q^k}/\mathbb{F}_q$ and for all
+with $a_i\in\A$ and $\lambda_i\in\K$ for all $1\leq i
+\leq n$. Because we are allowed to use scalars $\lambda_i\in\K$, we
+can limit our search to ``normalized'' elements in $\A$. For some
+choice of a basis of $\A$ and for all
 $1\leq i\leq k$, we let
 \[
-  \E_i=\left\{ x=(x_1, \dots, x_k)\in\mathbb{F}_{p^k}
+  \E_i=\left\{ x=(x_1, \dots, x_k)\in\A
   \,|\, \forall j\leq i-1,\,x_j=0\text{ and }x_i=1 \right\}
 \]
 and
 \[
   \E = \bigcup_{i=1}^k\E_i.
 \]
-We search for elements $a_i$ in $\E$ instead of $\mathbb{F}_{q^k}$. We further
-use the vector space structure of $\mathbb{F}_{q^k}$ by searching for solutions
+We search for elements $a_i$ in $\E$ instead of $\A$. We further
+use the vector space structure of $\A$ by searching for solutions
 on each coordinate.
 Let 
 \[
@@ -387,41 +388,40 @@ the $i$-th coordinate of the product in $\mathbb{F}_{p^k}$. In other words,
 \[
   \Phi = (\pi_1, \dots, \pi_k).
 \]
-We identify the
-bilinear forms to $k\times k$ matrices and therefore we use the same notation for both the
-bilinear forms and their matrix representations. Let $\f$ be the application mapping an element in
-$\mathbb{F}_{q^k}$ to its associated bilinear symmetric form:
+We let $\B$ be the space of bilinear forms on $\A$ and we let $\f$ be the
+application mapping an element in $\A$ to its associated bilinear symmetric
+form:
 \[
 \begin{array}{cccc}
-  \f: & \mathbb{F}_{q^k} & \to & (\mathbb{F}_q)^{k\times k} \\
+  \f: & \A & \to & \B \\
   & a & \mapsto & (x, y)\mapsto \ps{x}{a}\ps{y}{a}.
 \end{array}
 \]
-The idea is to search for elements $a_1, \dots, a_{n_1}$ in $\E_1$ and
-$\lambda_1, \dots, \lambda_{n_1}$ in $\mathbb{F}_q$ such that 
+We then search for elements $a_1, \dots, a_{n_1}$ in $\E_1$ and
+$\lambda_1, \dots, \lambda_{n_1}$ in $\K$ such that 
 \begin{equation}
   \pi_1 = \sum_{j=1}^{n_1}\lambda_j\f(a_j),
   \label{eq:pi1}
 \end{equation}
-we then have
+and we obtain
 \[
   \Phi-\sum_{j=1}^{n_1}\lambda_j\f(a_j)a_j = (0, \pi_2', \dots, \pi_k'), 
 \]
 where for $2\leq i \leq k$, $\pi_i'$ is some other bilinear form.
 We then continue the operation with $\pi_2'$ and elements $a_{n_1+1}, \dots,
 a_{n_2}$ in $\E_2$, then with $\pi_3''$ and elements in $\E_3$, and so on. In
-the end, we obtain $n$ elements $a_1, \dots, a_n\in \E$ and $\lambda_1, \dots,
-\lambda_n\in\mathbb{F}_q$ such that
+the end, we have $n$ elements $a_1, \dots, a_n\in \E$ and $\lambda_1, \dots,
+\lambda_n\in\K$ such that
 \[
   \Phi = \sum_{j=1}^{n}\lambda_j\f(a_j)a_j.
 \]
 Now, there is left to see how we compute the elements $a_1, \dots,
-a_{n_1}\in\E_1$ and $\lambda_1, \dots, \lambda_{n_1}\in\mathbb{F}_q$ in order to
+a_{n_1}\in\E_1$ and $\lambda_1, \dots, \lambda_{n_1}\in\K$ in order to
 obtain~\eqref{eq:pi1}. Let $r_1$ be the rank of $\pi_1$. We know that the number
 $n_1$ of elements in $\E_1$ such that we have~\eqref{eq:pi1} is at least $r_1$,
 but there also exist some trisymmetric decompositions where we need more than $r_1$
 elements. To find these elements, we search through elements $a_1\in\E_1$ such that
-there exists $\lambda_1\in\mathbb{F}_q$ with
+there exists $\lambda_1\in\K$ with
 \[
   \rank(\pi_1-\lambda_1\f(a_1))<\rank(\pi_1),
 \]
@@ -440,11 +440,15 @@ available online\footnote{\url{https://github.com/erou/TriSym.jl}}, along with
 the source code. We were able to algorithmically find trisymmetric decompositions of the
 product of $\mathbb{F}_{q^k}/\mathbb{F}_q$; for $q=3$, we found
 formulae for $k\leq 6$.
+% Ici il faudra à la place mettre un meilleur résumé des résultats, car c'est un
+% peu léger. Aussi parler de la recherche de décomposition invariantes via
+% Frobenius.
 
-As mentionned in Section~\ref{sec:symtrisym}, we were not able to find an
-extension where the bilinear complexity and the trisymmetric bilinear
-complexity are different. Moreover, in the case $q=p^l$ with $p\neq2$ and $k=2$,
-we can prove that we have
+\paragraph{Universal formulae.}
+As mentionned in Section~\ref{sec:symtrisym}, we are not able to find a
+finite field extension $\A=\mathbb{F}_{q^k}$ where the bilinear complexity and
+the trisymmetric bilinear complexity are different. Moreover, if the
+characteristic of $\K=\mathbb{F}_q$ is not $2$, we can prove that we have
 \[
   \mu_q(2) = \tri{q}{2} = 3.
 \]
@@ -452,11 +456,12 @@ In fact, we know~\cite[Theorem 2.2]{BCPRRR19} that $\mu_q(k)\geq2k-1$ with
 equality if and only if $k\leq \frac{q}{2}+1$. In order to prove that
 $\tri{q}{2} = 3$, we find an \emph{universal} trisymmetric formula of length
 $3$, \ie a formula that is true for all
-$q=p^l$, such that $p\neq2$. In order to obtain such a formula, it is useful to change our point of
+$q$ not divisible by $2$. In order to obtain such a formula, it is useful to
+change our point of
 view of the problem. Assume we want to compute a trisymmetric decomposition of
-the product $\Phi$ in $\mathbb{F}_{q^k}/\mathbb{F}_q$. After the choice of a basis of
-$\mathbb{F}_{q^k}$ and a basis of the space $\B$ of the bilinear forms on
-$\mathbb{F}_{q^k}$, we can represent
+the product $\Phi$ in $\A$, a commutative algebra of degree $k$. After the choice of a basis of
+$\A$ and a basis of the space $\B$ of the bilinear forms on
+$\A$, we can represent
 \[
   \Phi=(\pi_1, \dots, \pi_k)
 \]
@@ -467,11 +472,11 @@ $\pi_k$. Now, for each $a\in\E$, we note
   \bff(a) = a\otimes \f(a),
 \] 
 where $a$ is the column vector of length $k$ corresponding to $a$ in the basis
-of $\mathbb{F}_{q^k}$, $\f(a)$ is the column vector of length $k^2$ corresponding
+of $\A$, $\f(a)$ is the column vector of length $k^2$ corresponding
 to $\f(a)\in\B$, and $\otimes$ is the Kronecker product. With these notations,
 finding a trisymmetric decompositions of the product in
-$\mathbb{F}_{q^k}/\mathbb{F}_{q}$ is the same as finding elements $a_1\dots,
-a_n\in\E$ and $\lambda_1, \dots, \lambda_n$ with
+$\A$ is the same as finding elements $a_1\dots,
+a_n\in\E$ and $\lambda_1, \dots, \lambda_n\in\K$ with
 \[
   B = \sum_{j=1}^n \lambda_j\bff(a).
 \]
@@ -480,19 +485,20 @@ problem is to find a solution $X$ of
 \[
   AX = B
 \]
-with the smallest possible number of nonzero entries in $X$. If $q\neq2$, we
+with the smallest possible number of nonzero entries in $X$. If
+$\A=\mathbb{F}_{q^2}$ is not of characteristic $2$, we
 know that we can find a non-square element $\zeta$ in $\mathbb{F}_q$, we can then define
 \[
   \mathbb{F}_{q^2}\cong\mathbb{F}_q[T]/(T^2-\zeta)=\mathbb{F}_{q}(\alpha),
 \]
-where $\alpha=\bar T$ is the canonical generator of $\mathbb{F}_{q^2}$. If $x =
-x_0 + x_1\alpha$ and $y = y_0 + y_1\alpha$ are two elements of
+where $\alpha=\bar T$ is the canonical generator of $\mathbb{F}_{q^2}$. Let $x =
+x_0 + x_1\alpha$ and $y = y_0 + y_1\alpha$ be two elements of
 $\mathbb{F}_{q^2}$, we have
 \[
   xy = (x_0+x_1\alpha)(y_0+y_1\alpha)=x_0y_0+\zeta x_1y_1
   +(x_0y_1+x_1y_0)\alpha.
 \]
-This formula is the same for all $q=p^l$ with $p\neq2$, because we can represent
+This formula is the same for all $q$ not divisible by $2$, because we can represent
 $\mathbb{F}_{q^2}$ in the same way for all these choices of $q$. As a consequence, we can lift the matrix $B$ coming from
 the multiplication formula, that has coefficients in $\mathbb{F}_{q}$, to a
 matrix with coefficients in $\mathbb{Q}(\zeta)$, where $\zeta$ is an
@@ -513,6 +519,11 @@ Indeed, one can check that the map $\f$ is given by
     x_0 \\
     x_1
   \end{bmatrix}\right)^\intercal
+  =
+  4\begin{bmatrix}
+   x_0^2 & \zeta x_0x_1 \\
+   \zeta x_0 x_1 & \zeta^2 x_1^2
+  \end{bmatrix}.
 \]
 where
 \[
@@ -530,14 +541,6 @@ where
    0 & 2\zeta
   \end{bmatrix}.
 \]
-For all $q=p^l$, $p\neq 2$, we then have
-\[
-  \f(x_0+x_1\alpha) =
-  4\begin{bmatrix}
-   x_0^2 & \zeta x_0x_1 \\
-   \zeta x_0 x_1 & \zeta^2 x_1^2
-  \end{bmatrix}.
-\]
 We can then solve $AX=B$ over
 $\mathbb{Q}(\zeta)$ and finally check that
 \[
@@ -549,7 +552,7 @@ $\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$. Using the same strategy, we can also
 find universal formulae for an other type of algebra $\A =
 \mathbb{F}_{q}[T]/(T^k)$, namely the truncated polynomials. In that context, we
 are able to find formulae for $2\leq k \leq 4$.
-\paragraph{Truncated polynomials of degree $2$.} Let $q=p^l$, with $p\neq2$. Let
+\subparagraph{Truncated polynomials of degree $2$.} Let $q=p^l$, with $p\neq2$. Let
 \[
   \A = \mathbb{F}_{q}[T]/(T^2) = \mathbb{F}_q[\alpha],
 \]
@@ -568,7 +571,7 @@ $\mathbb{Q}$. We obtain
 \]
 so that the trisymmetric bilinear complexity of
 $\A=\mathbb{F}_q[T]/(T^2)$ is $3$.
-\paragraph{Truncated polynomials of degree $3$ and $4$.} Let $q=p^l$, with
+\subparagraph{Truncated polynomials of degree $3$ and $4$.} Let $q=p^l$, with
 $p\notin\left\{ 2, 3 \right\}$. We use the same notations as before. For
 $\A=\mathbb{F}_{q}[T]/(T^3)$, we obtain
 \[
@@ -636,7 +639,7 @@ we will write $\musym_q(k,m_t)$ for $\musym\left({m_t}^{\mathbb{F}_{q^k}/\mathbb
 and we will also use the similar notations $\muhyp_q(k,m_t)$, $\musym_q(k,\tau_t)$, etc.
 In particular for $t=2$ we have
 \[
-\mutri_q(k)=\mutri_q(k,m_2)=\musym_q(k,\tau_3).
+\mutri_q(k)=\mutri_q(k,m_2)=\musym_q(k,\tau_3). %\muhyp_q(k, m_2) plutôt non ?
 \]
 When working in $\mathbb{F}_q[T]/(T^k)$ over $\mathbb{F}_q$,
 we will write likewise $\hmusym_q(k,m_t)$, $\hmuhyp_q(k,m_t)$, etc.
