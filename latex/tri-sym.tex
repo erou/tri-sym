@@ -720,7 +720,7 @@ presented in~\cite{Stichtenoth09}. Let $F/\mathbb{F}_q$ be an algebraic
 function field of one variable over $\mathbb{F}_{q}$ and let $\mathbb{P}_F$ be the
 set of places of $F$. Let $\D_F$ the set of
 divisors on $F$, and if $D\in\D_F$ is a divisor on
-$F$, we denote by $L(D)$ its Riemann-Roch space.
+$F$, we denote by $L(D)$ its Riemann-Roch space and $\ell(D)=\dim L(D)$.
 %The following proposition highlights the method.
 
 \begin{prop}
@@ -861,43 +861,55 @@ and finally we get a symmetric formula for $m_t$:
 \begin{prop}
 \label{prop:numerical}
 Let $F/\mathbb{F}_{q}$ be an algebraic function field of genus $g$.
-Assume that $F$ admits a place $Q$ of degree $k$, and at least
+Assume that $F$ admits a place $Q$ of degree $k$, and a set $\mathcal{S}$ of places of degree $1$ of cardinality
 \[
-  n > (k+2g-1)t
+  |\mathcal{S}|\geq (k+g-1)t+1.
 \]
-places $P_1,\dots,P_n$ of degree $1$.
-Then there is a divisor $D$ such that Proposition~\ref{prop:method} applies, so
+Then one can find $P_1,\dots,P_n$ in $\mathcal{S}$, where
+\[
+  n = kt+(g-1)(t-1),
+\]
+and a divisor $D$ on $F$, such that Proposition~\ref{prop:method} applies, so
 \[ \musym_q(k,m_t)\leq n. \]
 \end{prop}
 \begin{proof}
-Set $d=k+2g-1$.
-By a result of Schmidt \cite[Cor.~5.1.11]{Stichtenoth09}, we know that $F$ admits divisors of any degree,
-so in particular it admits a divisor $D$ of degree $d$. Moreover, by the strong approximation theorem \cite[Thm.~1.6.5]{Stichtenoth09}
-we can assume that $D$ is disjoint from $Q,P_1,\dots,P_n$.
+Using e.g. \cite[Lemma~2.1]{Ballet99} we know $F$ admits a non-special divisor $R$ of degree $g-1$.
+By the strong approximation theorem \cite[Thm.~1.6.5]{Stichtenoth09}
+we can then find a divisor $D$ linearly equivalent to $R+Q$ and of support disjoint from $Q$ and $\mathcal{S}$.
 
-Now recall the equality case \cite[Thm.~1.5.17]{Stichtenoth09} in the Riemann-Roch theorem: any divisor $G$ with $\deg(G)\geq 2g-1$ satisfies $\ell(G)=\deg(G)+1-g$.
-It applies to $D$ and to $D-Q$ and gives $\ell(D)=k+g$ and $\ell(D-Q)=g$. 
-Then we have
+Then $D-Q$ and $D$ are non-special, with $\ell(D-Q)=0$ and $\ell(D)=k$.
+We thus find
 \[
-  \Ker(\ev_{Q, D}:L(D)\to\mathbb{F}_{q^k}) = L(D-Q),
+  \Ker(\ev_{Q, D}:L(D)\to\mathbb{F}_{q^k}) = L(D-Q) = 0,
 \]
-so by the rank-nullity theorem,
-\[
-  \dim\Img(\ev_{Q, D}) = \ell(D) - \ell(D-Q)=k,
-\]
-and the surjectivity condition~\ref{cond:1} in Proposition~\ref{prop:method} is satisfied.
+so $\ev_{Q, D}$ is injective, hence also surjective by equality of dimensions,
+\ie the surjectivity condition~\ref{cond:1} in Proposition~\ref{prop:method} is satisfied.
 
-Likewise we have $\deg(tD-P_1-\dots-P_n)=td-n<0$, so
- \[
-  \Ker(\ev_{\Pcal, tD}:L(tD)\to(\mathbb{F}_{q})^n) = L(tD-P_1-\dots-P_n)=0,
+Likewise, $tD$ is non-special, with $\deg(tD)=(k+g-1)t$ and $\ell(tD)=kt+(g-1)(t-1)$.
+Then the evaluation map
+\[
+\begin{array}{cccc}
+\ev_{\mathcal{S}, tD}: & L(tD) & \to & (\mathbb{F}_{q})^{|\mathcal{S}|}\\
+  & h & \mapsto & (h(P))_{P\in\mathcal{S}}
+\end{array}
 \]
-and the injectivity condition~\ref{cond:2} in Proposition~\ref{prop:method} is satisfied.
+has kernel $L(tD-\sum_{P\in\mathcal{S}}P)=0$, because $\deg(tD-\sum_{P\in\mathcal{S}}P)=(k+g-1)t-|\mathcal{S}|<0$.
+So $\ev_{\mathcal{S}, tD}$ is injective, with image of dimension $\dim\Img(\ev_{\mathcal{S}, tD})=\ell(tD)=n$.
+Then we can find a subset $\Pcal=\{P_1,\dots,P_n\}\subset\mathcal{S}$ of cardinality $n$,
+such that $\ev_{\Pcal, tD}: L(tD) \to (\mathbb{F}_{q})^n$ is an isomorphism,
+and the injectivity condition~\ref{cond:2} in Proposition~\ref{prop:method} is also satisfied.
 \end{proof}
 
 \paragraph{Choice of the curves for $q$ a large enough square.}
 
-Let us assume $q$ is a square, $q\geq(2t+2)^2$.
-
+\begin{prop}
+Let $t$ be given, and assume $q$ is a square, $q\geq(t+2)^2$.
+Then we have
+\[
+\limsup_{k\to\infty}\frac{1}{k}\musym_q(k,m_t)\leq(1+\epsilon_t(q))t
+\]
+with $\epsilon_t(q)=\frac{t-1}{\sqrt{q}-t-1}$.
+\end{prop}
 
 The remaining part is to prove that we can find suitable function fields for
 each $q$ fixed and $k\to\infty$. It means that we look for a function field
