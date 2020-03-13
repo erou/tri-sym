@@ -936,87 +936,32 @@ while by (iii),
 \[ N_{i(k)} \sim (\sqrt q - 1)g_{i(k)}. \]
 From these two relations we deduce
 \[ g_{i(k)} \sim \frac{t}{\sqrt{q}-1-t}k. \]
+For $k$ large enough this implies in particular $2g_{i(k)} +1 \leq q^{(k-1)/2}(\sqrt q-1)$,
+so $F_{i(k)}$ admits a place of degree $k$ by~\cite[Corollary 5.2.10.]{Stichtenoth09}.
 
+From this we are allowed to apply Proposition~\ref{prop:numerical} to $F_{i(k)}$, which gives
+\[ \musym_q(k,m_t)\;\leq\; kt+(g_{i(k)}-1)(t-1)\;\sim\; kt+g_{i(k)}(t-1)\;\sim\; kt(1+\epsilon_t(q)) \]
+as desired.
 \end{proof}
-The remaining part is to prove that we can find suitable function fields for
-each $q$ fixed and $k\to\infty$. It means that we look for a function field
-$F/\mathbb{F}_q$ of genus $g$, with a place of degree $k$, and such that there
-are at least $n$ places of degree $1$, with
+
+\begin{cor}
+For $q$ a square, $q\geq(t+3)^2$ we have
 \[
-  n > 3k +6g - 3
+\limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t)\leq(1+\epsilon_{t+1}(q))(t+1),
 \]
-in order to apply Proposition~\ref{prop:method}. Let us start with the special case of $q\geq64$
-a square. In this case, we know~\cite{STV92} that there exists a family of function fields
-$F_i/\mathbb{F}_q$ of genus $g_i$ such that
-\begin{enumerate}
-  \item $g_i\to\infty$
-  \item $\frac{g_{i+1}}{g_i}\to1$
-  \item $N_i\sim (\sqrt q - 1)g_i$
-\end{enumerate}
-with
+and in particular we have
+\[ \limsup_{k\to\infty}\frac{1}{k}\mutri_q(k)\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right) \]
+for $q$ a square, $q\geq 25$.
+\end{cor}
+
+\paragraph{Conclusion for arbitrary $q$.}
+\begin{thm}
+Let $t\geq2$ be an integer and $q\geq t$ a prime power. Then $\musym_q(k,m_t)$ grows at most linearly with $k$, \ie we have
 \[
-  N_i = \Card\left\{ P\in\mathbb{P}_{F_i}\,|\,\deg P = 1 \right\}
+\limsup_{k\to\infty}\frac{1}{k}\musym_q(k,m_t)\leq C_t(q)
 \]
-the number of places of degree $1$ of $F_i$. We also assume that the sequence
-$(g_i)_i$ is increasing. For each $k$, let $g_{i(k)}$ be the
-smallest genus $g_i$ such that
-\[
-  N_{i} > 3k + 6g_{i}.
-\]
-This is always possible to find such an index $i(k)$ since
-\[
-  N_i\sim (\sqrt q - 1)g_i
-\]
-and $\sqrt q -1 > 6$. By definition, we thus have
-\[
-  N_{i(k)-1}\leq 3k+6g_{i(k)-1}<3k+6g_{i(k)}<N_{i(k)}.
-\]
-Since $i(k)\to\infty$ when $k\to\infty$, we can use the asymptotic results on the
-family of function fields $F_i$, so we know
-\begin{equation*}
-  \begin{split}
-  N_{i(k)-1} &\sim (\sqrt q-1)g_{i(k)-1}\\
-  &\sim (\sqrt q-1)g_{i(k)}\\
-  &= (\sqrt q-1)g_{i(k)}+o(g_{i(k)}).
-  \end{split}
-\end{equation*}
-Similarly,
-\[
-  N_{i(k)} = (\sqrt q -1)g_{i(k)}+o(g_{i(k)}),
-\]
-and so we deduce that
-\begin{equation}
-  3k = (\sqrt q -7)g_{i(k)} + o(g_{i(k)})
-  \label{eqn:equivg}
-\end{equation}
-and
-\begin{equation}
-  g_{i(k)}= \frac{3}{\sqrt q - 7}k+o(k).
-  \label{equivk}
-\end{equation}
-We know~\cite[Corollary 5.2.10.]{Stichtenoth09} there exists a place of degree
-$k$ in $F_{i(k)}$ if we have
-\begin{equation}
-  2g_{i(k)} +1 \leq q^{(k-1)/2}(\sqrt q-1),
-  \label{eqn:degreek}
-\end{equation}
-but thanks to Equation~\eqref{eqn:equivg} we know that
-Inequation~\eqref{eqn:degreek} is true as soon as $k$ is large enough. Let
-$k_0(q)$ be a constant such that~\eqref{eqn:degreek} is true for $k\geq k_0(q)$.
-If $q\geq 64$ is a square and $k\geq k_0(q)$, we now know that we can find a
-function field $F_{i(k)}$ in which Proposition~\ref{prop:method}
-applies, so that we can find a $3$-symmetric decomposition of $m_3$ of length
-$n$, and therefore a trisymmetric decomposition $\mathbb{F}_{q^k}/\mathbb{F}_q$ of length $n$, with
-\begin{equation*}
-  \begin{split}
-    n&\leq N_{i(k)}\\
-    &= (\sqrt q -1)g_{i(k)}+o(g_{i(k)})\\
-    &= \frac{\sqrt q -1}{\sqrt q -7}\cdot3\cdot k+o(k)\\
-    &= O(k).
-  \end{split}
-\end{equation*}
-We have thus proven that the trisymmetric bilinear complexity of
-$\mathbb{F}_{q^k}/F_{q}$ is \emph{linear} in $k$ for $q\geq64$ a square.
+for some real constant $C_t(q)<\infty$.
+\end{thm}
 
 Let $q\geq3$ be a prime power, there exists an integer $d\in\mathbb{N}$ such that
 \[
