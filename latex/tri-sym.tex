@@ -445,23 +445,16 @@ formulae for $k\leq 6$.
 % Frobenius.
 
 \paragraph{Universal formulae.}
-As mentionned in Section~\ref{sec:symtrisym}, we are not able to find a
-finite field extension $\A=\mathbb{F}_{q^k}$ where the bilinear complexity and
-the trisymmetric bilinear complexity are different. Moreover, if the
-characteristic of $\K=\mathbb{F}_q$ is not $2$, we can prove that we have
-\[
-  \mu_q(2) = \tri{q}{2} = 3.
-\]
-In fact, we know~\cite[Theorem 2.2]{BCPRRR19} that $\mu_q(k)\geq2k-1$ with
-equality if and only if $k\leq \frac{q}{2}+1$. In order to prove that
-$\tri{q}{2} = 3$, we find an \emph{universal} trisymmetric formula of length
-$3$, \ie a formula that is true for all
-$q$ not divisible by $2$. In order to obtain such a formula, it is useful to
-change our point of
-view of the problem. Assume we want to compute a trisymmetric decomposition of
-the product $\Phi$ in $\A$, a commutative algebra of degree $k$. After the choice of a basis of
-$\A$ and a basis of the space $\B$ of the bilinear forms on
-$\A$, we can represent
+As mentionned in Section~\ref{sec:symtrisym}, for $q\geq3$, we do not know any example of
+algebra $\A=\mathbb{F}_{q^k}$ or $\A=\mathbb{F}_{q}[T]/(T^k)$ where the bilinear complexity and
+the trisymmetric bilinear complexity are different. We can even prove that these
+quantities are the same in small dimension, by exhibiting trisymmetric \emph{universal
+formulae}, \ie trisymmetric decompositions that are true for (almost) any choice
+of $q\geq3$. In order to obtain such formulae, it is useful to
+change our point of view of the problem. Assume we want to compute a
+trisymmetric decomposition of the product $\Phi$ in $\A$, a commutative algebra
+of degree $k$. After the choice of a basis of $\A$ and a basis of the space $\B$
+of the bilinear forms on $\A$, we can represent
 \[
   \Phi=(\pi_1, \dots, \pi_k)
 \]
@@ -485,9 +478,18 @@ problem is to find a solution $X$ of
 \[
   AX = B
 \]
-with the smallest possible number of nonzero entries in $X$. If
-$\A=\mathbb{F}_{q^2}$ is not of characteristic $2$, we
-know that we can find a non-square element $\zeta$ in $\mathbb{F}_q$, we can then define
+with the smallest possible number of nonzero entries in $X$.
+
+We first consider the case $\A=\mathbb{F}_{q^k}$ over $\K=\mathbb{F}_q$, where
+the characteristic of $\K$ is not $2$, with degree $k=2$. We prove that we have
+\[
+  \mu_q(2) = \tri{q}{2} = 3.
+\]
+In fact, we know~\cite[Theorem 2.2]{BCPRRR19} that $\mu_q(k)\geq2k-1$ with
+equality if and only if $k\leq \frac{q}{2}+1$. In order to prove that
+$\tri{q}{2} = 3$, we find an \emph{universal} trisymmetric formula of length
+$3$. We know that we can find a non-square element $\zeta$ in $\mathbb{F}_q$, we
+can then define
 \[
   \mathbb{F}_{q^2}\cong\mathbb{F}_q[T]/(T^2-\zeta)=\mathbb{F}_{q}(\alpha),
 \]
@@ -498,14 +500,12 @@ $\mathbb{F}_{q^2}$, we have
   xy = (x_0+x_1\alpha)(y_0+y_1\alpha)=x_0y_0+\zeta x_1y_1
   +(x_0y_1+x_1y_0)\alpha.
 \]
-This formula is the same for all $q$ not divisible by $2$, because we can represent
-$\mathbb{F}_{q^2}$ in the same way for all these choices of $q$. As a consequence, we can lift the matrix $B$ coming from
+We can lift the matrix $B$ coming from
 the multiplication formula, that has coefficients in $\mathbb{F}_{q}$, to a
 matrix with coefficients in $\mathbb{Q}(\zeta)$, where $\zeta$ is an
-indeterminate. The important point is that, for all finite fields, we can lift
-$B$ to the same matrix with coefficients in $\mathbb{Q}(\zeta)$, that we still
-denote as $B$ for simplicity. The same argument is true for the matrix $A$, because the map
-$\f$ (and therefore $\bff$) has the same expression in all these finite fields.
+indeterminate. We can also lift the matrix $A$, because the map
+$\f$ (and therefore $\bff$) has the same expression for all $q$ not divisible by
+$2$.
 Indeed, one can check that the map $\f$ is given by
 \[
   \f(x_0+x_1\alpha)=
