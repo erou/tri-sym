@@ -865,14 +865,14 @@ Assume that $F$ admits a place $Q$ of degree $k$, and a set $\mathcal{S}$ of pla
 \[
   |\mathcal{S}|\geq (k+g-1)t+1.
 \]
-Then one can find $P_1,\dots,P_n$ in $\mathcal{S}$, where
-\[
-  n = kt+(g-1)(t-1),
-\]
-and a divisor $D$ on $F$, such that Proposition~\ref{prop:method} applies, so
-\[ \musym_q(k,m_t)\leq n. \]
+Then we have
+\[ \musym_q(k,m_t)\leq kt+(g-1)(t-1). \]
 \end{prop}
 \begin{proof}
+Set $n=kt+(g-1)(t-1)$. We will show that there are places $P_1,\dots,P_n$ in $\mathcal{S}$,
+and a divisor $D$ on $F$, such that Proposition~\ref{prop:method} applies,
+which gives $\musym_q(k,m_t)\leq n$ as desired.
+
 Using e.g. \cite[Lemma~2.1]{Ballet99} we know $F$ admits a non-special divisor $R$ of degree $g-1$.
 By the strong approximation theorem \cite[Thm.~1.6.5]{Stichtenoth09}
 we can then find a divisor $D$ linearly equivalent to $R+Q$ and of support disjoint from $Q$ and $\mathcal{S}$.
@@ -910,7 +910,34 @@ Then we have
 \]
 with $\epsilon_t(q)=\frac{t-1}{\sqrt{q}-t-1}$.
 \end{prop}
+\begin{proof}
+We know~\cite{STV92} that there exists a family of function fields
+$F_i/\mathbb{F}_q$ of genus $g_i$ such that
+\begin{enumerate}[(i)]
+  \item $g_i\to\infty$
+  \item $\frac{g_{i+1}}{g_i}\to1$
+  \item $N_i\sim (\sqrt q - 1)g_i$
+\end{enumerate}
+where $N_i = \Card\left\{ P\in\mathbb{P}_{F_i}\,|\,\deg P = 1 \right\}$
+is the number of places of degree $1$ of $F_i$. We can also assume that the sequence
+$(g_i)_i$ is increasing. 
 
+For any $k$ let $i(k)$ be the smallest index such that
+\[ N_{i(k)} \geq (k + g_{i(k)}-1)t +1. \]
+Such an $i(k)$ always exists since by (iii) we have $N_i\sim (\sqrt q - 1)g_i$,
+with $\sqrt q - 1>t$.
+
+By definition we thus have
+\[ N_{i(k)} \geq (k + g_{i(k)}-1)t +1 > (k + g_{i(k)-1}-1)t +1 > N_{i(k)-1}. \]
+As $k\to\infty$ we have $i(k)\to\infty$, and by (ii) we get $g_{i(k)}\sim g_{i(k)-1}$,
+so by (iii) we also get $N_{i(k)}\sim N_{i(k)-1}$. This then gives
+\[ \begin{split} N_{i(k)} &\sim (k + g_{i(k)}-1)t +1\\ &\sim (k + g_{i(k)})t \end{split} \]
+while by (iii),
+\[ N_{i(k)} \sim (\sqrt q - 1)g_{i(k)}. \]
+From these two relations we deduce
+\[ g_{i(k)} \sim \frac{t}{\sqrt{q}-1-t}k. \]
+
+\end{proof}
 The remaining part is to prove that we can find suitable function fields for
 each $q$ fixed and $k\to\infty$. It means that we look for a function field
 $F/\mathbb{F}_q$ of genus $g$, with a place of degree $k$, and such that there
