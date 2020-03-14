@@ -254,7 +254,7 @@ the \emph{$G$-invariant} symmetric (resp. hypersymmetric) multilinear complexity
 as the minimal length $n$ of a symmetric (resp. hypersymmetric) multilinear formula for $\Phi$ that is $G$-invariant, \ie $\sigma$-invariant for all $\sigma$ in $G$. 
 
 
-\paragraph{Known results for multiplication in algebras}
+\paragraph{Multiplication formulae in algebras}
 
 Let $\A$ be a finite dimensional commutative algebra over $\K$.
 We say a linear form $\tau:\A\to\K$ is trace-like if the symmetric bilinear form $\A\times\A\to\K$, $(x,y)\mapsto\tau(xy)$ is non-degenerate.
@@ -955,6 +955,40 @@ for $q$ a square, $q\geq 25$.
 \end{cor}
 
 \paragraph{Conclusion for arbitrary $q$.}
+
+\begin{lm}
+Let $q$ be a prime power. Then for any integers $t,d,k$ we have
+\[ \musym_q(k,m_t)\leq\musym_q(dk,m_t)\leq\musym_q(d,m_t)\musym_{q^d}(k,m_t). \]
+\end{lm}
+\begin{proof}
+For the inequality on the left, there is nothing to prove if $\musym_q(dk,m_t)=\infty$.
+So let us assume $m_t^{\mathbb{F}_{q^{dk}}/\mathbb{F}_{q}}$ admits a symmetric multiplication formula of length $n=\musym_q(dk,m_t)$, \ie
+\[\forall x_1,\dots,x_t\in\mathbb{F}_{q^{dk}},\quad x_1\cdots x_t = \sum_{i=1}^{n}\varphi_i(x_1)\cdots\varphi_i(x_t)a_i \]
+for linear forms $\varphi_i:\mathbb{F}_{q^{dk}}\to\mathbb{F}_{q}$ and elements $a_i\in\mathbb{F}_{q^{dk}}$.
+Choose a linear projection
+\[ l:\mathbb{F}_{q^{dk}}\to\mathbb{F}_{q^{k}} \]
+left inverse for the inclusion $\mathbb{F}_{q^{k}}\subseteq\mathbb{F}_{q^{dk}}$.
+Then we get
+\[\forall x_1,\dots,x_t\in\mathbb{F}_{q^{k}},\quad x_1\cdots x_t = l(x_1,\dots,x_t) = \sum_{i=1}^{n}\varphi_i(x_1)\cdots\varphi_i(x_t)l(a_i) \]
+which is a symmetric multiplication formula of length $n$ for $m_t^{\mathbb{F}_{q^{k}}/\mathbb{F}_{q}}$.
+
+Likewise, for the inequality on the right, there is nothing to prove if $\musym_q(d,m_t)=\infty$ or $\musym_{q^d}(k,m_t)=\infty$.
+So let us assume $m_t^{\mathbb{F}_{q^{d}}/\mathbb{F}_{q}}$ and $m_t^{\mathbb{F}_{q^{dk}}/\mathbb{F}_{q^{d}}}$ admit symmetric multiplication formulae of length $r=\musym_q(d,m_t)$ and $s=\musym_{q^d}(k,m_t)$ respectively, so
+\vspace{-.5\baselineskip}
+
+\[\forall y_1,\dots,y_t\in\mathbb{F}_{q^{d}},\quad y_1\cdots y_t = \sum_{u=1}^{r}\psi_u(y_1)\cdots\psi_u(y_t)b_u \]
+\vspace{-1.5\baselineskip}
+
+\[\forall z_1,\dots,z_t\in\mathbb{F}_{q^{dk}},\quad z_1\cdots z_t = \sum_{v=1}^{s}\chi_v(z_1)\cdots\chi_v(z_t)c_v \]
+\vspace{-.5\baselineskip}
+
+\noindent for linear forms $\psi_u:\mathbb{F}_{q^{d}}\to\mathbb{F}_{q}$, $\chi_v:\mathbb{F}_{q^{dk}}\to\mathbb{F}_{q^{d}}$ and elements $b_u\in\mathbb{F}_{q^{d}}$, $c_v\in\mathbb{F}_{q^{dk}}$.
+Then setting $y_1=\chi_v(z_1)$, ..., $y_t=\chi_v(z_t)$ we find
+\[\forall z_1,\dots,z_t\in\mathbb{F}_{q^{dk}},\quad z_1\cdots z_t = \sum_{v=1}^{s}\sum_{u=1}^{r}(\psi_u\circ\chi_v)(z_1)\cdots(\psi_u\circ\chi_v)(z_t)\cdot(b_uc_v) \]
+which is a symmetric multiplication formula of length $rs$ for $m_t^{\mathbb{F}_{q^{dk}}/\mathbb{F}_{q}}$.
+\end{proof}
+
+
 \begin{thm}
 Let $t\geq2$ be an integer and $q\geq t$ a prime power. Then $\musym_q(k,m_t)$ grows at most linearly with $k$, \ie we have
 \[
