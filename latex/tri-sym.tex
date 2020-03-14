@@ -598,7 +598,7 @@ Finally, for $\A=\mathbb{F}_{q}[T]/(T^4)$, we obtain
 The trisymmetric bilinear complexity of $\A=\mathbb{F}_q[T]/(T^4)$ is then $7$.
 
 
-\section{Asymptotic lengths}
+\section{Asymptotic bounds}
 \label{sec:asymptotic}
 In this section, we work with $\A=\mathbb{F}_{q^k}$ or $\mathbb{F}_q[T]/(T^k)$, seen as an algebra over $\K=\mathbb{F}_q$, and equipped with the trace-like linear form $\tau$ introduced at the end of Section~\ref{sec:symtrisym}.
 Our aim is to show that the trisymmetric bilinear complexities $\mutri_q(k)$ and $\hmutri_q(k)$ grow linearly as $k\to\infty$.
@@ -608,14 +608,14 @@ For any $t$ we define the $t$-multilinear multiplication map in $\A$ over $\K$
 \[
 \begin{array}{cccc}
 m_t:&\A^t&\to&\A\\
-&(a_1,\dots,a_t)&\mapsto&a_1\cdots a_t
+&(x_1,\dots,x_t)&\mapsto&x_1\cdots x_t
 \end{array}
 \]
 and the $t$-multilinear trace form
 \[
 \begin{array}{cccc}
 \tau_t=\tau\circ m_t:&\A^t&\to&\A\\
-&(a_1,\dots,a_t)&\mapsto&\tau(a_1\cdots a_t).
+&(x_1,\dots,x_t)&\mapsto&\tau(x_1\cdots x_t).
 \end{array}
 \]
 If needed, we will write ${m_t}^{\A/\K}$ or ${\tau_t}^{\A/\K}$ to keep $\A$ and $\K$ explicit. 
@@ -647,70 +647,7 @@ we will write likewise $\hmusym_q(k,m_t)$, $\hmuhyp_q(k,m_t)$, etc.
 Our aim is, for fixed $q$ and $t$ with $q\geq t+1$, to show that $\muhyp_q(k,m_t)$ and $\hmuhyp_q(k,m_t)$ grow linearly with $k\to\infty$.
 Thanks to Lemma~\ref{lm:hyp<sym+1}, it suffices to show, for fixed $q$ and $t$ with $q\geq t$, that
 
-%Let
-%$\tri{q}{k}=\mu_{\text{tri}}(\mathbb{F}_{q^k}/\mathbb{F}_q)$ the trisymmetric
-%bilinear complexity of the extension $\mathbb{F}_{q^k}$. We prove that
-%$\tri{q}{k}$ is asymptotically linear in $k$. For any elements $x, y, z\in\mathbb{F}_{q^k}$, let
-%\[
-%m_3(x, y, z) = xyz
-%\]
-%and
-%\[
-%t_3(x, y, z) = \tr(xyz).
-%\]
-%The maps $m_3$ and $t_3$ are $3$-linear and we say that we have a $3$-symmetric
-%decomposition of $m_3$ if there exist $(a_i)_{1\leq i\leq n}$ and $(d_i)_{1\leq i\leq
-%n}$ in $\mathbb{F}_{q^k}$ with
-%\begin{equation}
-%    \forall x, y, z\in\mathbb{F}_{q^k},\,m_3(x, y, z) =
-%    \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
-%  \label{eq:3-sym}
-%\end{equation}
-%We have a similar definition for $t_3$. In fact, having a trisymmetric
-%decomposition of the product in $\mathbb{F}_{q^k}$ is equivalent to having a
-%$3$-symmetric decomposition of the $3$-linear form $t_3$, as stated in Lemma~\ref{lm:m2t3}.
-%\begin{lm}
-%  \label{lm:m2t3}
-%  Let $n\in\mathbb{N}$ be a natural integer and for $1\leq i \leq n$, let
-%  $a_i\in\mathbb{F}_{q^k}$ and $\lambda_i\in\mathbb{F}_q$, then
-%  \[
-%    \forall x, y\in\mathbb{F}_{q^k},\, xy =
-%    \sum_{i=1}^n\lambda_i\ps{a_i}{x}\ps{a_i}{y}a_i
-%  \]
-%  if and only if
-%  \[
-%    \forall x, y, z\in\mathbb{F}_{q^k},\,\tr(xyz) =
-%    \sum_{i=1}^n\lambda_i\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}
-%  \]
-%\end{lm}
-%\begin{proof}
-%  In one direction, multiply by $z$ and take the trace. In the other, it follows
-%  from the fact that the trace is non degenerate.
-%\end{proof}
-%The next lemma gives us a way of obtaining a $3$-symmetric decomposition of
-%$t_3$.
-%\begin{lm}
-%  Given a $3$-symmetric decomposition of $m_3$, one can deduce a $3$-symmetric
-%  decomposition of $t_3$.
-%\end{lm}
-%\begin{proof}
-%  Assume that there exist $n$ elements $a_i\in\mathbb{F}_{q^k}$ and $n$ elements
-%  $d_i\in\mathbb{F}_{q^k}$ with
-%  \[
-%    \forall x, y, z\in\mathbb{F}_{q^k},\,xyz =
-%    \sum_{i=1}^n\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z}d_i.
-%  \]
-%  Then taking the trace, we obtain
-%  \[
-%    \tr(xyz) = \sum_{i=1}^n\tr(d_i)\ps{a_i}{x}\ps{a_i}{y}\ps{a_i}{z},
-%  \]
-%  that is exactly a $3$-symmetric decomposition of the $3$-linear form $t_3$.
-%\end{proof}
-%\begin{rem}
-%  This is probably not the optimal way of obtaining a
-%  $3$-symmetric decomposition of $t_3$, but this strategy is sufficient for
-%  obtaining the desired result.
-%\end{rem}
+
 
 \paragraph{Evaluation-interpolation method.}
 %Albeit not optimal, our strategy will be to find a $3$-symmetric decomposition of
@@ -780,22 +717,11 @@ so the map $x\mapsto f_x$ is linear, and $f_x(Q)=x$. We
     \node (a) at (2, 2.7) {$a$};
   \end{tikzpicture}
   \end{center}
-  For all $1\leq i\leq n$, the map
-  $x\mapsto f_x(P_i)$ is a linear form, so there exists an element
-  $a_i\in\mathbb{F}_{q^k}$ such that $f_x(P_i) = \ps{a_i}{x}$,
-and thus
-  \[
-    \forall x\in\mathbb{F}_{q^k},\; a(x) = (\ps{a_1}{x}, \dots, \ps{a_n}{x}).
-  \]
-  Let $x,\dots,x_t\in\mathbb{F}_{q^k}$, and
-  \[
-    p = a(x_1)*\dots*a(x_t)\in(\mathbb{F}_{q})^n
-  \]
-  be the coordinatewise product of the elements $a(x_1)$, ..., $a(x_t)$. In
-  other words,
-  \[
-    p = ((\prod_{j=1}^tf_{x_j})(P_1), \dots, (\prod_{j=1}^tf_{x_j})(P_n)).
-  \]
+Observe that $a$ is linear, so we can write
+\[ a(x) = (\varphi_1(x), \dots, \varphi_n(x)) \]
+where $\varphi_i:\mathbb{F}_{q^k}\to\mathbb{F}_{q}$ is a linear form, namely $\varphi_i(x)=f_x(P_i)$.
+
+
 
   Similarly, since the map $\ev_{\Pcal, tD}$ is injective, it admits a left inverse, \ie a linear
   map $r: (\mathbb{F}_{q})^n \to L(tD)$
@@ -823,14 +749,17 @@ The map $b$ is linear, so there are $b_1, \dots, b_n$ in
   \[
     b(y) = \sum_{i=1}^n y_i b_i.
   \]
-Now
+
+Now for $x,\dots,x_t\in\mathbb{F}_{q^k}$, let
+  \[
+    p = (p_1,\dots,p_n) = ((\prod_{j=1}^tf_{x_j})(P_1), \dots, (\prod_{j=1}^tf_{x_j})(P_n))
+  \]
+in $(\mathbb{F}_{q})^n$  be the coordinatewise product of the vectors $a(x_1)$, ..., $a(x_t)$.
+Then
 \[
-  h = r(p)\in L(tD)
+  h = r(p)
 \]
-is an element of $L(tD)$ such that
-\[
-  \forall 1\leq i\leq n,\,h(P_i) = (\prod_{j=1}^tf_{x_j})(P_i),
-\]
+is an element of $L(tD)$ such that $h(P_i) = p_i = (\prod_{j=1}^tf_{x_j})(P_i)$ for all $i$.
 Since the map $\ev_{\Pcal, tD}$ is injective, this forces
 \[
   h = \prod_{j=1}^tf_{x_j}.
@@ -844,17 +773,12 @@ b(p) = \ev_{Q, tD}(r(p))
   = \prod_{j=1}^t x_j.
 \end{equation*}
 But we also have
-\begin{equation*}
-    p = a(x_1)*\cdots*a(x_t)
-    = (\prod_{j=1}^t\ps{a_1}{x_j}, \dots, \prod_{j=1}^t\ps{a_n}{x_j}),
- \end{equation*}
-so
 \[
-  b(p) = \sum_{i=1}^n(\prod_{j=1}^t\ps{a_i}{x_j})b_i
+  b(p) = \sum_{i=1}^np_ib_i=\sum_{i=1}^n(\prod_{j=1}^tf_{x_j}(P_i))b_i=\sum_{i=1}^n(\prod_{j=1}^t\varphi_i(x_j))b_i
 \]
 and finally we get a symmetric formula for $m_t$:
 \[
-  \prod_{j=1}^t x_j = \sum_{i=1}^n(\prod_{j=1}^t\ps{a_i}{x_j})b_i.
+  \prod_{j=1}^t x_j = \sum_{i=1}^n(\prod_{j=1}^t\varphi_i(x_j))b_i.
 \]
 \end{proof}
 
@@ -903,6 +827,7 @@ and the injectivity condition~\ref{cond:2} in Proposition~\ref{prop:method} is a
 \paragraph{Choice of the curves for $q$ a large enough square.}
 
 \begin{prop}
+\label{prop:asymptsquare}
 Let $t$ be given, and assume $q$ is a square, $q\geq(t+2)^2$.
 Then we have
 \[
@@ -945,6 +870,7 @@ as desired.
 \end{proof}
 
 \begin{cor}
+\label{cor:asymptsquare}
 For $q$ a square, $q\geq(t+3)^2$ we have
 \[
 \limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t)\leq(1+\epsilon_{t+1}(q))(t+1),
@@ -957,6 +883,7 @@ for $q$ a square, $q\geq 25$.
 \paragraph{Conclusion for arbitrary $q$.}
 
 \begin{lm}
+\label{lemma:basechange}
 Let $q$ be a prime power. Then for any integers $t,d,k$ we have
 \[ \musym_q(k,m_t)\leq\musym_q(dk,m_t)\leq\musym_q(d,m_t)\musym_{q^d}(k,m_t). \]
 \end{lm}
@@ -966,10 +893,10 @@ So let us assume $m_t^{\mathbb{F}_{q^{dk}}/\mathbb{F}_{q}}$ admits a symmetric m
 \[\forall x_1,\dots,x_t\in\mathbb{F}_{q^{dk}},\quad x_1\cdots x_t = \sum_{i=1}^{n}\varphi_i(x_1)\cdots\varphi_i(x_t)a_i \]
 for linear forms $\varphi_i:\mathbb{F}_{q^{dk}}\to\mathbb{F}_{q}$ and elements $a_i\in\mathbb{F}_{q^{dk}}$.
 Choose a linear projection
-\[ l:\mathbb{F}_{q^{dk}}\to\mathbb{F}_{q^{k}} \]
+\[ p:\mathbb{F}_{q^{dk}}\to\mathbb{F}_{q^{k}} \]
 left inverse for the inclusion $\mathbb{F}_{q^{k}}\subseteq\mathbb{F}_{q^{dk}}$.
 Then we get
-\[\forall x_1,\dots,x_t\in\mathbb{F}_{q^{k}},\quad x_1\cdots x_t = l(x_1,\dots,x_t) = \sum_{i=1}^{n}\varphi_i(x_1)\cdots\varphi_i(x_t)l(a_i) \]
+\[\forall x_1,\dots,x_t\in\mathbb{F}_{q^{k}},\quad x_1\cdots x_t = p(x_1,\dots,x_t) = \sum_{i=1}^{n}\varphi_i(x_1)\cdots\varphi_i(x_t)p(a_i) \]
 which is a symmetric multiplication formula of length $n$ for $m_t^{\mathbb{F}_{q^{k}}/\mathbb{F}_{q}}$.
 
 Likewise, for the inequality on the right, there is nothing to prove if $\musym_q(d,m_t)=\infty$ or $\musym_{q^d}(k,m_t)=\infty$.
@@ -996,57 +923,45 @@ Let $t\geq2$ be an integer and $q\geq t$ a prime power. Then $\musym_q(k,m_t)$ g
 \]
 for some real constant $C_t(q)<\infty$.
 \end{thm}
+\begin{proof}
+Since $q\geq t$, we have $\musym_q(d,m_t)<\infty$ for any integer $d$.
+Choose $d$ such that $q^d$ is a square, $q^d\geq(t+2)^2$.
+Then Proposition~\ref{prop:asymptsquare} shows $\musym_{q^d}(k,m_t)$ grows linearly with $k$.
+The Theorem then follows thanks to Lemma~\ref{lemma:basechange}, with $C_t(q)=\musym_q(d,m_t)\leq(1+\epsilon_t(q^d))t$.
+\end{proof}
+\begin{cor}
+For $q\geq t+1$ we have
+\[
+\limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t)\leq C_{t+1}(q)
+\]
+and in particular for $q\geq 3$ we have
+\[
+\limsup_{k\to\infty}\frac{1}{k}\mutri_q(k)\leq C_{3}(q).
+\]
+\end{cor}
 
-Let $q\geq3$ be a prime power, there exists an integer $d\in\mathbb{N}$ such that
-\[
-  q' = q^d \geq 64
-\]
-is a square. Let $\sym{q}{k}$ be the minimal length of a $3$-symmetric
-decomposition of
-\[
-  m_3:\mathbb{F}_{q^{k}}\times\mathbb{F}_{q^k}\times\mathbb{F}_{q^k}\to\mathbb{F}_{q^k}.
-\]
-We know that there exists some constant
-$N$ such that
-\[
-  \sym{q'}{k}\leq Nk
-\]
-for $k$ large enough, and since we know that
-
-\[
-  \sym{q}{kd}\leq\sym{q'}{k}\sym{q}{d},
-\]
-it follows that
-\[
-  \sym{q}{kd} \leq (sN)k.
-\]
-\begin{center}
-  \begin{tikzpicture}
-    \node (Fq) at (0, 0) {$\mathbb{F}_q$};
-    \node (Fqk) at (-2, 2) {$\mathbb{F}_{q^k}$};
-    \node (Fqd) at (2, 2) {$\mathbb{F}_{q'}$};
-    \node (Fqkd) at (0, 4) {$\mathbb{F}_{q'^{k}}$};
-    \draw (Fq) -- (Fqd);
-    \draw (Fqd) -- (Fqkd);
-    \draw (Fqk) -- (Fqkd);
-    \draw (Fq) -- (Fqk);
-    \node (s) at (1.2, .9) {$s$};
-    \node (Ok) at (1.5, 3.1) {$N$};
-  \end{tikzpicture}
-\end{center}
-Since
-\[
-  \mathbb{F}_{q^k}\subset\mathbb{F}_{q'^k}\cong\mathbb{F}_{q^{kd}},
-\]
-we also have
-\begin{equation*}
-  \begin{split}
-    \sym{q}{k}&\leq\sym{q}{kd}\\
-    &\leq (sN)k.
-  \end{split}
-\end{equation*}
-Because $\tri{q}{k}\leq\sym{q}{k}$, it thus proves that the trisymmetric bilinear complexity of
-$\mathbb{F}_{q^k}/\mathbb{F}_q$ is asymptotically linear in $k$, for any $q\geq3$.
+\paragraph{Further remarks and possible improvements.}
+To ease notations, set \[ M^{\textrm{sym}}_{q,t}=\limsup_{k\to\infty}\frac{1}{k}\musym_q(k,m_t) \]
+and likewise $M^{\textrm{hyp}}_{q,t}=\limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t)$ and $M^{\textrm{tri}}_q=\limsup_{k\to\infty}\frac{1}{k}\mutri_q(k)=M^{\textrm{hyp}}_{q,2}$.
+\begin{enumerate}
+\item When $q\geq4$ is not divisible by $3$, \cite[Thm.~2]{SL84} gives $\mutri_q(k)\leq 4\musym_q(k)$.
+On the other hand, \cite{CC88} shows that $\musym_q(k)$ grows linearly with $k$ (the result is stated for $\mu_q(k)$,
+but it is easily seen that the proof works for $\musym_q(k)$). Joint together, these results show that $\mutri_q(k)$ grows linearly with $k$
+when $q\geq4$ is not divisible by $3$. One advantage of our method is that it works for all $q\geq3$.
+Moreover it gives sharper bounds. For instance, when $q$ is a square and large enough, joining \cite[Thm.~2]{SL84} with the best asymptotic upper bound known on $\musym_q(k)$ \cite[Thm.~6.4]{Randriam12} gives $M^{\textrm{tri}}_q\leq 8\left(1+\frac{1}{\sqrt{q}-2}\right)$,
+which is not as good as $M^{\textrm{tri}}_q\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right)$ from Corollary~\ref{cor:asymptsquare}.
+\item \emph{Open question}: Lemma~\ref{lm:hyp<sym+1} reduces (upper) bounds on $\muhyp(m_t)$ to bounds on $\musym(m_{t+1})$,
+and in particular it reduces bounds on $M^{\textrm{tri}}_q$ to bounds on $M^{\textrm{hyp}}_{q,3}$, which does not seem optimal.
+Indeed we know no example where the inequality $\musym_q(k)\leq\mutri_q(k)$ is strict.
+So, for instance for $q$ square, $q\to\infty$, our method gives $M^{\textrm{tri}}_q\leq 3(1+o(1))$,
+but one could ask whether it is possible to get a bound of the form $M^{\textrm{tri}}_q\leq 2(1+o(1))$,
+as given by \cite[Thm.~6.4]{Randriam12} for $M^{\textrm{sym}}_q$.
+\item \emph{Open question}: The condition $|\mathcal{S}|\geq (k+g-1)t+1$ in Proposition~\ref{prop:numerical}
+does not seem optimal since in the end we do evaluation-interpolation at only $kt+(g-1)(t-1)$ places.
+If one could relax this condition to $|\mathcal{S}|\geq kt+(g-1)(t-1)$, this would lead to
+\cite{Randriam12}\cite{Randriam19}\cite{Randriam13}.
+\item \cite{BR04}\cite{Randriam12}\cite{CCXY12}\cite{BBRR20+}
+\end{enumerate}
 
 \bibliographystyle{plain}
 \bibliography{erou}
