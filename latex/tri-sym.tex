@@ -645,8 +645,18 @@ When working in $\mathbb{F}_q[T]/(T^k)$ over $\mathbb{F}_q$,
 we will write likewise $\hmusym_q(k,m_t)$, $\hmuhyp_q(k,m_t)$, etc.
 
 Our aim is, for fixed $q$ and $t$ with $q\geq t+1$, to show that $\muhyp_q(k,m_t)$ and $\hmuhyp_q(k,m_t)$ grow linearly with $k\to\infty$.
-Thanks to Lemma~\ref{lm:hyp<sym+1}, it suffices to show, for fixed $q$ and $t$ with $q\geq t$, that
+Thanks to Lemma~\ref{lm:hyp<sym+1}, it suffices to show that
+$\musym_q(k,m_{t+1})$ and $\hmusym_q(k,m_{t+1})$ grow linearly with $k\to\infty$.
+To ease notations we will set
+\vspace{-.5\baselineskip}
 
+\[ \Msym_{q,t}=\limsup_{k\to\infty}\frac{1}{k}\musym_q(k,m_t),\qquad \Mhyp_{q,t}=\limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t), \]
+\vspace{-1.5\baselineskip}
+
+\[ \Mtri_q=\limsup_{k\to\infty}\frac{1}{k}\mutri_q(k)=\Mhyp_{q,2}, \]
+\vspace{-.5\baselineskip}
+
+\noindent and likewise for $\hMsym_{q,t}$, $\hMhyp_{q,t}$, $\hMtri_q$, etc.
 
 
 \paragraph{Evaluation-interpolation method.}
@@ -831,38 +841,37 @@ and the injectivity condition~\ref{cond:2} in Proposition~\ref{prop:method} is a
 Let $t$ be given, and assume $q$ is a square, $q\geq(t+2)^2$.
 Then we have
 \[
-\limsup_{k\to\infty}\frac{1}{k}\musym_q(k,m_t)\leq(1+\epsilon_t(q))t
+\Msym_{q,t}\leq(1+\epsilon_t(q))t
 \]
 with $\epsilon_t(q)=\frac{t-1}{\sqrt{q}-t-1}$.
 \end{prop}
 \begin{proof}
 We know~\cite{STV92} that there exists a family of function fields
-$F_i/\mathbb{F}_q$ of genus $g_i$ such that
+$F_i/\mathbb{F}_q$ of genus $g_i\to\infty$ such that
 \begin{enumerate}[(i)]
-  \item $g_i\to\infty$
   \item $\frac{g_{i+1}}{g_i}\to1$
   \item $N_i\sim (\sqrt q - 1)g_i$
 \end{enumerate}
 where $N_i = \Card\left\{ P\in\mathbb{P}_{F_i}\,|\,\deg P = 1 \right\}$
 is the number of places of degree $1$ of $F_i$. We can also assume that the sequence
-$(g_i)_i$ is increasing. 
+$g_i$ is increasing. 
 
 For any $k$ let $i(k)$ be the smallest index such that
 \[ N_{i(k)} \geq (k + g_{i(k)}-1)t +1. \]
-Such an $i(k)$ always exists since by (iii) we have $N_i\sim (\sqrt q - 1)g_i$,
+Such an $i(k)$ always exists since by (ii) we have $N_i\sim (\sqrt q - 1)g_i$,
 with $\sqrt q - 1>t$.
 
 By definition we thus have
 \[ N_{i(k)} \geq (k + g_{i(k)}-1)t +1 > (k + g_{i(k)-1}-1)t +1 > N_{i(k)-1}. \]
-As $k\to\infty$ we have $i(k)\to\infty$, and by (ii) we get $g_{i(k)}\sim g_{i(k)-1}$,
-so by (iii) we also get $N_{i(k)}\sim N_{i(k)-1}$. This then gives
+As $k\to\infty$ we have $i(k)\to\infty$, and by (i) we get $g_{i(k)}\sim g_{i(k)-1}$,
+so by (ii) we also get $N_{i(k)}\sim N_{i(k)-1}$. This then gives
 \[ \begin{split} N_{i(k)} &\sim (k + g_{i(k)}-1)t +1\\ &\sim (k + g_{i(k)})t \end{split} \]
-while by (iii),
+while by (ii),
 \[ N_{i(k)} \sim (\sqrt q - 1)g_{i(k)}. \]
 From these two relations we deduce
 \[ g_{i(k)} \sim \frac{t}{\sqrt{q}-1-t}k. \]
 For $k$ large enough this implies in particular $2g_{i(k)} +1 \leq q^{(k-1)/2}(\sqrt q-1)$,
-so $F_{i(k)}$ admits a place of degree $k$ by~\cite[Corollary 5.2.10.]{Stichtenoth09}.
+so $F_{i(k)}$ admits a place of degree $k$ by~\cite[Cor.~5.2.10]{Stichtenoth09}.
 
 From this we are allowed to apply Proposition~\ref{prop:numerical} to $F_{i(k)}$, which gives
 \[ \musym_q(k,m_t)\;\leq\; kt+(g_{i(k)}-1)(t-1)\;\sim\; kt+g_{i(k)}(t-1)\;\sim\; kt(1+\epsilon_t(q)) \]
@@ -873,10 +882,10 @@ as desired.
 \label{cor:asymptsquare}
 For $q$ a square, $q\geq(t+3)^2$ we have
 \[
-\limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t)\leq(1+\epsilon_{t+1}(q))(t+1),
+\Mhyp_{q,t}\leq(1+\epsilon_{t+1}(q))(t+1),
 \]
 and in particular we have
-\[ \limsup_{k\to\infty}\frac{1}{k}\mutri_q(k)\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right) \]
+\[ \Mtri_q\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right) \]
 for $q$ a square, $q\geq 25$.
 \end{cor}
 
@@ -917,50 +926,73 @@ which is a symmetric multiplication formula of length $rs$ for $m_t^{\mathbb{F}_
 
 
 \begin{thm}
-Let $t\geq2$ be an integer and $q\geq t$ a prime power. Then $\musym_q(k,m_t)$ grows at most linearly with $k$, \ie we have
+Let $t\geq2$ be an integer and $q$ a prime power.
+If $q<t$, then $\musym_q(k,m_t)=\infty$ for all $k\geq2$.
+
+On the other hand, if $q\geq t$,
+then $\musym_q(k,m_t)$ grows at most linearly with $k$, \ie we have
 \[
-\limsup_{k\to\infty}\frac{1}{k}\musym_q(k,m_t)\leq C_t(q)
+\Msym_{q,t}\leq C_t(q)
 \]
 for some real constant $C_t(q)<\infty$.
 \end{thm}
 \begin{proof}
-Since $q\geq t$, we have $\musym_q(d,m_t)<\infty$ for any integer $d$.
+If $q<t$ and $k\geq2$, then $\musym_q(k,m_t)=\infty$ follows from Theorem~\ref{th:criterion}.
+
+On the other hand, for $q\geq t$, we have $\musym_q(d,m_t)<\infty$ for any integer $d$.
 Choose $d$ such that $q^d$ is a square, $q^d\geq(t+2)^2$.
 Then Proposition~\ref{prop:asymptsquare} shows $\musym_{q^d}(k,m_t)$ grows linearly with $k$.
-The Theorem then follows thanks to Lemma~\ref{lemma:basechange}, with $C_t(q)=\musym_q(d,m_t)\leq(1+\epsilon_t(q^d))t$.
+The Theorem then follows thanks to Lemma~\ref{lemma:basechange}, with $C_t(q)=\musym_q(d,m_t)(1+\epsilon_t(q^d))t$.
 \end{proof}
 \begin{cor}
 For $q\geq t+1$ we have
 \[
-\limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t)\leq C_{t+1}(q)
+\Mhyp_{q,t}\leq C_{t+1}(q)
 \]
 and in particular for $q\geq 3$ we have
 \[
-\limsup_{k\to\infty}\frac{1}{k}\mutri_q(k)\leq C_{3}(q).
+\Mtri_q\leq C_{3}(q).
 \]
 \end{cor}
 
 \paragraph{Further remarks and possible improvements.}
-To ease notations, set \[ M^{\textrm{sym}}_{q,t}=\limsup_{k\to\infty}\frac{1}{k}\musym_q(k,m_t) \]
-and likewise $M^{\textrm{hyp}}_{q,t}=\limsup_{k\to\infty}\frac{1}{k}\muhyp_q(k,m_t)$ and $M^{\textrm{tri}}_q=\limsup_{k\to\infty}\frac{1}{k}\mutri_q(k)=M^{\textrm{hyp}}_{q,2}$.
 \begin{enumerate}
 \item When $q\geq4$ is not divisible by $3$, \cite[Thm.~2]{SL84} gives $\mutri_q(k)\leq 4\musym_q(k)$.
 On the other hand, \cite{CC88} shows that $\musym_q(k)$ grows linearly with $k$ (the result is stated for $\mu_q(k)$,
 but it is easily seen that the proof works for $\musym_q(k)$). Joint together, these results show that $\mutri_q(k)$ grows linearly with $k$
 when $q\geq4$ is not divisible by $3$. One advantage of our method is that it works for all $q\geq3$.
-Moreover it gives sharper bounds. For instance, when $q$ is a square and large enough, joining \cite[Thm.~2]{SL84} with the best asymptotic upper bound known on $\musym_q(k)$ \cite[Thm.~6.4]{Randriam12} gives $M^{\textrm{tri}}_q\leq 8\left(1+\frac{1}{\sqrt{q}-2}\right)$,
-which is not as good as $M^{\textrm{tri}}_q\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right)$ from Corollary~\ref{cor:asymptsquare}.
+Moreover it gives sharper bounds. For instance, when $q$ is a square and large enough, joining \cite[Thm.~2]{SL84} with the best asymptotic upper bound known on $\musym_q(k)$ \cite[Thm.~6.4]{Randriam12} gives $\Mtri_q\leq 8\left(1+\frac{1}{\sqrt{q}-2}\right)$,
+which is not as good as $\Mtri_q\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right)$ from Corollary~\ref{cor:asymptsquare}.
 \item \emph{Open question}: Lemma~\ref{lm:hyp<sym+1} reduces (upper) bounds on $\muhyp(m_t)$ to bounds on $\musym(m_{t+1})$,
-and in particular it reduces bounds on $M^{\textrm{tri}}_q$ to bounds on $M^{\textrm{hyp}}_{q,3}$, which does not seem optimal.
+and in particular it reduces bounds on $\Mtri_q$ to bounds on $\Mhyp_{q,3}$, which does not seem optimal.
 Indeed we know no example where the inequality $\musym_q(k)\leq\mutri_q(k)$ is strict.
-So, for instance for $q$ square, $q\to\infty$, our method gives $M^{\textrm{tri}}_q\leq 3(1+o(1))$,
-but one could ask whether it is possible to get a bound of the form $M^{\textrm{tri}}_q\leq 2(1+o(1))$,
-as given by \cite[Thm.~6.4]{Randriam12} for $M^{\textrm{sym}}_q$.
+So, for instance for $q$ square, $q\to\infty$, our method gives $\Mtri_q\leq 3(1+o(1))$,
+but one could ask whether it is possible to get a bound of the form $\Mtri_q\leq 2(1+o(1))$,
+as given by \cite[Thm.~6.4]{Randriam12} for $\Msym_q$.
 \item \emph{Open question}: The condition $|\mathcal{S}|\geq (k+g-1)t+1$ in Proposition~\ref{prop:numerical}
 does not seem optimal since in the end we do evaluation-interpolation at only $kt+(g-1)(t-1)$ places.
-If one could relax this condition to $|\mathcal{S}|\geq kt+(g-1)(t-1)$, this would lead to
-\cite{Randriam12}\cite{Randriam19}\cite{Randriam13}.
-\item \cite{BR04}\cite{Randriam12}\cite{CCXY12}\cite{BBRR20+}
+If one could relax this condition to $|\mathcal{S}|\geq kt+(g-1)(t-1)$, this would improve Proposition~\ref{prop:asymptsquare}
+to $\Msym_{q,t}\leq(1+\epsilon'_t(q))t$ for $q$ square, $q\geq(t+1)^2$, with 
+with $\epsilon'_t(q)=\frac{t-1}{\sqrt{q}-t}$.
+For $t=2$ this is done in \cite{Randriam12,Randriam19} using techniques from \cite{Randriam13}.
+However, as observed at the end of \cite{Randriam13}, a generalization to $t\geq3$ would require new arguments.
+\item Lemma~\ref{lemma:basechange}, which generalizes \cite[Lemma~1.2]{STV92}, is clearly not optimal.
+When deriving upper bounds on $\musym_q(k,m_t)$ for non-square $q$, it might be better to use evaluation-interpolation
+at places of higher degree, as first introduced in~\cite{BR04}, and further developped e.g. in~\cite{CCXY12,Randriam12}.
+To do this in an optimal way one needs function fields $F_i$ defined over $\mathbb{F}_q$,
+of genus $g_i\to\infty$, with $\frac{g_{i+1}}{g_i}\to 1$ and $N_i^{(d)}\sim\frac{q^{d/2}-1}{d}g_i$
+where $N_i^{(d)}$ is the number of places of degree $d$ in $F_i$, for a convenient $d$.
+This improves the bound on $\Msym_{q,t}$ by a factor $\frac{1}{d}$.
+The existence of these function fields was first claimed in \cite{CCXY12}, but unfortunately with an incorrect proof.
+A corrected construction, based on Drinfeld modular curves, will be found in \cite{BBRR20+}.
+\item All our bounds for multiplication in extension fields also hold for truncated polynomials.
+For instance we have $\hat{M}^{\textrm{sym}}_{q,t}\leq(1+\epsilon_t(q))t$ for $q$ square, $q\geq(t+2)^2$,
+and $\hat{M}^{\textrm{sym}}_{q,t}\leq C_t(q)$ for all $q\geq t$.
+This requires only minor changes in our constructions.
+In Proposition~\ref{prop:method}, instead of evaluation at a place $Q$ of degree~$k$, one uses evaluation at order $k$
+at an extra place $P_0$ of degree~$1$.
+Likewise in Proposition~\ref{prop:numerical}, one needs one more place of degree~$1$, but one does not need $Q$
+(then the proof of Proposition~\ref{prop:asymptsquare} is slightly simplified since one does not need to invoke \cite[Cor.~5.2.10]{Stichtenoth09} anymore).
 \end{enumerate}
 
 \bibliographystyle{plain}
