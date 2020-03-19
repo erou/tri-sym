@@ -16,7 +16,18 @@
 \maketitle
 
 \begin{abstract}
-  To be written.
+  Multiplication is an expensive arithmetic operation, therefore there has been
+  extensive research to find Karatsuba-like formulae reducing the number of
+  multiplications involved when computing a bilinear map. The minimal number of
+  multiplications in such formulae is called the \emph{bilinear complexity}, and
+  it is also of theoretical interest to asymptotically understand it. Moreover,
+  when the bilinear maps admit some kind of invariance, it is also desirable to
+  find formulae keeping the same invariance. In this work, we study
+  \emph{hypersymmetric formulae} and we give an algorithm to find such formulae.
+  We also generalize the result that the bilinear complexity of the
+  two-variable multiplication in an extension field is linear in the degree of
+  the extension to hypersymmetric bilinear complexity and to $t$-variable
+  multiplication with $t\geq2$.
 \end{abstract}
 
 %\tableofcontents
@@ -1031,6 +1042,7 @@ Likewise in Proposition~\ref{prop:numerical}, one needs one more place of degree
 (then the proof of Proposition~\ref{prop:asymptsquare} is slightly simplified since one does not need to invoke \cite[Cor.~5.2.10]{Stichtenoth09} anymore).
 \end{enumerate}
 
+\small
 \bibliographystyle{plain}
 \bibliography{erou}
 
