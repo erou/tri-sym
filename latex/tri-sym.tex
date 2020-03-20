@@ -384,11 +384,11 @@ that we are looking for a trisymmetric decomposition:
 \]
 with $a_i\in\A$ and $\lambda_i\in\K$ for all $1\leq i
 \leq n$. Because we are allowed to use scalars $\lambda_i\in\K$, we
-can limit our search to ``normalized'' elements in $\A$. For some
-choice of a basis of $\A$ and for all
-$1\leq i\leq k$, we let
+can limit our search to ``normalized'' elements in $\A$, as follows. Choose
+a basis of $\A$, which gives an identification $\A\simeq\K^k$ as vector spaces. Then for all
+$1\leq i\leq k$, let
 \[
-  \E_i=\left\{ x=(x_1, \dots, x_k)\in\A
+  \E_i=\left\{ x=(x_1, \dots, x_k)\in\A\simeq\K^k
   \,|\, \forall j\leq i-1,\,x_j=0\text{ and }x_i=1 \right\}
 \]
 and
@@ -400,7 +400,7 @@ use the vector space structure of $\A$ by searching for solutions
 on each coordinate.
 Let 
 \[
-  xy = (\pi_1(x, y), \dots, \pi_k(x, y)),
+  xy = (\pi_1(x, y), \dots, \pi_k(x, y))\in\A\simeq\K^k,
 \]
 where, for all $1\leq i\leq k$, $\pi_i$ is the bilinear form corresponding to
 the $i$-th coordinate of the product in $\mathbb{F}_{p^k}$. In other words, 
@@ -540,14 +540,17 @@ problem is to find a solution $X$ of
 \]
 with the smallest possible number of nonzero entries in $X$.
 
-We first consider the case $\A=\mathbb{F}_{q^k}$ over $\K=\mathbb{F}_q$, where
-the characteristic of $\K$ is not $2$, with degree $k=2$. We prove that we have
+We first consider the case $\A=\mathbb{F}_{q^2}$ over $\K=\mathbb{F}_q$, where
+the characteristic of $\K$ is not $2$.
+\begin{prop}
+For any odd $q$ we have
 \[
-  \mu_q(2) = \tri{q}{2} = 3.
+  \mu_q(2) = \mutri_q(2) = 3.
 \]
-In fact, we know~\cite[Theorem 2.2]{BCPRRR19} that $\mu_q(k)\geq2k-1$ with
-equality if and only if $k\leq \frac{q}{2}+1$. In order to prove that
-$\tri{q}{2} = 3$, we find an \emph{universal} trisymmetric formula of length
+\end{prop}
+\begin{proof}
+That $\mu_q(2)=3$ follows e.g. from~\cite[Theorem 2.2]{BCPRRR19}. In order to prove that
+$\mutri_q(2) = 3$, we find an \emph{universal} trisymmetric formula of length
 $3$. We know that we can find a non-square element $\zeta$ in $\mathbb{F}_q$, we
 can then define
 \[
@@ -608,16 +611,21 @@ $\mathbb{Q}(\zeta)$ and finally check that
   (8\zeta)^{-1}\bff(1+\alpha)+(8\zeta)^{-1}\bff(1-\alpha),
 \]
 so that the trisymmetric bilinear complexity of
-$\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$. Using the same strategy, we can also
+$\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$.
+\end{proof}
+Using the same strategy, we can also
 find universal formulae for an other type of algebra $\A =
 \mathbb{F}_{q}[T]/(T^k)$, namely the truncated polynomials. In that context, we
 are able to find formulae for $2\leq k \leq 4$.
-\subparagraph{Truncated polynomials of degree $2$.} Let $q=p^l$, with $p\neq2$. Let
+
+\begin{prop}For any odd $q$ we have
 \[
-  \A = \mathbb{F}_{q}[T]/(T^2) = \mathbb{F}_q[\alpha],
+  \hmutri_q(2) = 3.
 \]
-with $\alpha=\bar T$. If $x =
-x_0 + x_1\alpha$ and $y = y_0 + y_1\alpha$ are two elements of
+\end{prop}
+\begin{proof}
+Let $\A = \mathbb{F}_{q}[T]/(T^2) = \mathbb{F}_q[\alpha]$ with $\alpha=\bar T$, so $\alpha^2=0$.
+If $x = x_0 + x_1\alpha$ and $y = y_0 + y_1\alpha$ are two elements of
 $\A$, we have
 \[
   xy = (x_0+x_1\alpha)(y_0+y_1\alpha)=x_0y_0+
@@ -631,8 +639,14 @@ $\mathbb{Q}$. We obtain
 \]
 so that the trisymmetric bilinear complexity of
 $\A=\mathbb{F}_q[T]/(T^2)$ is $3$.
-\subparagraph{Truncated polynomials of degree $3$ and $4$.} Let $q=p^l$, with
-$p\notin\left\{ 2, 3 \right\}$. We use the same notations as before. For
+\end{proof}
+\begin{prop}For any $q$ not divisible by $2$ nor $3$ we have
+\[
+  \hmutri_q(3) = 5\qquad\textrm{and}\qquad\hmutri_q(4) = 7.
+\]
+\end{prop}
+\begin{proof}
+We use the same notations as before. For
 $\A=\mathbb{F}_{q}[T]/(T^3)$, we obtain
 \[
   B =
@@ -656,7 +670,7 @@ Finally, for $\A=\mathbb{F}_{q}[T]/(T^4)$, we obtain
   \end{split}
 \end{equation*}
 The trisymmetric bilinear complexity of $\A=\mathbb{F}_q[T]/(T^4)$ is then $7$.
-
+\end{proof}
 
 \section{Asymptotic bounds}
 \label{sec:asymptotic}
