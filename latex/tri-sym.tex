@@ -815,15 +815,15 @@ We also let $b: (\mathbb{F}_{q})^n \to \mathbb{F}_{q^k}$
   following drawing.
   \begin{center}
   \begin{tikzpicture}
-    \node (L3D) at (2, 2) {$L(3D)$};
+    \node (LtD) at (2, 2) {$L(tD)$};
     \node (Fqk) at (0, 0) {$\mathbb{F}_{q^k}$};
     \node (Fqn) at (4, 0) {$(\mathbb{F}_{q})^n$};
-    \draw[right hook->] (L3D) to (Fqn);
-    \draw[->] (L3D) to (Fqk);
-    \draw[->] (Fqn) to[bend right] (L3D);
-    \node (evP) at (2.5, .7) {$\ev_{\Pcal, 3D}$};
+    \draw[right hook->] (LtD) to (Fqn);
+    \draw[->] (LtD) to (Fqk);
+    \draw[->] (Fqn) to[bend right] (LtD);
+    \node (evP) at (2.5, .7) {$\ev_{\Pcal, tD}$};
     \node (s) at (3.6, 1.5) {$r$};
-    \node (evQ) at (1.2, .4) {$\ev_{Q, 3D}$};
+    \node (evQ) at (1.2, .4) {$\ev_{Q, tD}$};
     \draw[->] (Fqn) to[out=60,in=0](2, 2.5) to[out=180, in=120] (Fqk);
     \node (d) at (2, 2.7) {$b$};
   \end{tikzpicture}
