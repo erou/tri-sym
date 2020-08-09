@@ -130,8 +130,8 @@ Let $\Phi:V_1\times\cdots\times V_t\to W$
 be a $t$-multilinear map between finite dimensional vector spaces over $\K$.
 A \emph{multilinear algorithm}, or \emph{multilinear decomposition}, or
 \emph{multilinear formula} of length $n$ for $\Phi$ is a collection of linear
-forms $(\phi_i^{(j)})_{\substack{1\leq i \leq n\\1\leq j\leq t}}$,
-where $\phi_i^{(j)}$ is in $V_j^\vee$, the dual vector space of $V_j$,
+forms $(\varphi_i^{(j)})_{\substack{1\leq i \leq n\\1\leq j\leq t}}$,
+where $\varphi_i^{(j)}$ is in $V_j^\vee$, the dual vector space of $V_j$,
 and elements $(w_i)_{1\leq i \leq n}$ in $W$, 
 such that for all $v_1,\dots,v_t$ we have
 \[
@@ -189,8 +189,8 @@ V\times V &\to&\K\\
 (v,w)&\mapsto&\ps{v}{w}.
 \end{array}
 \]
-This allows to identify $V$ and $V^\vee$, \ie any linear form $\phi\in V^\vee$
-is of the form $\phi(x)=\ps{a}{x}$ for a uniquely determined $a\in V$.
+This allows to identify $V$ and $V^\vee$, \ie any linear form $\varphi\in V^\vee$
+is of the form $\varphi(x)=\ps{a}{x}$ for a uniquely determined $a\in V$.
 As a consequence, a symmetric decomposition for $\Phi:V^t\to V$ can also be described
 as the data of elements $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ in $V$
 such that for all $v_1,\dots,v_t$ in $V$,
@@ -500,7 +500,8 @@ and for $q\geq3$ no example is known where one of the inequalities in $\mu_q(k)\
 is strict. However, it turns out that the inequality with $\mutriG_q(k)$ can be strict.
 Indeed, let $q=3$. For $k=2,3,4,5$ we found $\mutriG_3(k)=\mu_3(k)$. But for $k=7$ we were not able to
 find a $G$-invariant decomposition of length up to $15$. Since all orbits are of length $7$, 
-except the trivial orbit of length $1$, it means that the minimal length for a $G$-invariant decomposition is
+except the trivial orbit of length $1$, the minimal length for a $G$-invariant decomposition is
+congruent to $0$ or $1$ modulo $7$, so we deduce that it is
 at least $21$. Furthermore, we know~\cite[table~2]{BCPRRR19} that $\musym_3(7)\leq19$, so we have
 \[ \mu_3(7)\leq\musym_3(7)\leq 19<21\leq \mutriG_3(7). \]
 
