@@ -105,7 +105,7 @@ and solve a certain number of the open problems stated in \cite[\S5.2]{BCPRRR19}
 
 When a bilinear map admits certain invariance properties, it can be interesting,
 both for theoretical and for practical reasons,
-to find formulae for it that exhibit these same invariances.
+to find formulae for it that exhibit these same properties.
 For symmetric bilinear maps, and in particular for commutative algebras, this leads to the notion of symmetric bilinear complexity.
 A further refinement, the trisymmetric bilinear complexity of $\mathbb{F}_{q^k}$ over $\mathbb{F}_{q}$, was first introduced in \cite{SL84}, and rediscovered independently in \cite[App.~A]{Randriam15}.
 
@@ -152,7 +152,7 @@ natural to search for \emph{symmetric multilinear decompositions}, \ie formulae 
 \end{equation*}
 with $\varphi_i^{(1)}=\dots=\varphi_i^{(t)}=\varphi_i\in V^\vee$ for all $i$.
 It is more space-efficient, since symmetric formulae admit a shorter description.
-On an algorithmic point of view, it should also be simpler to find symmetric formulae,
+From an algorithmic point of view, it should also be simpler to find symmetric formulae,
 because the search space is smaller. 
 We define $\musym(\Phi)$,
 the \emph{symmetric multilinear complexity} of $\Phi$,
@@ -368,8 +368,8 @@ However the resulting upper bounds do not seem to be tight, so it would be desir
 \label{sec:algos}
 \paragraph{Algorithmic search.}
 Barbulescu \emph{et al.}~\cite{BDEZ12} and later Covanov~\cite{Covanov19} found
-clever ways of exhaustively search for formulae for (symmetric) bilinear maps.
-Their method eliminates redundancy in the search but highly
+clever ways of exhaustively searching for formulae for (symmetric) bilinear maps.
+Their method eliminates redundancy in the search but strongly
 relies on the fact that the vectors $a_i\in\A$ in 
 the symmetric formulae~\eqref{eq:sym-tr} 
 can be chosen independently of
@@ -533,7 +533,8 @@ $c_0=\varphi_0(x)\varphi_0(y)=(x_0-x_2)(y_0-y_2)$ in the formula.
    \hline
   \end{tabular}
 %  \endgroup
-  \caption{Examples of multiplication formulae.}
+  \caption{Examples of multiplication formulae. For all $i$,
+  $c_i=\varphi_i(x)\varphi_i(y)$. }
   \label{tab:formulae}
 \end{table}
 
@@ -553,13 +554,13 @@ at least $21$. Furthermore, we know~\cite[table~2]{BCPRRR19} that $\musym_3(7)\l
 \[ \mu_3(7)\leq\musym_3(7)\leq 19<21\leq \mutriG_3(7). \]
 
 \paragraph{Universal formulae.}
-As mentionned in Section~\ref{sec:symtrisym}, for $q\geq3$, we do not know any example of
+As mentioned in Section~\ref{sec:symtrisym}, for $q\geq3$, we do not know any example of
 algebra $\A=\mathbb{F}_{q^k}$ or $\A=\mathbb{F}_{q}[T]/(T^k)$ where the bilinear complexity and
 the trisymmetric bilinear complexity are different. We can even prove that these
 quantities are the same in small dimension, by exhibiting trisymmetric \emph{universal
 formulae}, \ie trisymmetric decompositions that are true for (almost) any choice
 of $q\geq3$. In order to obtain such formulae, it is useful to
-change our point of view of the problem. Assume we want to compute a
+change our point of view on the problem. Assume we want to compute a
 trisymmetric decomposition of the product $\Phi$ in $\A$, a commutative algebra
 of degree $k$. After the choice of a basis of $\A$ and a basis of the space $\B$
 of the bilinear forms on $\A$, we can represent
@@ -662,7 +663,7 @@ so that the trisymmetric bilinear complexity of
 $\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$.
 \end{proof}
 Using the same strategy, we can also
-find universal formulae for an other type of algebra
+find universal formulae for another type of algebra
 $\A = \mathbb{F}_{q}[T]/(T^k)$, namely the truncated polynomials.
 In that context, we first observe that we have
 \[ \hmutri_q(k)\geq\hat\mu_q(k)\geq2k-1 \]
@@ -1087,7 +1088,7 @@ and in particular for $q\geq 3$ we have
 \begin{enumerate}
 \item When $q\geq4$ is not divisible by $3$, \cite[Thm.~2]{SL84} gives $\mutri_q(k)\leq 4\musym_q(k)$.
 On the other hand, \cite{CC88} shows that $\musym_q(k)$ grows linearly with $k$ (the result is stated for $\mu_q(k)$,
-but it is easily seen that the proof works for $\musym_q(k)$). Joint together, these results show that $\mutri_q(k)$ grows linearly with $k$
+but it is easily seen that the proof works for $\musym_q(k)$). Taken together, these results show that $\mutri_q(k)$ grows linearly with $k$
 when $q\geq4$ is not divisible by $3$. One advantage of our method is that it works for all $q\geq3$.
 Moreover it gives sharper bounds. For instance, when $q$ is a square and large enough, joining \cite[Thm.~2]{SL84} with the best asymptotic upper bound known on $\musym_q(k)$ \cite[Thm.~6.4]{Randriam12} gives $\Mtri_q\leq 8\left(1+\frac{1}{\sqrt{q}-2}\right)$,
 which is not as good as $\Mtri_q\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right)$ from Corollary~\ref{cor:asymptsquare}.
