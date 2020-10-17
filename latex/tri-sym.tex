@@ -1,16 +1,15 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{llncs}
 
 \input{packages.tex}
 \input{tikz.tex}
-\input{thmstyle.tex}
 \input{macros.tex}
 
 % opening
-\title{Trisymmetric multiplication formulae in finite fields}
-\author{Hugues Randriambololona$^{1, 2}$, Édouard Rousseau$^{2, 3}$}
-\date{$^1$ ANSSI, Laboratoire de Cryptographie\\
-      $^2$ Institut Polytechnique de Paris, Télécom Paris, LTCI\\
-      $^3$ Université Paris-Saclay, UVSQ, CNRS, Laboratoire de Mathématiques de Versailles}
+\title{Trisymmetric Multiplication Formulae in Finite Fields}
+\author{Hugues Randriambololona\inst{1,2} \and Édouard Rousseau\inst{2,3}\textsuperscript{(\Letter)}}
+\institute{ANSSI, Paris, France
+\and Institut Polytechnique de Paris / Télécom Paris, Palaiseau, France\\ \email{\{randriam,erousseau\}@telecom-paris.fr}
+\and Université Paris-Saclay / UVSQ, Versailles, France}
 
 \begin{document}
 
@@ -39,7 +38,7 @@
 \section{Introduction}
 \label{sec:intro}
 
-%\paragraph{Bilinear complexity.}
+%\vspace{.5\baselineskip}\noindent\textbf{Bilinear complexity.}
 Given an algorithm that computes a polynomial map over a field $\K$
 (or a family of such polynomial maps, with entries of length going to infinity),
 one is
@@ -57,7 +56,7 @@ Strassen's algorithm~\cite{Strassen69}. Karatsuba's algorithm is
 based on the fact that the bilinear map associated to the product of two
 polynomials of degree $1$
 \[
-  A = a_1 X + a_0\text{ and }B = b_1 X + b_0
+  A = a_1 X + a_0\textrm{ and }B = b_1 X + b_0
 \]
 can be computed with three products $a_0b_0, (a_0+a_1)(b_0+b_1), a_1b_1$ instead
 of the four classic ones $a_0b_0, a_0b_1, a_1b_0, a_1b_1$. Strassen's algorithm
@@ -94,8 +93,8 @@ In fact, this is optimal, so we have exactly $\mu(\K^{2\times2}/\K)=7$ \cite[Thm
 general, it seems to be hard to find the bilinear complexity of a given algebra,
 for example the bilinear complexity of $\K^{3\times3}$ is not known.
 In the litterature, work has been done both to algorithmically find the bilinear complexity of
-small algebras~\cite{BDEZ12, Covanov19} and to understand how the bilinear
-complexity asymptotically grows~\cite{CC88, BCPRRR19}. Chudnovsky and Chudnovsky
+small algebras~\cite{BDEZ12,Covanov19} and to understand how the bilinear
+complexity asymptotically grows~\cite{CC88,BCPRRR19}. Chudnovsky and Chudnovsky
 proved in 1988 that the bilinear complexity of an extension field
 $\mathbb{F}_{q^k}/\mathbb{F}_{q}$ is linear in the degree $k$ of the
 extension, using an evaluation-interpolation method on curves.
@@ -125,7 +124,7 @@ for higher multiplication maps.
 Although we are mainly interested in bilinear multiplication formulae,
 the notions we will consider naturally involve higher multilinear maps.
 
-\paragraph{Multilinear complexity.}
+\vspace{.5\baselineskip}\noindent\textbf{Multilinear complexity.}
 Let $\Phi:V_1\times\cdots\times V_t\to W$
 be a $t$-multilinear map between finite dimensional vector spaces over $\K$.
 A \emph{multilinear algorithm}, or \emph{multilinear decomposition}, or
@@ -143,7 +142,7 @@ Equivalently, it is the rank of the tensor in
 $V_1^\vee \otimes\dots\otimes V_t^\vee\otimes W$
 corresponding to $\Phi$.
 
-\paragraph{Symmetric multilinear complexity.}
+\vspace{.5\baselineskip}\noindent\textbf{Symmetric multilinear complexity.}
 When $V_1=\cdots=V_t=V$ and $\Phi$ is a \emph{symmetric} multilinear map, it is
 natural to search for \emph{symmetric multilinear decompositions}, \ie formulae of the form
 \begin{equation*}
@@ -166,7 +165,7 @@ while in the remaining case $t=3$ and $q=2$, as observed by Cascudo,
 a necessary condition is that $\Phi$ should satisfy $\Phi(x,x,y)=\Phi(x,y,y)$
 for all entries $x,y$.
 These results were then combined and generalized into the following necessary and sufficient criterion:
-\begin{thm}[{\cite[Thm.~A.7]{Randriam15}}]\label{th:criterion}
+\begin{theorem}[{\cite[Thm.~A.7]{Randriam15}}]\label{th:criterion}
 Let $\Phi:V^t\to W$ be a $t$-multilinear map between finite dimensional vector spaces over $\mathbb{F}_q$.
 Then $\Phi$ admits a symmetric decomposition if and only if $\Phi$ is \emph{Frobenius-symmetric},
 \ie if and only if it is symmetric and one of the following two conditions holds:
@@ -177,10 +176,10 @@ Then $\Phi$ admits a symmetric decomposition if and only if $\Phi$ is \emph{Frob
 \Phi(\underset{\textrm{$q$ times}}{\underbrace{u,\dots,u}},v,z_1,\dots,z_{t-q-1})=\Phi(u,\underset{\textrm{$q$ times}}{\underbrace{v,\dots,v}},z_1,\dots,z_{t-q-1}).
 \]
 \end{itemize}
-\end{thm}
+\end{theorem}
 Observe that this criterion involves the \emph{cardinality} of the field, not its characteristic.
 
-\paragraph{Trisymmetric and hypersymmetric complexity.}
+\vspace{.5\baselineskip}\noindent\textbf{Trisymmetric and hypersymmetric complexity.}
 Now suppose furthermore that $V=W$, and that this space is equipped with a
 non-degenerate symmetric bilinear form, written as a scalar product
 \[
@@ -196,7 +195,7 @@ as the data of elements $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ in $
 such that for all $v_1,\dots,v_t$ in $V$,
 we have $\Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\ps{a_i}{v_1}\cdots\ps{a_i}{v_t}b_i$.
 In order to have an even more compact description, one could ask for $b_i$ to be proportional to $a_i$, leading to the following:
-\begin{defi}
+\begin{definition}
 Let $V$ be a finite dimensional $\K$-vector space equipped with a scalar product,
 and $\Phi:V^t\to V$ a symmetric $t$-multilinear map.
 Then a \emph{hypersymmetric} formula for $\Phi$ is the data of
@@ -208,7 +207,7 @@ The hypersymmetric complexity $\muhyp(\Phi)$ is then the minimal length $n$ of s
 
 When $t=2$, we will say \emph{trisymmetric} for hypersymmetric,
 and write $\mutri(\Phi)$ for $\muhyp(\Phi)$.
-\end{defi}
+\end{definition}
 As a further motivation, observe that to any $t$-multilinear map $\Phi:V^t\to V$
 one can associate a $(t+1)$-multilinear \emph{form} $\widetilde{\Phi}:V^{t+1}\to \K$, defined by
 \[
@@ -217,7 +216,7 @@ one can associate a $(t+1)$-multilinear \emph{form} $\widetilde{\Phi}:V^{t+1}\to
 We then say that $\Phi$ is hypersymmetric (as a $t$-multilinear map)
 if $\widetilde{\Phi}$ is symmetric (as a $(t+1)$-multilinear form).
 It is easily seen that $\Phi$ hypersymmetric is a necessary condition for it to admit a hypersymmetric decomposition, and more precisely:
-\begin{lm}
+\begin{lemma}
 \label{lm:hyp=symtilde}
 Elements $(a_i)_{1\leq i\leq n}$ in $V$ and scalars $(\lambda_i)_{1\leq i\leq n}$ in $\K$ define a hypersymmetric formula for the $t$-multilinear map $\Phi$,
 \[
@@ -235,16 +234,16 @@ and we have
 \]
 
 In particular, if $q\geq t+1$, then any hypersymmetric $t$-multilinear map over $\mathbb{F}_q$ admits a hypersymmetric formula.
-\end{lm}
+\end{lemma}
 \begin{proof}
 For the \emph{only if} part in the first assertion, take scalar product with $v_{t+1}$. For the \emph{if} part, use the fact that the scalar product is non-degenerate. The other assertions follow.
-\end{proof}
+\qed\end{proof}
 
-\paragraph{Galois invariance.}
+\vspace{.5\baselineskip}\noindent\textbf{Galois invariance.}
 Last we consider another type of symmetry.
 Let $\sigma:v\mapsto v^\sigma$ be a $\K$-linear automorphism of $V$
 that respects the scalar product: $\ps{v^\sigma}{w^\sigma}=\ps{v}{w}$ for all $v,w$ in $V$.
-\begin{lm}
+\begin{lemma}
 \label{lm:symGalois}
 Let $\Phi:V^t\to V$ be a symmetric $t$-multilinear map that is compatible with $\sigma$, \ie
 \[
@@ -259,10 +258,10 @@ Then $(a_i^\sigma)_{1\leq i\leq n}$ and $(b_i^\sigma)_{1\leq i\leq n}$ also defi
 \[
 \Phi(v_1,\dots,v_t)=\sum_{i=1}^{n}\ps{a_i^\sigma}{v_1}\cdots\ps{a_i^\sigma}{v_t}b_i^\sigma.
 \]
-\end{lm}
+\end{lemma}
 \begin{proof}
 Write $\Phi(v_1,\dots,v_t)=\Phi(v_1^{\sigma^{-1}},\dots,v_t^{\sigma^{-1}})^\sigma$ and apply the formula.
-\end{proof}
+\qed\end{proof}
 We then say that the symmetric formula given by $(a_i)_{1\leq i\leq n}$ and $(b_i)_{1\leq i\leq n}$ is $\sigma$-invariant if it is the same as the formula given by $(a_i^\sigma)_{1\leq i\leq n}$ and $(b_i^\sigma)_{1\leq i\leq n}$,
 \ie if there is a permutation $\pi$ of $\{1,\dots,n\}$ such that $(a_i^\sigma,b_i^\sigma)=(a_{\pi(i)},b_{\pi(i)})$ for all $i$. This applies also to hypersymmetric formulae, setting $b_i=\lambda_i a_i$.
 
@@ -273,8 +272,7 @@ the \emph{$G$-invariant} symmetric (resp. hypersymmetric) multilinear complexity
 as the minimal length $n$ of a symmetric (resp. hypersymmetric) multilinear formula for $\Phi$ that is $G$-invariant, \ie $\sigma$-invariant for all $\sigma$ in $G$. 
 
 
-\paragraph{Multiplication formulae in algebras}
-
+\vspace{.5\baselineskip}\noindent\textbf{Multiplication formulae in algebras.}
 Let $\A$ be a finite dimensional commutative algebra over $\K$.
 We say a linear form $\tau:\A\to\K$ is trace-like if the symmetric bilinear form $\A\times\A\to\K$, $(x,y)\mapsto\tau(xy)$ is non-degenerate.
 If so, we set $\ps{x}{y}=\tau(xy)$, which defines a scalar product on $\A$.
@@ -325,10 +323,10 @@ However the resulting upper bounds do not seem to be tight, so it would be desir
 
 %The minimal length $n$ such that we have an
 %equation of type~\eqref{eq:sym} is called the \emph{symmetric bilinear
-%complexity} and we write $\mu_{\text{sym}}(\A/\K)$. If $\A$ is commutative, then
-%we always have $\mu_{\text{sym}}(\A/\K)<\infty$, and it is clear that 
+%complexity} and we write $\mu_{\textrm{sym}}(\A/\K)$. If $\A$ is commutative, then
+%we always have $\mu_{\textrm{sym}}(\A/\K)<\infty$, and it is clear that 
 %\[
-%  \mu(\A/\K)\leq\mu_{\text{sym}}(\A/\K),
+%  \mu(\A/\K)\leq\mu_{\textrm{sym}}(\A/\K),
 %\]
 %but we do not know an example where the two quantities are different.
 %It was also shown\footnote{Where?} that the
@@ -357,16 +355,16 @@ However the resulting upper bounds do not seem to be tight, so it would be desir
 % Should we prove that? Should we just cite Hugues' paper?
 %Such a decomposition always exist if $q\neq2$. As before, the minimal $n$
 %in~\eqref{eq:tri-sym} is called the \emph{trisymmetric bilinear complexity} and
-%is noted $\mu_{\text{tri}}(\A/\K)$. Once again, it is clear that
+%is noted $\mu_{\textrm{tri}}(\A/\K)$. Once again, it is clear that
 %\[
-%  \mu(\A/\K) \leq \mu_{\text{sym}}(\A/\K)\leq\mu_{\text{tri}}(\A/\K),
+%  \mu(\A/\K) \leq \mu_{\textrm{sym}}(\A/\K)\leq\mu_{\textrm{tri}}(\A/\K),
 %\]
 %but, for $q\neq2$, we do not know any example where these quantities are
 %different.
 
 \section{Finding trisymmetric decompositions}
 \label{sec:algos}
-\paragraph{Algorithmic search.}
+\vspace{.5\baselineskip}\noindent\textbf{Algorithmic search.}
 Barbulescu \emph{et al.}~\cite{BDEZ12} and later Covanov~\cite{Covanov19} found
 clever ways of exhaustively searching for formulae for (symmetric) bilinear maps.
 Their method eliminates redundancy in the search but strongly
@@ -390,7 +388,7 @@ a basis of $\A$, which gives an identification $\A\simeq\K^k$ as vector spaces. 
 $1\leq i\leq k$, let
 \[
   \E_i=\left\{ x=(x_1, \dots, x_k)\in\A\simeq\K^k
-  \,|\, \forall j\leq i-1,\,x_j=0\text{ and }x_i=1 \right\}
+  \,|\, \forall j\leq i-1,\,x_j=0\textrm{ and }x_i=1 \right\}
 \]
 and
 \[
@@ -499,7 +497,7 @@ while examples of formulae obtained via our algorithm are given in Table~\ref{ta
   \label{tab:alg}
 \end{table}
 
-\paragraph{Galois invariant formulae.}
+\vspace{.5\baselineskip}\noindent\textbf{Galois invariant formulae.}
 Let $\A=\mathbb{F}_{q^k}$ and $G$ be the cyclic group generated by $\sigma$, the Frobenius
 automorphism over $\mathbb{F}_{q}$. In order to find $G$-invariant decompositions,
 we exhaustively search through orbits in $\mathbb{F}_{q^k}$, which is fast
@@ -522,7 +520,7 @@ at least $21$. Furthermore, we know~\cite[table~2]{BCPRRR19} that $\musym_3(7)\l
 
 \begin{table}
 %  \begingroup
-%  \setlength{\tabcolsep}{2pt}
+\setlength{\tabcolsep}{3pt}
   \centering
   \footnotesize
   \begin{tabular}{|c|c|c|}
@@ -556,7 +554,7 @@ at least $21$. Furthermore, we know~\cite[table~2]{BCPRRR19} that $\musym_3(7)\l
   \label{tab:formulae}
 \end{table}
 
-\paragraph{Universal formulae.}
+\vspace{.5\baselineskip}\noindent\textbf{Universal formulae.}
 As mentioned in Section~\ref{sec:symtrisym}, for $q\geq3$, we do not know any example of
 algebra $\A=\mathbb{F}_{q^k}$ or $\A=\mathbb{F}_{q}[T]/(T^k)$ where the bilinear complexity and
 the trisymmetric bilinear complexity are different. We can even prove that these
@@ -594,12 +592,12 @@ with the smallest possible number of nonzero entries in $X$.
 
 We first consider the case $\A=\mathbb{F}_{q^2}$ over $\K=\mathbb{F}_q$, where
 the characteristic of $\K$ is not $2$.
-\begin{prop}
+\begin{proposition}
 For any odd $q$ we have
 \[
   \mu_q(2) = \mutri_q(2) = 3.
 \]
-\end{prop}
+\end{proposition}
 \begin{proof}
 That $\mu_q(2)=3$ follows e.g. from~\cite[Thm. 2.2]{BCPRRR19}. In order to prove that
 $\mutri_q(2) = 3$, we find an \emph{universal} trisymmetric formula of length
@@ -664,7 +662,7 @@ $\mathbb{Q}(\zeta)$ and finally check that
 \]
 so that the trisymmetric bilinear complexity of
 $\mathbb{F}_{q^2}/\mathbb{F}_{q}$ is $3$.
-\end{proof}
+\qed\end{proof}
 Using the same strategy, we can also
 find universal formulae for another type of algebra
 $\A = \mathbb{F}_{q}[T]/(T^k)$, namely the truncated polynomials.
@@ -676,11 +674,11 @@ which holds for any polynomial that is a power of an irreducible polynomial.
 Conversely we
 are able to find formulae for $2\leq k \leq 4$ that match this lower bound.
 
-\begin{prop}For any odd $q$ we have
+\begin{proposition}For any odd $q$ we have
 \[
   \hmutri_q(2) = 3.
 \]
-\end{prop}
+\end{proposition}
 \begin{proof}
 Let $\A = \mathbb{F}_{q}[T]/(T^2) = \mathbb{F}_q[\alpha]$ with $\alpha=\bar T$, so $\alpha^2=0$.
 If $x = x_0 + x_1\alpha$ and $y = y_0 + y_1\alpha$ are two elements of
@@ -697,12 +695,12 @@ $\mathbb{Q}$. We obtain
 \]
 so that the trisymmetric bilinear complexity of
 $\A=\mathbb{F}_q[T]/(T^2)$ is at least $3$, which concludes.
-\end{proof}
-\begin{prop}For any $q$ not divisible by $2$ nor $3$ we have
+\qed\end{proof}
+\begin{proposition}For any $q$ not divisible by $2$ nor $3$ we have
 \[
   \hmutri_q(3) = 5\qquad\textrm{and}\qquad\hmutri_q(4) = 7.
 \]
-\end{prop}
+\end{proposition}
 \begin{proof}
 We use the same notations as before. For
 $\A=\mathbb{F}_{q}[T]/(T^3)$, we obtain
@@ -728,7 +726,7 @@ Finally, for $\A=\mathbb{F}_{q}[T]/(T^4)$, we obtain
   \end{split}
 \end{equation*}
 The trisymmetric bilinear complexity of $\A=\mathbb{F}_q[T]/(T^4)$ is then $7$.
-\end{proof}
+\qed\end{proof}
 
 \section{Asymptotic bounds}
 \label{sec:asymptotic}
@@ -754,17 +752,17 @@ If needed, we will write ${m_t}^{\A/\K}$ or ${\tau_t}^{\A/\K}$ to keep $\A$ and 
 
 The (symmetric) multilinear complexity of $m_t$ has been considered in \cite{Bshouty13} in relation with the theory of testers.
 
-\begin{lm}
+\begin{lemma}
 \label{lm:hyp<sym+1}
 The map $m_t$ is hypersymmetric, and we have
 \[
 \muhyp(m_t)=\musym(\tau_{t+1})\leq\musym(m_{t+1}).
 \] 
-\end{lm}
+\end{lemma}
 \begin{proof}
 Indeed we have $\widetilde{m}_t=\tau_{t+1}$, and the equality on the left is a special case of Lemma~\ref{lm:hyp=symtilde}.
 For the inequality on the right, take a symmetric formula for $m_{t+1}$ and apply $\tau$.
-\end{proof}
+\qed\end{proof}
 
 When studying the variation with the degree of the extension field $\mathbb{F}_{q^k}$ over $\mathbb{F}_q$,
 we will write $\musym_q(k,m_t)$ for $\musym\left({m_t}^{\mathbb{F}_{q^k}/\mathbb{F}_q}\right)$,
@@ -791,7 +789,7 @@ To ease notations we will set
 \noindent and likewise for $\hMsym_{q,t}$, $\hMhyp_{q,t}$, $\hMtri_q$, etc.
 
 
-\paragraph{Evaluation-interpolation method.}
+\vspace{.5\baselineskip}\noindent\textbf{Evaluation-interpolation method.}
 %Albeit not optimal, our strategy will be to find a $3$-symmetric decomposition of
 %$m_3$ by an evaluation-interpolation method.
 We use the function field terminology and notations
@@ -802,7 +800,7 @@ divisors on $F$, and if $D\in\D_F$ is a divisor on
 $F$, we denote by $L(D)$ its Riemann-Roch space and $\ell(D)=\dim L(D)$.
 %The following proposition highlights the method.
 
-\begin{prop}
+\begin{proposition}
   \label{prop:method}
   Assume there exist a place $Q\in\mathbb{P}_{F}$ of $F$ of degree $k$, $P_1,
   \dots, P_n\in\mathbb{P}_F$ places of $F$ of degree $1$, and a divisor
@@ -827,7 +825,7 @@ is \emph{surjective}.
 is \emph{injective}.
   \end{enumerate}
   Then ${m_t}^{\mathbb{F}_{q^k}/\mathbb{F}_q}$ admits a symmetric formula of length $n$, \ie we have $\musym_q(k,m_t)\leq n$.
-\end{prop}
+\end{proposition}
 \begin{proof}
   Since the map $\ev_{Q, D}$ is surjective, it admits a right inverse, \ie a linear
   map $s: \mathbb{F}_{q^k} \to L(D)$
@@ -922,9 +920,9 @@ and finally we get a symmetric formula for $m_t$:
 \[
   \prod_{j=1}^t x_j = \sum_{i=1}^n(\prod_{j=1}^t\varphi_i(x_j))b_i.
 \]
-\end{proof}
+\qed\end{proof}
 
-\begin{prop}
+\begin{proposition}
 \label{prop:numerical}
 Let $F/\mathbb{F}_{q}$ be an algebraic function field of genus $g$.
 Assume that $F$ admits a place $Q$ of degree $k$, and a set $\mathcal{S}$ of places of degree $1$ of cardinality
@@ -933,7 +931,7 @@ Assume that $F$ admits a place $Q$ of degree $k$, and a set $\mathcal{S}$ of pla
 \]
 Then we have
 \[ \musym_q(k,m_t)\leq kt+(g-1)(t-1). \]
-\end{prop}
+\end{proposition}
 \begin{proof}
 Set $n=kt+(g-1)(t-1)$. We will show that there are places $P_1,\dots,P_n$ in $\mathcal{S}$,
 and a divisor $D$ on $F$, such that Proposition~\ref{prop:method} applies,
@@ -964,11 +962,10 @@ So $\ev_{\mathcal{S}, tD}$ is injective, with image of dimension $\dim\Img(\ev_{
 Then we can find a subset $\Pcal=\{P_1,\dots,P_n\}\subset\mathcal{S}$ of cardinality $n$,
 such that $\ev_{\Pcal, tD}: L(tD) \to (\mathbb{F}_{q})^n$ is an isomorphism,
 and the injectivity condition~\ref{cond:2} in Proposition~\ref{prop:method} is also satisfied.
-\end{proof}
+\qed\end{proof}
 
-\paragraph{Choice of the curves for $q$ a large enough square.}
-
-\begin{prop}
+\vspace{.5\baselineskip}\noindent\textbf{Choice of the curves for $q$ a large enough square.}
+\begin{proposition}
 \label{prop:asymptsquare}
 Let $t$ be given, and assume $q$ is a square, $q\geq(t+2)^2$.
 Then we have
@@ -976,7 +973,7 @@ Then we have
 \Msym_{q,t}\leq(1+\epsilon_t(q))t
 \]
 with $\epsilon_t(q)=\frac{t-1}{\sqrt{q}-t-1}$.
-\end{prop}
+\end{proposition}
 \begin{proof}
 We know~\cite{STV92} that there exists a family of function fields
 $F_i/\mathbb{F}_q$ of genus $g_i\to\infty$ such that
@@ -1008,9 +1005,9 @@ so $F_{i(k)}$ admits a place of degree $k$ by~\cite[Cor.~5.2.10]{Stichtenoth09}.
 From this we are allowed to apply Proposition~\ref{prop:numerical} to $F_{i(k)}$, which gives
 \[ \musym_q(k,m_t)\;\leq\; kt+(g_{i(k)}-1)(t-1)\;\sim\; kt+g_{i(k)}(t-1)\;\sim\; kt(1+\epsilon_t(q)) \]
 as desired.
-\end{proof}
+\qed\end{proof}
 
-\begin{cor}
+\begin{corollary}
 \label{cor:asymptsquare}
 For $q$ a square, $q\geq(t+3)^2$ we have
 \[
@@ -1019,15 +1016,14 @@ For $q$ a square, $q\geq(t+3)^2$ we have
 and in particular we have
 \[ \Mtri_q\leq 3\left(1+\frac{2}{\sqrt{q}-4}\right) \]
 for $q$ a square, $q\geq 25$.
-\end{cor}
+\end{corollary}
 
-\paragraph{Conclusion for arbitrary $q$.}
-
-\begin{lm}
+\vspace{.5\baselineskip}\noindent\textbf{Conclusion for arbitrary $q$.}
+\begin{lemma}
 \label{lemma:basechange}
 Let $q$ be a prime power. Then for any integers $t,d,k$ we have
 \[ \musym_q(k,m_t)\leq\musym_q(dk,m_t)\leq\musym_q(d,m_t)\musym_{q^d}(k,m_t). \]
-\end{lm}
+\end{lemma}
 \begin{proof}
 For the inequality on the left, there is nothing to prove if $\musym_q(dk,m_t)=\infty$.
 So let us assume $m_t^{\mathbb{F}_{q^{dk}}/\mathbb{F}_{q}}$ admits a symmetric multiplication formula of length $n=\musym_q(dk,m_t)$, \ie
@@ -1054,10 +1050,10 @@ So let us assume $m_t^{\mathbb{F}_{q^{d}}/\mathbb{F}_{q}}$ and $m_t^{\mathbb{F}_
 Then setting $y_1=\chi_v(z_1)$, ..., $y_t=\chi_v(z_t)$ we find
 \[\forall z_1,\dots,z_t\in\mathbb{F}_{q^{dk}},\quad z_1\cdots z_t = \sum_{v=1}^{s}\sum_{u=1}^{r}(\psi_u\circ\chi_v)(z_1)\cdots(\psi_u\circ\chi_v)(z_t)\cdot(b_uc_v) \]
 which is a symmetric multiplication formula of length $rs$ for $m_t^{\mathbb{F}_{q^{dk}}/\mathbb{F}_{q}}$.
-\end{proof}
+\qed\end{proof}
 
 
-\begin{thm}
+\begin{theorem}
 Let $t\geq2$ be an integer and $q$ a prime power.
 If $q<t$, then $\musym_q(k,m_t)=\infty$ for all $k\geq2$.
 
@@ -1067,7 +1063,7 @@ then $\musym_q(k,m_t)$ grows at most linearly with $k$, \ie we have
 \Msym_{q,t}\leq C_t(q)
 \]
 for some real constant $C_t(q)<\infty$.
-\end{thm}
+\end{theorem}
 \begin{proof}
 If $q<t$ and $k\geq2$, then $\musym_q(k,m_t)=\infty$ follows from Theorem~\ref{th:criterion}.
 
@@ -1075,8 +1071,8 @@ On the other hand, for $q\geq t$, we have $\musym_q(d,m_t)<\infty$ for any integ
 Choose $d$ such that $q^d$ is a square, $q^d\geq(t+2)^2$.
 Then Proposition~\ref{prop:asymptsquare} shows $\musym_{q^d}(k,m_t)$ grows linearly with $k$.
 The Theorem then follows thanks to Lemma~\ref{lemma:basechange}, with $C_t(q)=\musym_q(d,m_t)(1+\epsilon_t(q^d))t$.
-\end{proof}
-\begin{cor}
+\qed\end{proof}
+\begin{corollary}
 For $q\geq t+1$ we have
 \[
 \Mhyp_{q,t}\leq C_{t+1}(q)
@@ -1085,9 +1081,9 @@ and in particular for $q\geq 3$ we have
 \[
 \Mtri_q\leq C_{3}(q).
 \]
-\end{cor}
+\end{corollary}
 
-\paragraph{Further remarks and possible improvements.}
+\vspace{.5\baselineskip}\noindent\textbf{Further remarks and possible improvements.}
 \begin{enumerate}
 \item When $q\geq4$ is not divisible by $3$, \cite[Thm.~2]{SL84} gives $\mutri_q(k)\leq 4\musym_q(k)$.
 On the other hand, \cite{CC88} shows that $\musym_q(k)$ grows linearly with $k$ (the result is stated for $\mu_q(k)$,
@@ -1127,7 +1123,7 @@ Likewise in Proposition~\ref{prop:numerical}, one needs one more place of degree
 (then the proof of Proposition~\ref{prop:asymptsquare} is slightly simplified since one does not need to invoke \cite[Cor.~5.2.10]{Stichtenoth09} anymore).
 \end{enumerate}
 
-\small
+%\small
 \bibliographystyle{plain}
 \bibliography{erou}
 
